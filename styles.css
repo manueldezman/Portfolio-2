@@ -13,7 +13,7 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 6rem;
 }
 
 .about-me {
@@ -75,4 +75,70 @@ img {
 }
 .profile-icon {
     font-size: 2.5rem;
+}
+
+.project-image {
+    max-width: 25rem;
+    max-height: 25rem;
+    border-bottom: .1rem solid black;
+}
+
+.project-image img {
+    width: 100%;
+}
+
+.project-tile {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 110rem;
+
+}
+
+.project {
+    max-width: 25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: 0rem 0rem 1rem 0rem grey;
+    min-height: 30rem;
+}
+
+.project-text {
+    font-size: 1.5rem;
+    padding-inline: 2rem;
+}
+
+.projects {
+    margin-inline: auto;
+}
+
+.project-title {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 2rem;
+}
+
+.project-title .project-icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.project-icon  {
+    font-size: 1.5rem;
+}
+
+.project-title h4 {
+    font-size: 1.5rem;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 85rem;
+    margin-inline: auto;
+    padding-left: 1rem;
 }
