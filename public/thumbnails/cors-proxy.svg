@@ -1,0 +1,15 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F7F7F4"/>
+  <path d="M930 0H1200V630H875L930 0Z" fill="#00B8D9"/>
+  <path d="M68 0V584" stroke="#00B8D9" stroke-opacity="0.35" stroke-width="2"/>
+  <path d="M980 0V630M1040 0V630M1100 0V630M1160 0V630M875 235H1200M875 285H1200M875 335H1200M875 385H1200M875 435H1200M875 485H1200M875 535H1200" stroke="#07111F" stroke-opacity="0.08"/>
+  <rect x="72" y="58" width="228" height="28" fill="white" stroke="#07111F"/>
+  <text x="86" y="77" font-family="monospace" font-size="12" letter-spacing="5" fill="#07111F">FRONTEND DEVELOPMENT</text>
+  <path d="M72 164H102" stroke="#00B8D9" stroke-width="2"/>
+  <text x="116" y="169" font-family="monospace" font-size="14" letter-spacing="7" fill="#00A6C4">TUTORIAL GUIDE</text>
+  <text x="72" y="260" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" fill="#00B8D9">FIX CORS</text>
+  <text x="72" y="350" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" fill="#07111F">WITH A PROXY</text>
+  <text x="72" y="455" font-family="monospace" font-size="11" letter-spacing="5" fill="#07111F">WRITTEN BY</text>
+  <text x="72" y="482" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#07111F">Adeleke Abdulganiy</text>
+  <text x="980" y="76" font-family="monospace" font-size="12" letter-spacing="4" fill="#07111F">PRACTICAL FIX</text>
+</svg>
