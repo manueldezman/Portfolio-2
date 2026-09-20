@@ -21,6 +21,95 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "mental-note",
+    title: "Mental Note",
+    category: "AI Learning Tool",
+    year: "2026",
+    summary:
+      "A local-first cognitive sandbox for active recall that turns source material and user blurts into verified notes and an interactive visual knowledge map.",
+    role: "Builder: product, frontend, recall workflow, AI integration, and cognitive canvas.",
+    timeline: "Currently building · 2026",
+    result: "In active development, with source ingestion, recall verification, visual mapping, and note export already working.",
+    tags: ["Next.js 15", "React 19", "Excalidraw", "Cognee 1.2.2", "NVIDIA GLM", "OpenAI SDK"],
+    links: [{ label: "GitHub", href: "https://github.com/manueldezman/mental-note" }],
+    caseStudy: {
+      problem:
+        "Passive rereading makes it difficult to know whether a learner can actually retrieve and structure what they studied. Existing note tools capture information, but rarely turn recall into a visible, verifiable learning loop.",
+      targetUser:
+        "Mental Note is for learners and knowledge workers who want to ingest source material, test their understanding through blurting, and turn verified recall into reusable visual notes.",
+      difficulty:
+        "The system has to combine document ingestion, semantic recall, optional AI interpretation, visual layout, and durable browser state while still working when hosted AI or Cognee services are not fully configured.",
+      approach:
+        "Sources are stored in a local namespace and, when configured, ingested into a Cognee dataset. User blurts can be interpreted into note graphs by an NVIDIA-hosted GLM through the OpenAI-compatible SDK, then verified against real Cognee recall results or a local overlap heuristic fallback.",
+      decision:
+        "The key decision was to keep the learning workflow resilient and local-first. Hosted recall and model interpretation improve the experience when available, but browser persistence and local verification keep the core source-to-blurt-to-canvas loop usable without every external service.",
+      outcome:
+        "The current build renders verified ideas as a branded Excalidraw-style cognitive canvas, preserves the workspace and saved-note library in the browser, exports Markdown and diagram JSON, and attempts Cognee memify enrichment for vetted notes. Next steps include broader document extraction and stronger analogy validation and layout rules.",
+    },
+  },
+  {
+    slug: "cloakroom",
+    title: "CloakRoom",
+    category: "Confidential Token Tooling",
+    year: "2026",
+    summary:
+      "A protocol dashboard for discovering Zama wrapper pairs, wrapping and unwrapping ERC-20 and ERC-7984 tokens, and decrypting confidential balances.",
+    role: "Solo builder: product, frontend, Zama integration, wallet flows, documentation, and deployment.",
+    timeline: "July 2026",
+    result: "Shipped as a live protocol tool supporting confidential token workflows on Ethereum mainnet and Sepolia.",
+    tags: ["Next.js", "TypeScript", "Zama FHE SDK", "ERC-7984", "RainbowKit", "wagmi", "viem", "Tailwind CSS"],
+    links: [
+      { label: "Live App", href: "https://cloak-room.vercel.app/" },
+      { label: "GitHub", href: "https://github.com/manueldezman/CloakRoom" },
+      { label: "Demo Video", href: "https://youtu.be/qtFiDK-58TQ" },
+    ],
+    caseStudy: {
+      problem:
+        "Confidential token users need a practical way to discover official wrapper pairs, move between public ERC-20 and confidential ERC-7984 assets, and reveal their own encrypted balances without stitching together separate scripts and contract interfaces.",
+      targetUser:
+        "The dashboard serves Zama ecosystem users and developers working with confidential tokens on Ethereum mainnet or Sepolia, including teams testing private asset flows before production deployment.",
+      difficulty:
+        "The interface has to coordinate onchain registry data, wallet and network state, Zama relayer operations, EIP-712 user decryption, token-specific faucet rules, and safe transaction feedback across testnet and mainnet.",
+      approach:
+        "CloakRoom reads official pairs from the active chain's Zama Wrappers Registry, merges repository-defined and browser-imported development pairs, and provides focused flows for wrapping, unwrapping, faucet claims, and confidential balance inspection.",
+      decision:
+        "The key product decision was a hybrid registry model: official onchain pairs take precedence, while repository configuration and chain-scoped browser imports let developers test private or newly deployed pairs without modifying the official registry.",
+      outcome:
+        "The shipped dashboard supports Ethereum mainnet and Sepolia, provides EIP-712 user decryption for arbitrary ERC-7984 tokens, surfaces network-aware safeguards and actionable errors, and gives developers one interface for confidential token discovery and interaction.",
+    },
+  },
+  {
+    slug: "botchain-init-toolkit",
+    title: "BOT Chain Init Toolkit",
+    category: "Web3 AI Developer Tooling",
+    year: "2026",
+    summary:
+      "A single-command bootstrap that turns Claude Code, Codex, Cursor, and Windsurf into BOT Chain engineering agents with a reusable skill and local MCP tooling.",
+    role: "Solo builder: installer, agent skill, MCP server, safety model, documentation, and testing.",
+    timeline: "July 2026",
+    result: "Released as an open-source toolkit with support for four AI coding environments and 10 BOT Chain tools.",
+    tags: ["BOT Chain", "MCP", "AI Agents", "Node.js", "EVM", "Codex", "Claude Code", "Web3"],
+    links: [
+      { label: "Documentation", href: "https://manueldezman.github.io/botchain-init-toolkit/#install" },
+      { label: "GitHub", href: "https://github.com/manueldezman/botchain-init-toolkit/tree/main" },
+      { label: "Documentation Audit", href: "/audits/company-documentation-audit.md" },
+    ],
+    caseStudy: {
+      problem:
+        "BOT Chain encourages builders to use AI coding tools such as Claude Code, Codex, Cursor, and Windsurf, while still requiring them to understand, demonstrate, and verify what they submit. General-purpose agents can introduce unreliable network assumptions and fragmented setup into that workflow.",
+      targetUser:
+        "The target users are BOT Chain smart contract developers and Web3 builders who use Claude Code, Codex, Cursor, or Windsurf in their development workflow.",
+      difficulty:
+        "The toolkit needed to make four different agent environments reliable on BOT Chain, work defensively around gaps found in the official documentation, expose useful blockchain operations, and keep high-risk actions explicit and testnet-first.",
+      approach:
+        "The project pairs structured BOT Chain knowledge with a local Model Context Protocol server. A single npx command installs the skill, registers executable workflows, and gives agents tools for environment checks, balances, contract reads, gas estimates, deployments, transfers, and explorer lookups.",
+      decision:
+        "The key decision was to package durable network guidance and executable tools together. The skill teaches agents when and how to act, while the MCP server provides 10 focused operations with safety rules, allow-listed commands, documentation-gap handling, and defensive configuration defaults.",
+      outcome:
+        "The result is an MIT-0 open-source bootstrap that supports four major AI coding environments, reduces repeated setup to one command, and provides a safer path from development questions to tested onchain workflows. It simplifies the developer experience without replacing the builder's responsibility to understand and verify the work.",
+    },
+  },
+  {
     slug: "trovepilot",
     title: "TrovePilot",
     category: "Web3 Hackathon Project",

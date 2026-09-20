@@ -3,13 +3,12 @@ export function ThemeScript() {
     (function () {
       try {
         var storedTheme = window.localStorage.getItem("theme");
-        var systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        var theme = storedTheme || systemTheme;
+        var theme = storedTheme === "light" || storedTheme === "dark" ? storedTheme : "dark";
         document.documentElement.dataset.theme = theme;
         document.documentElement.style.colorScheme = theme;
       } catch (error) {
-        document.documentElement.dataset.theme = "light";
-        document.documentElement.style.colorScheme = "light";
+        document.documentElement.dataset.theme = "dark";
+        document.documentElement.style.colorScheme = "dark";
       }
     })();
   `;

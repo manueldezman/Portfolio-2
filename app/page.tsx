@@ -1,262 +1,121 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { FeedbackSection } from "@/components/FeedbackSection";
+import { Heading } from "@/components/Heading";
+import { RotatingRoles } from "@/components/RotatingRoles";
 import profileImage from "@/images/profile-iamge.jpeg";
-import { articleItems } from "@/content/contents";
-import { contributionStories } from "@/content/oss";
-import { projects } from "@/content/projects";
 import { socials } from "@/content/socials";
 
-const stats = [
-  { value: "6+", label: "Content pieces" },
-  { value: "8+", label: "Merged PRs" },
-  { value: "200+", label: "Event attendees" },
-  { value: "4", label: "Dev tools built" },
+const bioParagraphs = [
+  "I create developer resources that help both humans and AI agents understand and use technical products effectively: tutorials, conceptual guides, API references, docs-as-code workflows, videos, diagrams, and agent and developer tooling.",
+  "My background in REST APIs, frontend development, smart contract development, testing, developer tools, Git, Markdown, and docs-as-code workflows lets me test the systems I explain, validate workflows directly, and produce technically accurate content that improves onboarding, adoption, and developer experience.",
+  "I like getting my hands dirty: I spot bugs, investigate them, and leave a project better than I found it, through feedback and pull-request fixes. That led to my selection as a published technical author for the Hackmamba blog.",
+  "I also contribute to open source, including decentralized protocols like Midnight Network and Intuition, and developer educational platforms like The Odin Project.",
 ];
-
-const stackGroups = [
-  { title: "Writing", items: ["Markdown / MDX", "Docs-as-Code", "API Documentation", "Tutorial Guides"] },
-  { title: "Web3", items: ["Solidity", "Hardhat", "Sui / Move", "Wagmi / Viem"] },
-  { title: "AI Tools", items: ["Gemini", "Agent Skills", "Prompt Workflows", "Docs Generators"] },
-  { title: "Community", items: ["Workshops", "Moderation", "X / Social", "Developer Education"] },
-];
-
-const socialLinks = [
-  { label: "GitHub", href: socials.github.href },
-  { label: "Twitter", href: socials.x.href },
-  { label: "LinkedIn", href: socials.linkedin.href },
-  { label: "YouTube", href: socials.youtube.href },
-];
-
-function SectionTitle({ index, title }: { index: string; title: string }) {
-  return (
-    <div className="mb-8 flex items-center gap-5">
-      <span className="font-mono text-xs font-black text-[var(--accent)]">{index}</span>
-      <h2 className="text-3xl font-black tracking-[-0.05em] text-[var(--text)]">{title}</h2>
-      <span className="h-px flex-1 bg-[var(--rule-soft)]" />
-    </div>
-  );
-}
-
-function requireProject(slug: string) {
-  const project = projects.find((item) => item.slug === slug);
-
-  if (!project) {
-    throw new Error(`Missing homepage project: ${slug}`);
-  }
-
-  return project;
-}
-
-function requireContribution(title: string) {
-  const contribution = contributionStories.find((item) => item.title === title);
-
-  if (!contribution) {
-    throw new Error(`Missing homepage OSS contribution: ${title}`);
-  }
-
-  return contribution;
-}
 
 export default function Home() {
-  const featuredProjects = [requireProject("fhevm-agent-skills"), requireProject("suimulate")];
-  const writingPreview = articleItems.slice(0, 3);
-  const ossPreview = [
-    requireContribution("Maintained technical writing course resources"),
-    requireContribution("Fixed Lace wallet configuration typo"),
-  ];
-
   return (
-    <main className="editorial-shell pb-16 pt-14">
-      <section className="grid gap-10 lg:grid-cols-[1fr_0.42fr] lg:items-center">
-        <div className="max-w-3xl">
-          <div className="inline-flex border border-[var(--accent)] px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.14em] text-[var(--accent)]">
-            Tech Writer · DevRel
-          </div>
-          <h1 className="mt-14 max-w-2xl text-6xl font-black leading-[0.9] tracking-[-0.08em] text-[var(--text)] md:text-8xl">
+    <main className="editorial-shell max-w-5xl py-16">
+      <div className="grid gap-10 lg:grid-cols-[1fr_0.42fr] lg:items-start">
+        <div>
+          <Heading className="whitespace-nowrap" level={1}>
             Abdulganiy <span className="italic text-[var(--accent)]">Adeleke</span>.
-          </h1>
+          </Heading>
+          <RotatingRoles />
 
-          <div className="mt-10 flex justify-start">
-            <span className="border border-[var(--teal)] bg-[var(--teal-soft)] px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--teal)]">
-              • Open to opportunities
-            </span>
-          </div>
-
-          <p className="mt-10 max-w-xl text-lg font-semibold italic leading-8 text-[var(--muted)]">
-            I bridge the gap between powerful products and the developers who need them through
-            content, tooling, documentation, and community.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Link className="editorial-button editorial-button-primary px-6 py-4" href="/projects">
-              View Projects
-            </Link>
-            <Link className="editorial-button editorial-button-secondary px-6 py-4" href="/contents">
-              Read Contents
-            </Link>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-4 font-mono text-xs text-[var(--muted)] underline underline-offset-4">
-            {socialLinks.map((link) => (
-              <a className="link-ring" href={link.href} key={link.href} rel="noreferrer" target="_blank">
-                {link.label}
-              </a>
+          <div className="mt-8 space-y-6 text-base leading-8 text-[var(--muted)]">
+            {bioParagraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-        </div>
 
-        <figure className="border-2 border-[var(--rule)] bg-[var(--surface)] lg:justify-self-end">
-          <Image
-            alt="Abdulganiy Adeleke"
-            className="aspect-[4/5] w-full object-cover grayscale"
-            priority
-            src={profileImage}
-          />
-          <figcaption className="border-t-2 border-[var(--rule)] px-4 py-3 font-mono text-[0.65rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]">
-            Developer Relations · Technical Writing
-          </figcaption>
-        </figure>
-      </section>
-
-      <section className="mt-16 grid border-y-[3px] border-[var(--rule)] md:grid-cols-4">
-        {stats.map((stat, index) => (
-          <div
-            className="border-[var(--rule)] px-8 py-7 text-center md:border-l md:first:border-l-0"
-            key={stat.label}
-          >
-            <p className="text-4xl font-black tracking-[-0.06em] text-[var(--accent)] md:text-5xl">
-              {stat.value}
-            </p>
-            <p className="mt-2 font-mono text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--muted)]">
-              {stat.label}
-            </p>
-          </div>
-        ))}
-      </section>
-
-      <section className="mt-20">
-        <SectionTitle index="01" title="Sample Projects" />
-        <div className="grid border-2 border-[var(--rule)] md:grid-cols-2">
-          {featuredProjects.map((project, index) => (
-            <article
-              className={`p-8 ${index === 0 ? "bg-[var(--surface-strong)] text-[var(--background)]" : "bg-[var(--surface)] text-[var(--text)] md:border-l-2 md:border-[var(--rule)]"}`}
-              key={project.slug}
-            >
-              <p className={`font-mono text-xs font-black uppercase tracking-[0.16em] ${index === 0 ? "text-[var(--accent)]" : "text-[var(--teal)]"}`}>
-                {String(index + 1).padStart(2, "0")} / {index === 0 ? "Featured" : project.category}
-              </p>
-              <h3 className="mt-8 text-2xl font-black tracking-[-0.04em]">{project.title}</h3>
-              <p className={`mt-4 max-w-lg leading-7 ${index === 0 ? "text-[color-mix(in_srgb,var(--background)_70%,transparent)]" : "text-[var(--muted)]"}`}>
-                {project.summary}
-              </p>
-              <p className="mt-6 font-mono text-xs text-[var(--muted)]">{project.tags.slice(0, 3).join(" · ")}</p>
-              <Link className="link-ring mt-8 inline-flex items-center gap-2 font-mono text-xs font-black text-[var(--accent)]" href={`/projects/${project.slug}`}>
-                View <ArrowRight size={14} />
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-20 border-t-[3px] border-[var(--rule)] pt-14">
-        <SectionTitle index="02" title="Technical Content" />
-        <div className="border-2 border-[var(--rule)]">
-          {writingPreview.map((item) => (
-            <a
-              className="link-ring grid gap-4 border-b-2 border-[var(--rule)] px-7 py-6 last:border-b-0 md:grid-cols-[0.28fr_1fr_0.18fr] md:items-center"
-              href={item.href}
-              key={item.href}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <span className="font-mono text-[0.65rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]">
-                {item.category}
-              </span>
-              <span>
-                <span className="block text-lg font-black tracking-[-0.03em] text-[var(--text)]">{item.title}</span>
-                <span className="mt-1 block text-sm text-[var(--muted)]">{item.description}</span>
-              </span>
-              <span className="justify-self-start border border-[var(--teal)] bg-[var(--teal-soft)] px-3 py-1 font-mono text-[0.65rem] font-black uppercase tracking-[0.12em] text-[var(--teal)] md:justify-self-end">
-                {item.readTime || item.date}
-              </span>
+          <p className="mt-8 text-base leading-8 text-[var(--muted)]">
+            I make tech videos on{" "}
+            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.youtube.href} rel="noreferrer" target="_blank">
+              YouTube
             </a>
-          ))}
-        </div>
-      </section>
+            , I yap on{" "}
+            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.x.href} rel="noreferrer" target="_blank">
+              X
+            </a>
+            , and push code on{" "}
+            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.github.href} rel="noreferrer" target="_blank">
+              GitHub
+            </a>
+            . You can also connect professionally with me on{" "}
+            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.linkedin.href} rel="noreferrer" target="_blank">
+              LinkedIn
+            </a>
+            , or reach me by{" "}
+            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.email.href}>
+              email
+            </a>{" "}
+            or on{" "}
+            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.telegram.href} rel="noreferrer" target="_blank">
+              Telegram
+            </a>
+            .
+          </p>
 
-      <section className="mt-20 border-t-[3px] border-[var(--rule)] pt-14">
-        <SectionTitle index="03" title="Stack & Tools" />
-        <div className="grid border-2 border-[var(--rule)] md:grid-cols-4">
-          {stackGroups.map((group) => (
-            <div className="border-[var(--rule)] p-7 md:border-l md:first:border-l-0" key={group.title}>
-              <h3 className="font-mono text-xs font-black uppercase tracking-[0.16em] text-[var(--text)]">
-                {group.title}
-              </h3>
-              <ul className="mt-5 divide-y divide-[var(--rule-soft)] text-sm text-[var(--muted)]">
-                {group.items.map((item) => (
-                  <li className="py-2" key={item}>{item}</li>
-                ))}
-              </ul>
+          <ul className="mt-9 space-y-3">
+            {[
+              { href: "/portfolio", label: "portfolio", description: "see my works" },
+              { href: "/blog", label: "blog", description: "writings on technology and ideas" },
+              { href: "/resume", label: "resume", description: "experience and skills" },
+            ].map((item) => (
+              <li key={item.href}>
+                <Link
+                  className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
+                  href={item.href}
+                >
+                  {item.label}
+                </Link>
+                <span className="text-[var(--muted)]"> — {item.description}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <figure className="order-first relative mx-auto w-full max-w-[260px] sm:max-w-[320px] lg:order-none lg:ml-auto lg:mr-0 lg:max-w-[380px]">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-6 rounded-full bg-[color-mix(in_srgb,var(--rule)_10%,transparent)] blur-2xl md:-inset-10 md:blur-3xl"
+          />
+          <div className="relative -rotate-[3.5deg] scale-95 overflow-hidden rounded-xl bg-[#1a1a1a] p-1.5 shadow-2xl ring-1 ring-white/10">
+            <div className="mb-2 flex items-center gap-1.5 border-b border-white/5 px-2 pb-2 pt-1">
+              <span className="h-2 w-2 rounded-full bg-white/20 sm:h-2.5 sm:w-2.5" />
+              <span className="h-2 w-2 rounded-full bg-white/20 sm:h-2.5 sm:w-2.5" />
+              <span className="h-2 w-2 rounded-full bg-white/20 sm:h-2.5 sm:w-2.5" />
+              <span className="ml-2 font-mono text-[8px] uppercase tracking-widest text-gray-500 sm:text-[10px]">
+                Photo Booth
+              </span>
             </div>
-          ))}
-        </div>
-      </section>
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-white/5 bg-zinc-900">
+              <Image
+                alt="Abdulganiy Adeleke"
+                className="scale-105 object-cover transition-transform duration-700 hover:scale-100"
+                fill
+                priority
+                sizes="(max-width: 640px) 260px, (max-width: 1024px) 320px, 380px"
+                src={profileImage}
+              />
+              <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-4 rounded-full border border-white/10 bg-black/40 px-4 py-2 backdrop-blur-md sm:bottom-4 sm:gap-6 sm:px-6 sm:py-2.5">
+                <span className="h-2.5 w-2.5 rounded-full border border-white/20 sm:h-3 sm:w-3" />
+                <span className="h-2.5 w-2.5 rounded-full border border-white/20 sm:h-3 sm:w-3" />
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white/40 sm:h-10 sm:w-10">
+                  <span className="h-6 w-6 rounded-full bg-white/10 sm:h-8 sm:w-8" />
+                </span>
+                <span className="h-2.5 w-2.5 rounded-full border border-white/20 sm:h-3 sm:w-3" />
+                <span className="h-2.5 w-2.5 rounded-full border border-white/20 sm:h-3 sm:w-3" />
+              </div>
+            </div>
+          </div>
+        </figure>
+      </div>
 
       <section className="mt-20 border-t-[3px] border-[var(--rule)] pt-14">
-        <SectionTitle index="04" title="Open Source" />
-        <div className="grid border-2 border-[var(--rule)] md:grid-cols-2">
-          {ossPreview.map((story, index) => (
-            <article className="border-[var(--rule)] p-8 md:border-l md:first:border-l-0" key={story.title}>
-              <p className="font-mono text-sm font-black text-[var(--text)]">→ {story.repo}</p>
-              <h3 className="mt-5 text-xl font-black tracking-[-0.03em]">{story.title}</h3>
-              <p className="mt-3 leading-7 text-[var(--muted)]">{story.impact}</p>
-              <a
-                className="link-ring mt-8 inline-flex items-center gap-2 font-mono text-xs font-black text-[var(--accent)]"
-                href={story.links[0]?.href}
-                rel="noreferrer"
-                target="_blank"
-              >
-                {story.links[0]?.label || `PR #${index + 1}`} <ArrowRight size={14} />
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-20 border-t-[3px] border-[var(--rule)] pt-14">
-        <SectionTitle index="05" title="Community & Events" />
-        <div className="grid border-2 border-[var(--rule)] md:grid-cols-3">
-          {[
-            {
-              label: "Education & Workshops",
-              title: "Kodespot",
-              metric: "Web2/Web3",
-              detail: "Student developer education",
-            },
-            {
-              label: "Community Building",
-              title: "Kodespot moderation",
-              metric: "X + Chat",
-              detail: "Community communication",
-            },
-            {
-              label: "Featured Event",
-              title: "Techie Soiree",
-              metric: "200+",
-              detail: "Attendees · Web3 onboarding",
-            },
-          ].map((item) => (
-            <article className="flex min-h-[210px] flex-col border-[var(--rule)] p-8 md:border-l md:first:border-l-0" key={item.title}>
-              <div>
-                <p className="font-mono text-[0.65rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]">{item.label}</p>
-                <h3 className="mt-3 text-xl font-black tracking-[-0.03em]">{item.title}</h3>
-              </div>
-              <div className="mt-auto pt-8">
-                <p className="break-words text-4xl font-black leading-none tracking-[-0.07em] text-[var(--accent)] md:text-5xl">{item.metric}</p>
-                <p className="mt-2 font-mono text-[0.65rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]">{item.detail}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <Heading level={2}>What people say</Heading>
+        <FeedbackSection />
       </section>
     </main>
   );

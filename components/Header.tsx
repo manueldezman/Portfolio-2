@@ -1,46 +1,68 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { Briefcase, FileText, Github, Linkedin, PenLine, Twitter } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { socials } from "@/content/socials";
 
 const navItems = [
-  { href: "/projects", label: "Projects" },
-  { href: "/contents", label: "Contents" },
-  { href: "/oss", label: "OSS" },
-  { href: "/community", label: "Community" },
+  { href: "/portfolio", label: "Portfolio", Icon: Briefcase },
+  { href: "/blog", label: "Blog", Icon: PenLine },
+  { href: "/resume", label: "Resume", Icon: FileText },
 ];
+
+const socialItems = [
+  { href: socials.github.href, label: "GitHub", Icon: Github },
+  { href: socials.linkedin.href, label: "LinkedIn", Icon: Linkedin },
+  { href: socials.x.href, label: "X", Icon: Twitter },
+];
+
+function Divider({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`mx-0.5 h-6 w-px shrink-0 self-center bg-[var(--rule-soft)] sm:mx-2 sm:h-8 ${className}`}
+    />
+  );
+}
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur">
-      <nav className="editorial-shell py-5">
-        <div className="flex items-center justify-between gap-6">
-          <Link className="text-lg font-black uppercase tracking-[-0.04em] text-[var(--text)]" href="/">
-            Abdulganiy
-            <span className="align-super text-[0.6rem] tracking-normal text-[var(--accent)]">TW+DR</span>
+    <header className="pointer-events-none fixed inset-x-0 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] z-50 flex justify-center px-4">
+      <nav className="pointer-events-auto flex items-center gap-1 rounded-[20px] border border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--surface)_72%,transparent)] p-1.5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:gap-2 sm:rounded-[24px] sm:p-2">
+        <Link
+          className="link-ring hidden shrink-0 px-3 text-sm font-bold tracking-[-0.01em] text-[var(--text)] sm:block"
+          href="/"
+        >
+          0xDezman
+        </Link>
+
+        <Divider className="hidden sm:block" />
+
+        {navItems.map((item) => (
+          <Link aria-label={item.label} className="nav-item" href={item.href} key={item.href}>
+            <item.Icon size={19} />
+            <span className="nav-tooltip">{item.label}</span>
           </Link>
-          <div className="hidden items-center gap-8 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--muted)] md:flex">
-            {navItems.map((item) => (
-              <Link className="link-ring" href={item.href} key={item.href}>
-                {item.label}
-              </Link>
-            ))}
-          </div>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Link className="editorial-button editorial-button-dark gap-1 px-5 py-3" href="/resume">
-              Resume
-              <ArrowUpRight size={13} />
-            </Link>
-          </div>
-        </div>
-        <div className="mt-5 border-t-2 border-[var(--rule)]" />
-        <div className="mt-4 flex flex-wrap gap-4 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--muted)] md:hidden">
-          {navItems.map((item) => (
-            <Link className="link-ring" href={item.href} key={item.href}>
-              {item.label}
-            </Link>
-          ))}
-        </div>
+        ))}
+
+        <Divider />
+
+        {socialItems.map((item) => (
+          <a
+            aria-label={item.label}
+            className="nav-item"
+            href={item.href}
+            key={item.href}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <item.Icon size={19} />
+            <span className="nav-tooltip">{item.label}</span>
+          </a>
+        ))}
+
+        <Divider />
+
+        <ThemeToggle />
       </nav>
     </header>
   );

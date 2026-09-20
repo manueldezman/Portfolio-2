@@ -49,7 +49,7 @@ export function Hero() {
         </div>
         <Image
           alt="Abdulganiy Adeleke"
-          className="aspect-[4/5] rounded-2xl object-cover opacity-95 grayscale-[20%]"
+          className="aspect-[4/5] rounded-2xl object-cover opacity-95"
           priority
           src={profileImage}
         />

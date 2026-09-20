@@ -29,7 +29,7 @@ export function ArticleArchive({ articles }: ArticleArchiveProps) {
 
   return (
     <section className="mt-14">
-      <EditorialSectionTitle index="01" title="Article Archive" />
+      <EditorialSectionTitle index="02" title="Article Archive" />
       <div className={`grid gap-8 ${selected ? "xl:grid-cols-[1fr_0.42fr]" : ""}`}>
         <div className="border-2 border-[var(--rule)]">
           {articles.map((item, index) => {

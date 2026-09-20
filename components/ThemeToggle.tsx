@@ -5,25 +5,23 @@ import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
-function getInitialTheme(): Theme {
+const DEFAULT_THEME: Theme = "dark";
+
+function getStoredTheme(): Theme {
   if (typeof window === "undefined") {
-    return "light";
+    return DEFAULT_THEME;
   }
 
   const storedTheme = window.localStorage.getItem("theme");
 
-  if (storedTheme === "light" || storedTheme === "dark") {
-    return storedTheme;
-  }
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return storedTheme === "light" || storedTheme === "dark" ? storedTheme : DEFAULT_THEME;
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(DEFAULT_THEME);
 
   useEffect(() => {
-    setTheme(getInitialTheme());
+    setTheme(getStoredTheme());
   }, []);
 
   useEffect(() => {
@@ -38,12 +36,12 @@ export function ThemeToggle() {
   return (
     <button
       aria-label={`Switch to ${nextTheme} mode`}
-      className="editorial-button editorial-button-secondary inline-flex items-center gap-2 px-3 py-2 text-xs"
+      className="nav-item"
       onClick={() => setTheme(nextTheme)}
       type="button"
     >
-      <Icon size={14} />
-      {nextTheme}
+      <Icon size={19} />
+      <span className="nav-tooltip">{nextTheme}</span>
     </button>
   );
 }

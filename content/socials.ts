@@ -11,6 +11,10 @@ export const socials = {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/abdulganiyadeleke",
   },
+  telegram: {
+    label: "Telegram",
+    href: "https://t.me/Manueldezman",
+  },
   youtube: {
     label: "YouTube",
     href: "https://www.youtube.com/@0xdezman",

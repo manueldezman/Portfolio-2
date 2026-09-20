@@ -1,81 +1,59 @@
 import type { Metadata } from "next";
-import { Download, Mail } from "lucide-react";
-import { PlaceholderPanel } from "@/components/PlaceholderPanel";
-import { SectionHeader } from "@/components/SectionHeader";
+import Link from "next/link";
+import { Heading } from "@/components/Heading";
+import { ResumePdfActions } from "@/components/ResumePdfActions";
 import { socials } from "@/content/socials";
+
+const basePath = process.env.GITHUB_PAGES === "true" ? "/Portfolio-2" : "";
+const resumePdf = `${basePath}/abdulganiy-adeleke-resume.pdf`;
 
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Web resume for Abdulganiy Adeleke, Developer Relations Engineer and Technical Writer.",
+    "Resume for Abdulganiy Adeleke, Developer Relations Engineer and Technical Writer.",
 };
 
 export default function ResumePage() {
   return (
-    <main className="mx-auto max-w-5xl px-5 py-16">
-      <SectionHeader
-        description="A focused web resume for Developer Relations Engineer and Technical Writer roles."
-        eyebrow="Resume"
-        title="Abdulganiy Adeleke"
-      />
+    <main className="editorial-shell max-w-5xl py-16">
+      <Link className="link-ring font-mono text-xs text-[var(--muted)]" href="/">
+        ← back
+      </Link>
 
-      <div className="mt-8 flex flex-wrap gap-3">
-        <button
-          className="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-dashed border-accent/35 px-5 py-3 font-semibold text-sand"
-          disabled
-          type="button"
-        >
-          <Download size={18} />
-          PDF coming soon
-        </button>
-        <a
-          className="link-ring inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 font-semibold text-ink"
-          href={socials.email.href}
-        >
-          <Mail size={18} />
-          Contact me
-        </a>
-      </div>
+      <header className="mt-10">
+        <Heading level={1}>Resume</Heading>
+        <p className="mt-3 text-base leading-8 text-[var(--muted)]">
+          The full resume, embedded below. Download the PDF or open it in a new tab.
+        </p>
+      </header>
 
-      <section className="mt-10 grid gap-5 md:grid-cols-[0.85fr_1.15fr]">
-        <div className="terminal-card p-6">
-          <p className="eyebrow">Focus</p>
-          <h2 className="mt-4 text-2xl font-semibold text-cream">
-            Developer Relations Engineer & Technical Writer
-          </h2>
-          <p className="mt-4 leading-7 text-sand">
-            I bridge technical products and developers through clear documentation, useful tooling,
-            open-source contribution, tutorials, demos, and community support.
+      <ResumePdfActions emailHref={socials.email.href} pdfHref={resumePdf} />
+
+      <section className="mt-10">
+        <div className="hidden overflow-hidden rounded-2xl border border-cream/10 bg-cream/[0.03] md:block">
+          <object
+            aria-label="Abdulganiy Adeleke resume PDF"
+            className="h-[85vh] min-h-[600px] w-full"
+            data={resumePdf}
+            type="application/pdf"
+          >
+            <div className="p-6 text-sm leading-6 text-sand">
+              Your browser can&apos;t display the PDF inline.{" "}
+              <a className="link-ring text-accent underline" download href={resumePdf}>
+                Download the resume PDF
+              </a>{" "}
+              instead.
+            </div>
+          </object>
+        </div>
+        <div className="rounded-2xl border border-cream/10 bg-cream/[0.03] p-6 md:hidden">
+          <p className="text-sm leading-6 text-sand">
+            The embedded viewer is hidden on mobile. Use{" "}
+            <span className="font-semibold text-cream">Open PDF</span> above to read the resume in
+            a new tab.
           </p>
         </div>
-        <div className="terminal-card p-6">
-          <p className="eyebrow">Highlights</p>
-          <ul className="mt-4 space-y-3 leading-7 text-sand">
-            <li>Won Best Technical Website for Suimulate, a Sui Move visualizer.</li>
-            <li>Built TrovePilot, a Mezo borrower automation prototype for BTC/MUSD scenarios.</li>
-            <li>Created AI-assisted tools for README generation and FHEVM agent workflows.</li>
-            <li>Contributed merged documentation and curriculum improvements to open source.</li>
-          </ul>
-        </div>
       </section>
-
-      <section className="mt-5 grid gap-5 md:grid-cols-3">
-        {["Developer Education", "Documentation UX", "Web3 + AI Tooling"].map((item) => (
-          <div className="rounded-2xl border border-cream/10 bg-cream/[0.03] p-5" key={item}>
-            <p className="font-mono text-sm text-accent">{item}</p>
-            <p className="mt-3 text-sm leading-6 text-sand">
-              Practical proof across tutorials, shipped tools, demos, and OSS feedback loops.
-            </p>
-          </div>
-        ))}
-      </section>
-
-      <div className="mt-5">
-        <PlaceholderPanel
-          description="The downloadable resume will be linked here once the final PDF is available. The web resume remains visible for hiring teams at launch."
-          title="Downloadable PDF placeholder"
-        />
-      </div>
     </main>
   );
 }
