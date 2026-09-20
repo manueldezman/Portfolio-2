@@ -19,7 +19,7 @@ export default function Home() {
       <div className="grid gap-10 lg:grid-cols-[1fr_0.42fr] lg:items-start">
         <div>
           <Heading className="whitespace-nowrap" level={1}>
-            Abdulganiy <span className="italic text-[var(--accent)]">Adeleke</span>.
+            AbdulGaniy Adeleke.
           </Heading>
           <RotatingRoles />
 

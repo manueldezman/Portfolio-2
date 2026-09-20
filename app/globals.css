@@ -232,6 +232,39 @@ body::after {
   transform: scale(1);
 }
 
+.nav-label,
+.nav-home {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .nav-item {
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .nav-label {
+    display: block;
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-transform: uppercase;
+  }
+
+  .nav-home {
+    display: flex;
+  }
+
+  .nav-tooltip,
+  .nav-social {
+    display: none;
+  }
+}
+
 @keyframes caret-blink {
   0%,
   50% {
