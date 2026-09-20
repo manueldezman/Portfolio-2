@@ -50,6 +50,7 @@ export function Header() {
             <span aria-hidden="true" className="nav-label">
               {item.label}
             </span>
+            <span className="nav-tooltip">{item.label}</span>
           </Link>
         ))}
 
@@ -65,9 +66,7 @@ export function Header() {
             target="_blank"
           >
             <item.Icon size={19} />
-            <span aria-hidden="true" className="nav-label">
-              {item.label}
-            </span>
+            <span className="nav-tooltip">{item.label}</span>
           </a>
         ))}
 
