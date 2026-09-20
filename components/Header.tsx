@@ -26,13 +26,13 @@ function Divider({ className = "" }: { className?: string }) {
 
 export function Header() {
   return (
-    <header className="pointer-events-none fixed inset-x-0 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] z-50 flex justify-center px-4">
+    <header className="pointer-events-none fixed inset-x-0 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] sm:bottom-[calc(4rem+env(safe-area-inset-bottom))] z-50 flex justify-center px-4">
       <nav className="pointer-events-auto flex items-center gap-1 rounded-[20px] border border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--surface)_72%,transparent)] p-1.5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:gap-2 sm:rounded-[24px] sm:p-2">
         <Link
           className="link-ring hidden shrink-0 px-3 text-sm font-bold tracking-[-0.01em] text-[var(--text)] sm:block"
           href="/"
         >
-          0xDezman
+          About me
         </Link>
 
         <Divider className="hidden sm:block" />

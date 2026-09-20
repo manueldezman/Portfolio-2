@@ -11,7 +11,7 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="editorial-shell mt-24 border-t-[3px] border-[var(--rule)] py-10">
+    <footer className="editorial-shell mt-24 border-t-[3px] border-[var(--rule)] pt-10 pb-24 sm:pb-36">
       <div className="flex flex-col justify-between gap-6 text-sm text-[var(--muted)] md:flex-row md:items-center">
         <div>
           <p className="font-mono font-bold uppercase text-[var(--text)]">Abdulganiy Adeleke</p>
