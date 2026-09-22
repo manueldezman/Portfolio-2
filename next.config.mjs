@@ -5,11 +5,6 @@ const githubPagesBasePath = "/Portfolio-2";
 const nextConfig = {
   output: "export",
   trailingSlash: true,
-  basePath: isGithubPages ? githubPagesBasePath : "",
-  assetPrefix: isGithubPages ? `${githubPagesBasePath}/` : "",
-  env: {
-    NEXT_PUBLIC_BASE_PATH: isGithubPages ? githubPagesBasePath : "",
-  },
   images: {
     unoptimized: true,
     remotePatterns: [
