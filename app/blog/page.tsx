@@ -21,7 +21,7 @@ export default function BlogPage() {
   const posts = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
-    <main className="editorial-shell max-w-3xl py-16">
+    <main className="editorial-shell max-w-3xl pb-16">
       <Link className="link-ring font-mono text-xs text-[var(--muted)]" href="/">
         ← back
       </Link>

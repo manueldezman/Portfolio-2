@@ -67,7 +67,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function PortfolioPage() {
   return (
-    <main className="editorial-shell max-w-3xl py-16">
+    <main className="editorial-shell max-w-3xl pb-16">
       <Link className="link-ring font-mono text-xs text-[var(--muted)]" href="/">
         ← back
       </Link>

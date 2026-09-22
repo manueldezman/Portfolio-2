@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <main className="editorial-shell max-w-5xl py-16">
+    <main className="editorial-shell max-w-5xl pb-16">
       <Link className="link-ring font-mono text-xs text-[var(--muted)]" href="/">
         ← back
       </Link>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { ThemeScript } from "@/components/ThemeScript";
+import { SkyScenery, GroundScenery } from "@/components/Scenery";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://abdulganiy.dev"),
@@ -29,9 +30,22 @@ export default function RootLayout({
       <head>
         <ThemeScript />
       </head>
-      <body className="font-sans antialiased">
+      {/* Added 'relative min-h-screen w-full flex flex-col justify-between' to manage flow layout timing */}
+      <body className="font-sans antialiased relative min-h-screen w-full flex flex-col justify-between">
+        
+        {/* 1. Sky sits cleanly at the top flow boundary */}
+        <SkyScenery />
+        
+        {/* 2. Main content column sits in the middle, locking layout width blocks */}
+        <main className="w-full flex-grow">
+          {children}
+        </main>
+        
         <Header />
-        {children}
+        
+        {/* 3. Ground sits cleanly at the absolute bottom flow boundary */}
+        <GroundScenery/>
+        
       </body>
     </html>
   );

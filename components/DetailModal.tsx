@@ -68,7 +68,7 @@ export function DetailModal({ eyebrow, title, onClose, children }: DetailModalPr
       <div
         aria-labelledby={titleId}
         aria-modal="true"
-        className="max-h-[92vh] w-full max-w-5xl overflow-y-auto border-2 border-[var(--rule)] bg-[var(--background)] shadow-2xl sm:max-h-[88vh]"
+        className="detail-modal-panel max-h-[92vh] w-full max-w-5xl overflow-y-auto border-2 border-[var(--rule)] bg-[var(--background)] shadow-2xl sm:max-h-[88vh]"
         id={`modal-${titleId}`}
         ref={dialogRef}
         role="dialog"

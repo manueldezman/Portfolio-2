@@ -3,19 +3,19 @@ import Link from "next/link";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { Heading } from "@/components/Heading";
 import { RotatingRoles } from "@/components/RotatingRoles";
+import { BrandLink } from "@/components/BrandLink";
+import hackmambaLogo from "@/images/brands/hackmamba.png";
+import intuitionLogo from "@/images/brands/intuition.png";
+import midnightLogo from "@/images/brands/midnight.png";
+import odinLogo from "@/images/brands/odin.png";
 import profileImage from "@/images/profile-iamge.jpeg";
 import { socials } from "@/content/socials";
 
-const bioParagraphs = [
-  "I create developer resources that help both humans and AI agents understand and use technical products effectively: tutorials, conceptual guides, API references, docs-as-code workflows, videos, diagrams, and agent and developer tooling.",
-  "My background in REST APIs, frontend development, smart contract development, testing, developer tools, Git, Markdown, and docs-as-code workflows lets me test the systems I explain, validate workflows directly, and produce technically accurate content that improves onboarding, adoption, and developer experience.",
-  "I like getting my hands dirty: I spot bugs, investigate them, and leave a project better than I found it, through feedback and pull-request fixes. That led to my selection as a published technical author for the Hackmamba blog.",
-  "I also contribute to open source, including decentralized protocols like Midnight Network and Intuition, and developer educational platforms like The Odin Project.",
-];
-
 export default function Home() {
   return (
-    <main className="editorial-shell max-w-5xl py-16">
+    <main className="editorial-shell max-w-5xl pb-16">
+
+
       <div className="grid gap-10 lg:grid-cols-[1fr_0.42fr] lg:items-start">
         <div>
           <Heading className="whitespace-nowrap" level={1}>
@@ -24,9 +24,64 @@ export default function Home() {
           <RotatingRoles />
 
           <div className="mt-8 space-y-6 text-base leading-8 text-[var(--muted)]">
-            {bioParagraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            <p>
+              I create developer resources that help both humans and AI
+              agents understand and use technical products effectively:
+              tutorials, conceptual guides, API references, docs-as-code
+              workflows, videos, diagrams, and agent and developer tooling.
+            </p>
+
+            <p>
+              I like getting my hands dirty: I spot bugs, investigate them,
+              and leave a project better than I found it, through feedback
+              and pull-request fixes. That led to my selection as a
+              published technical author for the{" "}
+              <BrandLink
+                href="https://hackmamba.io/blog/"
+                logoAlt="Hackmamba"
+                logoHeight={45}
+                logoWidth={180}
+                logoSrc={hackmambaLogo}
+              >
+                Hackmamba blog
+              </BrandLink>
+              .
+            </p>
+
+            <p>
+              I also contribute to open source, including decentralized
+              protocols like{" "}
+              <BrandLink
+                href="https://midnight.network/overview"
+                logoAlt="Midnight Network"
+                logoHeight={94}
+                logoWidth={180}
+                logoSrc={midnightLogo}
+              >
+                Midnight Network
+              </BrandLink>{" "}
+              and{" "}
+              <BrandLink
+                href="https://www.intuition.systems/"
+                logoAlt="Intuition"
+                logoHeight={36}
+                logoWidth={180}
+                logoSrc={intuitionLogo}
+              >
+                Intuition
+              </BrandLink>
+              , and developer educational platforms like{" "}
+              <BrandLink
+                href="https://www.theodinproject.com/about"
+                logoAlt="The Odin Project"
+                logoHeight={94}
+                logoWidth={180}
+                logoSrc={odinLogo}
+              >
+                The Odin Project
+              </BrandLink>
+              .
+            </p>
           </div>
 
           <p className="mt-8 text-base leading-8 text-[var(--muted)]">
