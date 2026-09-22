@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { testimonials } from "@/content/testimonials";
 
 const SNIPPET_LENGTH = 110;
