@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FeedbackSection } from "@/components/FeedbackSection";
+import { AudioToggle } from "@/components/AudioToggle";
 import { Heading } from "@/components/Heading";
 import { RotatingRoles } from "@/components/RotatingRoles";
 import { BrandLink } from "@/components/BrandLink";
@@ -18,9 +19,12 @@ export default function Home() {
 
       <div className="grid gap-10 lg:grid-cols-[1fr_0.42fr] lg:items-start">
         <div>
-          <Heading className="whitespace-nowrap" level={1}>
-            AbdulGaniy Adeleke.
-          </Heading>
+          <div className="flex items-center gap-3">
+            <Heading className="whitespace-nowrap" level={1}>
+              AbdulGaniy Adeleke.
+            </Heading>
+            <AudioToggle />
+          </div>
           <RotatingRoles />
 
           <div className="mt-8 space-y-6 text-base leading-8 text-[var(--muted)]">

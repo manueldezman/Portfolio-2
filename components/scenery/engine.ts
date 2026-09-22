@@ -10,6 +10,7 @@ import {
 import { GRASS_TONES, STAR_TONES, SKY_GRADIENT, type ThemeName } from "./palette";
 import { clamp } from "./random";
 import { ditherTest, getBayerDither } from "./dither";
+import { enableAudio, playBirdFlightSound, playPlaneSound, playTransitionSound } from "./audio";
 
 const STEP = 4;
 const REDUCED_MOTION =
@@ -54,6 +55,7 @@ export function mountSky(skyCanvas: HTMLCanvasElement) {
 
   const skyCtx = skyCanvas.getContext("2d")!;
   let plane: { t0: number; from: number; dir: 1 | -1; speed: number; y: number } | null = null;
+  let planeSoundPlayed = false;
   let planeNextAt = 4 + Math.random() * 6;
 
   let running = false;
@@ -67,8 +69,9 @@ export function mountSky(skyCanvas: HTMLCanvasElement) {
   }
 
   function resize() {
-    const w = skyCanvas.clientWidth;
-    const h = skyCanvas.clientHeight;
+    const rect = skyCanvas.getBoundingClientRect();
+    const w = Math.round(rect.width);
+    const h = Math.round(rect.height);
     if (!w || !h) return;
     if (w === width && h === height) return;
     width = w;
@@ -87,21 +90,25 @@ export function mountSky(skyCanvas: HTMLCanvasElement) {
   function hitOrb(x: number, y: number) {
     const cx = sky.orb.x + sky.orb.size / 2;
     const cy = sky.orb.y + sky.orb.size / 2;
-    const r = sky.orb.size / 5;
+    const r = sky.orb.radius + 8;
     const dx = x - cx;
     const dy = y - cy;
     return dx * dx + dy * dy <= (r + 10) * (r + 10);
   }
 
-  function onSkyClick(ev: PointerEvent) {
+  async function onSkyClick(ev: PointerEvent) {
     if (inTransition) return;
     const { x, y } = localPoint(ev);
-    if (hitOrb(x, y)) toggleTheme();
+    if (hitOrb(x, y)) {
+      await enableAudio();
+      toggleTheme();
+    }
   }
 
   function toggleTheme() {
     if (inTransition || !sky || !tryAcquireThemeTransition()) return;
     inTransition = true;
+    playTransitionSound();
     const next: ThemeName = theme === "dark" ? "light" : "dark";
     const fromCanvas = sky.orb.canvas;
     const fromSize = sky.orb.size;
@@ -151,9 +158,16 @@ export function mountSky(skyCanvas: HTMLCanvasElement) {
         speed: 60 + Math.random() * 40,
         y: sky.orb.y + sky.orb.size * (0.35 + Math.random() * 0.35),
       };
+      planeSoundPlayed = false;
     }
     const t = now - plane.t0;
     const x = plane.from + plane.dir * plane.speed * t;
+    const planeCenter = x + sky.plane.w / 2;
+    const orbCenter = sky.orb.x + sky.orb.size / 2;
+    if (!planeSoundPlayed && Math.abs(planeCenter - orbCenter) <= sky.orb.size * 1.25) {
+      planeSoundPlayed = true;
+      playPlaneSound();
+    }
     if (x < -sky.plane.w - 10 || x > width + 10) {
       plane = null;
       planeNextAt = now + 6 + Math.random() * 10;
@@ -376,6 +390,7 @@ export function mountGround(groundCanvas: HTMLCanvasElement) {
     if (pine) {
       pine.swayVelocity += 2.4;
       birds.push(...spawnBirdBurst({ x: pine.x, y: pine.topY, w: pine.width }, performance.now() / 1000, Date.now()));
+      playBirdFlightSound();
       return;
     }
     if (snowOverlay) {

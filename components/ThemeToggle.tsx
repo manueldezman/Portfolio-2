@@ -3,6 +3,7 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { isThemeTransitionActive } from "./scenery/transition";
+import { enableAudio } from "./scenery/audio";
 
 type Theme = "light" | "dark";
 
@@ -39,8 +40,9 @@ export function ThemeToggle() {
   const nextTheme = theme === "dark" ? "light" : "dark";
   const Icon = theme === "dark" ? Sun : Moon;
 
-  function handleClick() {
+  async function handleClick() {
     if (isThemeTransitionActive()) return;
+    await enableAudio();
     // The scenery engine owns every theme change so the orb and page always
     // use the same animated transition and sprite lifecycle.
     window.dispatchEvent(new CustomEvent("scenery:toggle-theme"));

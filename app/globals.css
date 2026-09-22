@@ -66,6 +66,58 @@ button,
   touch-action: manipulation;
 }
 
+.audio-notice {
+  align-items: center;
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  border: 1px solid var(--rule-soft);
+  color: var(--background);
+  display: flex;
+  gap: 0.75rem;
+  left: 50%;
+  padding: 0.45rem 0.65rem 0.45rem 0.85rem;
+  position: fixed;
+  top: 0.75rem;
+  transform: translateX(-50%);
+  z-index: 60;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.audio-notice-enable,
+.audio-notice-dismiss {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.audio-notice-enable {
+  background: var(--background);
+  color: var(--text);
+  padding: 0.25rem 0.5rem;
+}
+
+.audio-notice-dismiss {
+  color: var(--background);
+  opacity: 0.7;
+}
+
+.audio-toggle {
+  align-items: center;
+  border: 1px solid var(--rule-soft);
+  color: var(--muted);
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  padding: 0.35rem;
+  transition: color 400ms ease-in-out, border-color 400ms ease-in-out;
+}
+
+.audio-toggle:hover,
+.audio-toggle:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .brand-preview {
   opacity: 0;
   transform: perspective(900px) rotateX(-26deg) rotateY(10deg) translateY(24px) scale(0.72);

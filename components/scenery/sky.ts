@@ -23,6 +23,7 @@ export type Cloud = {
 export type Orb = {
   canvas: HTMLCanvasElement;
   glowCanvas: HTMLCanvasElement;
+  radius: number;
   size: number;
   x: number;
   y: number;
@@ -86,7 +87,7 @@ function buildOrb(dpr: number, theme: ThemeName, radius: number): Orb {
   gctx.fillStyle = gradient;
   gctx.fillRect(0, 0, size, size);
 
-  return { canvas, glowCanvas, size, x: 0, y: 0 };
+  return { canvas, glowCanvas, radius, size, x: 0, y: 0 };
 }
 
 function buildCloud(theme: ThemeName, rand: () => number): Cloud {
@@ -204,7 +205,7 @@ export function buildSky(
   // the band, not off to one side). Vertically it sits a little above center,
   // clamped so its glow ring — which is much bigger than the orb core — never
   // gets clipped by the top or bottom of the sky band.
-  orb.x = width * 0.5 - orb.size / 2;
+  orb.x = Math.max(0, Math.round((width - orb.size) / 2));
   orb.y = clamp(
     height * 0.14 - orb.size / 2,
     8,

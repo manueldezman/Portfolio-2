@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { ThemeScript } from "@/components/ThemeScript";
 import { SkyScenery, GroundScenery } from "@/components/Scenery";
+import { AudioNotice } from "@/components/AudioNotice";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://abdulganiy.dev"),
@@ -32,6 +33,7 @@ export default function RootLayout({
       </head>
       {/* Added 'relative min-h-screen w-full flex flex-col justify-between' to manage flow layout timing */}
       <body className="font-sans antialiased relative min-h-screen w-full flex flex-col justify-between">
+        <AudioNotice />
         
         {/* 1. Sky sits cleanly at the top flow boundary */}
         <SkyScenery />
