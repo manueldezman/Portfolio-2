@@ -62,5 +62,5 @@ export function playBirdFlightSound() {
 }
 
 export function playPlaneSound() {
-  playClip(planeUrl, 0.12);
+  playClip(planeUrl, 0.99);
 }
