@@ -105,6 +105,69 @@ export type DeveloperCommunityEntry =
   | { kind: "activity"; activity: CommunityActivity }
   | { kind: "event"; event: CommunityEvent };
 
+export const apiDocumentationItems: PortfolioItem[] = [
+  {
+    title: "Agent ready API documentation",
+    description:
+      "OpenAPI 3.1 and Mintlify documentation for the EmPay HRMS product, scored 99/100 on the AFDocs agent-friendly docs check.",
+    href: "https://empay-sample.mintlify.site/product-overview",
+    source: "Mintlify",
+    readiness: {
+      image: {
+        alt: "Terminal output of an AFDocs agent-friendly docs scorecard showing an overall score of 99 out of 100 for empay-sample.mintlify.app",
+        caption: "AFDocs agent-friendly docs scorecard: 99/100 for the EmPay HRMS documentation, September 2026.",
+        image: apiDocsScorecardImage,
+      },
+      command: "npx afdocs check https://empay-sample.mintlify.app/ --format scorecard",
+      tools: [
+        { name: "Redocly", role: "API spec contract validation" },
+        { name: "Mintlify", role: "Publishing" },
+        { name: "GitHub", role: "Version control" },
+        { name: "AFDocs", role: "AI readiness evaluation" },
+        { name: "Codex", role: "AI coding assistance" },
+      ],
+      practices: [
+        "Enabled Markdown output for every page so agents read clean Markdown instead of scraped HTML.",
+        "Kept llms.txt valid — existence, size, link coverage, and links that point at Markdown, in both HTML and Markdown directive variants.",
+        "Verified Markdown URL support and `Accept: text/markdown` content negotiation.",
+        "Held page size and content-start position in check; raw `/openapi.json` and `/openapi.yaml` stay published because agents need them.",
+        "Made tabbed content serialize correctly for agents.",
+        "Checked URL stability — redirect behavior and HTTP status codes.",
+        "Kept the documentation readable without a login wall.",
+        "Applied cache-header hygiene so agents and proxies get consistent responses.",
+        "Served the OpenAPI spec from the configured source with valid code fences and an interactive reference.",
+        "Verified Markdown and HTML content parity so agents do not see different content.",
+        "Ran readiness checks as a repeatable gate instead of a one-off audit.",
+      ],
+    },
+  },
+  {
+    title: "Hookline docs: a documentation pipeline",
+    description:
+      "A docs-as-code pipeline on Docusaurus: Vale, codespell, front matter, and link checks in CI, plus Markdown twins and llms.txt for AI agents.",
+    href: "https://github.com/manueldezman/hookline-docs#hookline-docs-a-documentation-pipeline",
+    source: "Docusaurus · GitHub",
+  },
+];
+
+export const developerToolItems: PortfolioItem[] = [
+  // Unlisted: GitHub README Generator card pulled until its issues are fixed. Restore this block to re-list it.
+  // {
+  //   title: "GitHub README Generator",
+  //   description: "A developer tool for generating structured GitHub documentation from repository details.",
+  //   href: "https://github-docs-generator.vercel.app/",
+  //   source: "Live demo",
+  //   caseStudySlug: "github-readme-generator",
+  // },
+  {
+    title: "botchain skills and MCP",
+    description: "A toolkit for building BOT Chain skills and Model Context Protocol integrations.",
+    href: "https://github.com/manueldezman/botchain-init-toolkit/tree/main",
+    source: "GitHub",
+    caseStudySlug: "botchain-skills-and-mcp",
+  },
+];
+
 export const tutorialItems: PortfolioItem[] = [
   {
     title: "How to make technical documentation AI-ready: prevent information loss in Markdown",
@@ -174,62 +237,6 @@ export const explainerPlaylistNote: ExplainerPlaylistNote = {
     },
   ],
 };
-
-export const developerToolItems: PortfolioItem[] = [
-  // Unlisted: GitHub README Generator card pulled until its issues are fixed. Restore this block to re-list it.
-  // {
-  //   title: "GitHub README Generator",
-  //   description: "A developer tool for generating structured GitHub documentation from repository details.",
-  //   href: "https://github-docs-generator.vercel.app/",
-  //   source: "Live demo",
-  //   caseStudySlug: "github-readme-generator",
-  // },
-  {
-    title: "botchain skills and MCP",
-    description: "A toolkit for building BOT Chain skills and Model Context Protocol integrations.",
-    href: "https://github.com/manueldezman/botchain-init-toolkit/tree/main",
-    source: "GitHub",
-    caseStudySlug: "botchain-skills-and-mcp",
-  },
-];
-
-export const apiDocumentationItems: PortfolioItem[] = [
-  {
-    title: "Agent ready API documentation",
-    description:
-      "OpenAPI 3.1 and Mintlify documentation for the EmPay HRMS product, scored 99/100 on the AFDocs agent-friendly docs check.",
-    href: "https://empay-sample.mintlify.site/product-overview",
-    source: "Mintlify",
-    readiness: {
-      image: {
-        alt: "Terminal output of an AFDocs agent-friendly docs scorecard showing an overall score of 99 out of 100 for empay-sample.mintlify.app",
-        caption: "AFDocs agent-friendly docs scorecard: 99/100 for the EmPay HRMS documentation, September 2026.",
-        image: apiDocsScorecardImage,
-      },
-      command: "npx afdocs check https://empay-sample.mintlify.app/ --format scorecard",
-      tools: [
-        { name: "Redocly", role: "API spec contract validation" },
-        { name: "Mintlify", role: "Publishing" },
-        { name: "GitHub", role: "Version control" },
-        { name: "AFDocs", role: "AI readiness evaluation" },
-        { name: "Codex", role: "AI coding assistance" },
-      ],
-      practices: [
-        "Enabled Markdown output for every page so agents read clean Markdown instead of scraped HTML.",
-        "Kept llms.txt valid — existence, size, link coverage, and links that point at Markdown, in both HTML and Markdown directive variants.",
-        "Verified Markdown URL support and `Accept: text/markdown` content negotiation.",
-        "Held page size and content-start position in check; raw `/openapi.json` and `/openapi.yaml` stay published because agents need them.",
-        "Made tabbed content serialize correctly for agents.",
-        "Checked URL stability — redirect behavior and HTTP status codes.",
-        "Kept the documentation readable without a login wall.",
-        "Applied cache-header hygiene so agents and proxies get consistent responses.",
-        "Served the OpenAPI spec from the configured source with valid code fences and an interactive reference.",
-        "Verified Markdown and HTML content parity so agents do not see different content.",
-        "Ran readiness checks as a repeatable gate instead of a one-off audit.",
-      ],
-    },
-  },
-];
 
 export const openSourceRepositories: OpenSourceRepository[] = [
   {

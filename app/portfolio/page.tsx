@@ -79,6 +79,14 @@ export default function PortfolioPage() {
         </p>
       </header>
 
+      <Section title="API documentation">
+        <PortfolioList items={apiDocumentationItems} />
+      </Section>
+      
+      <Section title="AI agent/developer tools">
+        <PortfolioList items={developerToolItems} />
+      </Section>
+
       <Section title="Tutorials">
         <PortfolioList items={tutorialItems} />
       </Section>
@@ -103,13 +111,6 @@ export default function PortfolioPage() {
         </p>
       </Section>
 
-      <Section title="AI agent/developer tools">
-        <PortfolioList items={developerToolItems} />
-      </Section>
-
-      <Section title="API documentation">
-        <PortfolioList items={apiDocumentationItems} />
-      </Section>
 
       <Section title="Open-source contributions">
         <OpenSourceContributions repositories={openSourceRepositories} />
