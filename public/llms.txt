@@ -1,0 +1,21 @@
+# Abdulganiy Adeleke
+
+> Developer relations engineer and technical writer focused on developer documentation, documentation testing, open-source contributions, and developer education.
+
+This index points to Markdown representations of the site's published pages. The portfolio Markdown includes modal details immediately after the corresponding portfolio entries.
+
+## Pages
+
+- [Homepage](https://abdulganiy.dev/index.md): Profile, selected site links, social links, and testimonials.
+- [Portfolio](https://abdulganiy.dev/portfolio.md): Selected writing, tools, open-source work, and developer-community work. Modal content is inlined below each entity.
+- [BOT Chain skills and MCP case study](https://abdulganiy.dev/portfolio/botchain-skills-and-mcp.md): Problem, approach, outcome, and project links.
+- [Blog](https://abdulganiy.dev/blog.md): Published writing with dates, summaries, tags, and source links.
+- [Resume](https://abdulganiy.dev/resume.md): Resume content in Markdown, plus the original PDF.
+
+## Site
+
+- [HTML homepage](https://abdulganiy.dev/)
+- [HTML portfolio](https://abdulganiy.dev/portfolio/)
+- [HTML blog](https://abdulganiy.dev/blog/)
+- [HTML resume](https://abdulganiy.dev/resume/)
+- [Resume PDF](https://abdulganiy.dev/abdulganiy-adeleke-resume.pdf)
