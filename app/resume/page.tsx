@@ -4,8 +4,7 @@ import { Heading } from "@/components/Heading";
 import { ResumePdfActions } from "@/components/ResumePdfActions";
 import { socials } from "@/content/socials";
 
-const basePath = process.env.GITHUB_PAGES === "true" ? "/Portfolio-2" : "";
-const resumePdf = `${basePath}/abdulganiy-adeleke-resume.pdf`;
+const resumePdf = "/abdulganiy-adeleke-resume.pdf";
 
 export const metadata: Metadata = {
   title: "Resume",

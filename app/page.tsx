@@ -88,51 +88,6 @@ export default function Home() {
             </p>
           </div>
 
-          <p className="mt-8 text-base leading-8 text-[var(--muted)]">
-            I make tech videos on{" "}
-            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.youtube.href} rel="noreferrer" target="_blank">
-              YouTube
-            </a>
-            , I yap on{" "}
-            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.x.href} rel="noreferrer" target="_blank">
-              X
-            </a>
-            , and push code on{" "}
-            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.github.href} rel="noreferrer" target="_blank">
-              GitHub
-            </a>
-            . You can also connect professionally with me on{" "}
-            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.linkedin.href} rel="noreferrer" target="_blank">
-              LinkedIn
-            </a>
-            , or reach me by{" "}
-            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.email.href}>
-              email
-            </a>{" "}
-            or on{" "}
-            <a className="link-ring font-semibold text-[var(--text)] underline underline-offset-4" href={socials.telegram.href} rel="noreferrer" target="_blank">
-              Telegram
-            </a>
-            .
-          </p>
-
-          <ul className="mt-9 space-y-3">
-            {[
-              { href: "/portfolio", label: "portfolio", description: "see my works" },
-              { href: "/blog", label: "blog", description: "writings on technology and ideas" },
-              { href: "/resume", label: "resume", description: "experience and skills" },
-            ].map((item) => (
-              <li key={item.href}>
-                <Link
-                  className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
-                  href={item.href}
-                >
-                  {item.label}
-                </Link>
-                <span className="text-[var(--muted)]"> — {item.description}</span>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <figure className="order-first relative mx-auto w-full max-w-[260px] sm:max-w-[320px] lg:order-none lg:ml-auto lg:mr-0 lg:max-w-[380px]">
@@ -171,6 +126,56 @@ export default function Home() {
           </div>
         </figure>
       </div>
+
+      <section className="mt-12">
+        <nav aria-label="Main sections">
+          <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { href: "/portfolio", label: "portfolio", description: "see my works" },
+              { href: "/blog", label: "blog", description: "writings on technology and ideas" },
+              { href: "/resume", label: "resume", description: "experience and skills" },
+            ].map((item) => (
+              <li key={item.href}>
+                <Link
+                  className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
+                  href={item.href}
+                >
+                  {item.label}
+                </Link>
+                <span className="text-[var(--muted)]"> — {item.description}</span>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="mt-8 border-t-[3px] border-[var(--rule)] pt-6">
+          <Heading level={2}>Social links</Heading>
+          <nav aria-label="Social links" className="mt-3">
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
+              {[
+                { ...socials.linkedin, description: "Connect with me professionally" },
+                { ...socials.email, description: "Reach me by email" },
+                { ...socials.youtube, description: "Tech videos" },
+                { ...socials.x, description: "Posts and ideas" },
+                { ...socials.github, description: "Code and open-source work" },
+                { ...socials.telegram, description: "Direct messages" },
+              ].map((social) => (
+                <li className="flex flex-col items-start border-b border-[var(--rule-soft)] pb-2" key={social.label}>
+                  <a
+                    className="link-ring inline-flex min-h-11 items-center font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
+                    href={social.href}
+                    rel={social.href.startsWith("mailto:") ? undefined : "noreferrer"}
+                    target={social.href.startsWith("mailto:") ? undefined : "_blank"}
+                  >
+                    {social.label}
+                  </a>
+                  <span className="text-sm text-[var(--muted)]">{social.description}</span>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </section>
 
       <section className="mt-20 border-t-[3px] border-[var(--rule)] pt-14">
         <Heading level={2}>What people say</Heading>
