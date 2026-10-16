@@ -217,6 +217,14 @@ body::after {
     0 0 0 4px var(--accent);
 }
 
+.share-x {
+  color: #000;
+}
+
+:root[data-theme="dark"] .share-x {
+  color: #fff;
+}
+
 .editorial-shell {
   margin-inline: auto;
   max-width: 72rem;
