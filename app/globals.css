@@ -45,7 +45,7 @@ html, body {
 .full-bleed-breakout {
   align-self: flex-start;
   flex: 0 0 auto;
-  width: 100vw;
+  width: 100%;
   max-width: none;
   position: relative;
 }
@@ -53,6 +53,12 @@ html, body {
 .sky-scenery {
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+}
+
+@media (max-width: 1023.98px) {
+  .sky-half-mobile {
+    height: 140px !important;
+  }
 }
 
 

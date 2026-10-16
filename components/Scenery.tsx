@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { mountSky, mountGround } from "./scenery/engine";
 
-export function SkyScenery({ height = 350 }: { height?: number }) {
+export function SkyScenery({ height = 200 }: { height?: number }) {
   const skyRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export function SkyScenery({ height = 350 }: { height?: number }) {
   return (
     <div
       aria-hidden="true"
-      className="full-bleed-breakout sky-scenery"
+      className="full-bleed-breakout sky-scenery sky-half-mobile"
       style={{ height, overflow: "hidden" }}
     >
       <canvas

@@ -90,8 +90,8 @@ function buildOrb(dpr: number, theme: ThemeName, radius: number): Orb {
   return { canvas, glowCanvas, radius, size, x: 0, y: 0 };
 }
 
-function buildCloud(theme: ThemeName, rand: () => number): Cloud {
-  const scale = 0.9 + rand() * 0.45;
+function buildCloud(theme: ThemeName, rand: () => number, height: number): Cloud {
+  const scale = (0.9 + rand() * 0.45) * Math.min(1, height / 350);
   const profile = [
     [-0.56, 0.2, 0.25],
     [-0.4, 0.16, 0.32],
@@ -193,9 +193,9 @@ export function buildSky(
 
   const cloudCount = Math.max(4, Math.round(width / 260));
   const clouds: Cloud[] = Array.from({ length: cloudCount }, (_, i) => {
-    const cloud = buildCloud(theme, rand);
+    const cloud = buildCloud(theme, rand, height);
     cloud.x = (i / cloudCount) * (width + cloud.w) - cloud.w / 2 + rand() * 80;
-    cloud.y = height * (0.06 + rand() * 0.3);
+    cloud.y = height * (0.02 + rand() * 0.22);
     return cloud;
   });
 
@@ -206,11 +206,14 @@ export function buildSky(
   // clamped so its glow ring — which is much bigger than the orb core — never
   // gets clipped by the top or bottom of the sky band.
   orb.x = Math.max(0, Math.round((width - orb.size) / 2));
-  orb.y = clamp(
-    height * 0.14 - orb.size / 2,
-    8,
-    Math.max(8, height - orb.size - 8),
+  // Anchor the orb core (not the oversized glow sprite) to the cloud band so
+  // the sun/moon always sits level with the clouds at any band height.
+  const orbCenterY = clamp(
+    height * 0.2,
+    orbRadius + 4,
+    Math.max(orbRadius + 4, height - orbRadius - 4),
   );
+  orb.y = Math.round(orbCenterY - orb.size / 2);
 
   const plane = theme === "light" ? buildPlane(dpr, theme) : null;
 
