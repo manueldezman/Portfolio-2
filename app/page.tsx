@@ -149,7 +149,7 @@ export default function Home() {
 
       </section>
 
-      <section className="mt-20 border-t-[3px] border-[var(--rule)] pt-14">
+      <section className="mt-12 border-t-[3px] border-[var(--rule)] pt-8">
         <Heading level={2}>What people say</Heading>
         <FeedbackSection />
       </section>
