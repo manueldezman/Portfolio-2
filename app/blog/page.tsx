@@ -35,17 +35,27 @@ export default function BlogPage() {
         <p className="mt-14 leading-8 text-[var(--muted)]">No posts yet.</p>
       ) : (
         <ul className="mt-14 space-y-12">
-          {posts.map((post) => (
-            <li key={post.href}>
+          {posts.map((post) => {
+            const isInternal = post.href.startsWith("/");
+            const titleClass =
+              "link-ring text-base font-semibold leading-7 text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4";
+            return (
+              <li key={post.href}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                <a
-                  className="link-ring text-base font-semibold leading-7 text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
-                  href={post.href}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  {post.title}
-                </a>
+                {isInternal ? (
+                  <Link className={titleClass} href={post.href}>
+                    {post.title}
+                  </Link>
+                ) : (
+                  <a
+                    className={titleClass}
+                    href={post.href}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    {post.title}
+                  </a>
+                )}
                 <span className="font-mono text-xs text-[var(--muted)]">
                   {dateFormatter.format(new Date(post.date))}
                 </span>
@@ -64,7 +74,8 @@ export default function BlogPage() {
                 </ul>
               ) : null}
             </li>
-          ))}
+            );
+          })}
         </ul>
       )}
     </main>
