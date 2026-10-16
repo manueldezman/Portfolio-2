@@ -128,13 +128,13 @@ export default function Home() {
 
       <section className="mt-12">
         <nav aria-label="Main sections">
-          <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="flex flex-wrap gap-x-8 gap-y-4">
             {[
               { href: "/portfolio", label: "portfolio", description: "see my works" },
               { href: "/blog", label: "blog", description: "writings on technology and ideas" },
               { href: "/resume", label: "resume", description: "experience and skills" },
             ].map((item) => (
-              <li className="flex flex-col items-start" key={item.href}>
+              <li className="flex w-max flex-col items-start px-1" key={item.href}>
                 <Link
                   className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
                   href={item.href}
