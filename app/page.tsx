@@ -10,7 +10,6 @@ import intuitionLogo from "@/images/brands/intuition.png";
 import midnightLogo from "@/images/brands/midnight.png";
 import odinLogo from "@/images/brands/odin.png";
 import profileImage from "@/images/profile-iamge.jpeg";
-import { socials } from "@/content/socials";
 
 export default function Home() {
   return (
@@ -148,33 +147,6 @@ export default function Home() {
           </ul>
         </nav>
 
-        <div className="mt-8 border-t-[3px] border-[var(--rule)] pt-6">
-          <Heading level={2}>Social links</Heading>
-          <nav aria-label="Social links" className="mt-3">
-            <ul className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
-              {[
-                { ...socials.linkedin, description: "Connect with me professionally" },
-                { ...socials.email, description: "Reach me by email" },
-                { ...socials.youtube, description: "Tech videos" },
-                { ...socials.x, description: "Posts and ideas" },
-                { ...socials.github, description: "Code and open-source work" },
-                { ...socials.telegram, description: "Direct messages" },
-              ].map((social) => (
-                <li className="flex flex-col items-start border-b border-[var(--rule-soft)] pb-2" key={social.label}>
-                  <a
-                    className="link-ring inline-flex min-h-11 items-center font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
-                    href={social.href}
-                    rel={social.href.startsWith("mailto:") ? undefined : "noreferrer"}
-                    target={social.href.startsWith("mailto:") ? undefined : "_blank"}
-                  >
-                    {social.label}
-                  </a>
-                  <span className="text-sm text-[var(--muted)]">{social.description}</span>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
       </section>
 
       <section className="mt-20 border-t-[3px] border-[var(--rule)] pt-14">
