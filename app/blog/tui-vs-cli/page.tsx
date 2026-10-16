@@ -1,12 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Heading } from "@/components/Heading";
+import { ShareButtons } from "@/components/ShareButtons";
 import { blogPosts } from "@/content/blog";
 
 export const metadata: Metadata = {
   title: "TUI vs CLI: Is There Any Difference?",
   description:
     "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
+  openGraph: {
+    title: "TUI vs CLI: Is There Any Difference?",
+    description:
+      "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
+    type: "article",
+    images: [{ url: "/og/tui-vs-cli.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TUI vs CLI: Is There Any Difference?",
+    description:
+      "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
+    images: ["/og/tui-vs-cli.png"],
+  },
 };
 
 const codeStyle =
@@ -220,6 +235,7 @@ export default function TuiVsCliPost() {
               between TUI and CLI, but if there is a part that still feels confusing, do let me know
               in the comments.
             </p>
+            <ShareButtons title="TUI vs CLI: Is There Any Difference?" path="/blog/tui-vs-cli/" />
           </section>
         </article>
 
