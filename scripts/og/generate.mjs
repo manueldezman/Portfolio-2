@@ -50,7 +50,7 @@ function Shell({ children }) {
         style: {
           display: "flex",
           flexDirection: "column",
-          marginTop: 64,
+          paddingTop: 64,
           marginRight: 72,
           marginBottom: 64,
           marginLeft: 72,
