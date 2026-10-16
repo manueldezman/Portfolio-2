@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "og": "node scripts/og/generate.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
@@ -26,6 +27,8 @@
     "eslint-config-next": "^14.2.23",
     "husky": "^9.1.7",
     "postcss": "^8.5.1",
+    "satori": "^0.62.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"
   }

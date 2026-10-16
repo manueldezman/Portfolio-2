@@ -6,7 +6,7 @@ import { SkyScenery, GroundScenery } from "@/components/Scenery";
 import { AudioNotice } from "@/components/AudioNotice";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://abdulganiy.dev"),
+  metadataBase: new URL("https://0xdezman.cv"),
   title: {
     default: "Abdulganiy Adeleke — Developer Relations Engineer & Technical Writer",
     template: "%s | Abdulganiy Adeleke",
@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     description:
       "Proof-first DevRel portfolio featuring projects, content, open-source contributions, and community work.",
     type: "website",
+    images: [{ url: "/og/profile.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Abdulganiy Adeleke — Developer Relations Engineer & Technical Writer",
+    description:
+      "Proof-first DevRel portfolio featuring projects, content, open-source contributions, and community work.",
+    images: ["/og/profile.png"],
   },
 };
 
