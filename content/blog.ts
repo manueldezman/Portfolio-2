@@ -8,6 +8,14 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    title: "TUI vs CLI: Is There Any Difference?",
+    href: "/blog/tui-vs-cli/",
+    date: "2026-10-13",
+    description:
+      "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
+    tags: ["cli", "tui", "terminal", "git"],
+  },
+  {
     title: "How to Never Run Out of Ideas",
     href: "https://0xdezman.substack.com/p/how-to-never-run-out-of-ideas",
     date: "2026-08-08",
