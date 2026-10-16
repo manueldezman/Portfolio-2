@@ -134,14 +134,14 @@ export default function Home() {
               { href: "/blog", label: "blog", description: "writings on technology and ideas" },
               { href: "/resume", label: "resume", description: "experience and skills" },
             ].map((item) => (
-              <li key={item.href}>
+              <li className="flex flex-col items-start" key={item.href}>
                 <Link
                   className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
                   href={item.href}
                 >
                   {item.label}
                 </Link>
-                <span className="text-[var(--muted)]"> — {item.description}</span>
+                <span className="mt-1 text-sm text-[var(--muted)]">{item.description}</span>
               </li>
             ))}
           </ul>
