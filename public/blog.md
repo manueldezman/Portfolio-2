@@ -2,6 +2,14 @@
 
 Writings about ideas that emerge from what I learn, build, observe, and experience across technology, money, and personal growth.
 
+## TUI vs CLI: Is There Any Difference?
+
+- Published: October 2026
+- Summary: A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.
+- Tags: cli, tui, terminal, git
+- Read: [TUI vs CLI](/blog/tui-vs-cli/)
+- Full text: [tui-vs-cli.md](/blog/tui-vs-cli.md)
+
 ## How to Never Run Out of Ideas
 
 - Published: August 2026

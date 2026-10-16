@@ -73,7 +73,7 @@ export default function TuiVsCliPost() {
           </div>
         </aside>
 
-        <article className="min-w-0 max-w-3xl">
+        <article className="min-w-0 max-w-3xl text-justify [text-justify:inter-word]">
           <header className="scroll-mt-32" id="overview">
             <Heading level={1}>TUI vs CLI: Is There Any Difference?</Heading>
             <p className="mt-3 font-mono text-xs text-[var(--muted)]">
