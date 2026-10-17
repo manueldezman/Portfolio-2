@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Heading } from "@/components/Heading";
 import { ShareButtons } from "@/components/ShareButtons";
+import { TableOfContents } from "@/components/TableOfContents";
 import { blogPosts } from "@/content/blog";
 
 export const metadata: Metadata = {
@@ -240,17 +241,12 @@ export default function TuiVsCliPost() {
         </article>
 
         <aside className="hidden lg:block">
-          <nav className="sticky top-32 border-l border-[var(--rule-soft)] pl-6">
-            {toc.map(([key, label]) => (
-              <a
-                className="link-ring block py-1.5 text-[0.8rem] leading-6 text-[var(--muted)]"
-                href={`#${key}`}
-                key={key}
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
+          <div className="sticky top-32">
+            <p className="text-base font-semibold leading-6 text-[var(--text)]">On this page</p>
+            <div className="mt-3">
+              <TableOfContents items={toc} label="On this page" />
+            </div>
+          </div>
         </aside>
       </div>
     </main>

@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 html, body {
-  overflow-x: hidden; /* Prevents tiny subpixel shifts from creating horizontal scrollbars */
+  /* `clip` (not `hidden`) keeps subpixel shifts from creating horizontal
+     scrollbars while still allowing `position: sticky` to work, since it does
+     not turn the element into a scroll container. */
+  overflow-x: clip;
 }
 
 
