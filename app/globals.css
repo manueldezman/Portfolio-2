@@ -228,6 +228,133 @@ body::after {
   color: #fff;
 }
 
+/* Kit (ConvertKit) embeds its own form markup and styles. These scoped
+   overrides align the form with the site's current soft, rounded surface. */
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] {
+  max-width: none;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] [data-style="clean"] {
+  padding: 0;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-field,
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-submit {
+  margin: 0;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-field {
+  flex: 1 1 15rem;
+  min-width: 0;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-input {
+  background: var(--background);
+  border: 1px solid var(--rule-soft);
+  border-radius: 0.65rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 0.9rem 0.95rem;
+  transition: border-color 120ms;
+  width: 100%;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-input:focus {
+  border-color: var(--accent);
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-submit {
+  background: var(--accent);
+  border: 0;
+  border-radius: 0.65rem;
+  color: #fff8ef;
+  flex: 0 0 auto;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  text-transform: uppercase;
+  transition:
+    background-color 120ms,
+    border-color 120ms;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-submit:hover,
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-submit:focus {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-submit > span {
+  padding: 0.95rem 1.35rem;
+}
+
+@media (max-width: 639px) {
+  .kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-submit {
+    flex: 1 0 100%;
+  }
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-alert {
+  background: transparent;
+  border: 1px solid var(--rule-soft);
+  border-radius: 0.65rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0 0 0.75rem;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  width: 100%;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-alert-success {
+  background: var(--teal-soft);
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-alert-error {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-powered-by-convertkit-container {
+  margin: 0.9rem 0 0;
+}
+
+.kit-subscribe form.formkit-form[data-uid="bb1e8f9665"] .formkit-powered-by-convertkit {
+  filter: grayscale(1);
+  opacity: 0.5;
+  transform: scale(0.92);
+  transform-origin: left center;
+}
+
+:root[data-theme="dark"]
+  .kit-subscribe
+  form.formkit-form[data-uid="bb1e8f9665"]
+  .formkit-powered-by-convertkit {
+  filter: grayscale(1) invert(1);
+}
+
 .editorial-shell {
   margin-inline: auto;
   max-width: 72rem;

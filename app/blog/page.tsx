@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Heading } from "@/components/Heading";
+import { SubscribeForm } from "@/components/SubscribeForm";
 import { blogPosts } from "@/content/blog";
 
 const subtitle =
@@ -78,6 +79,8 @@ export default function BlogPage() {
           })}
         </ul>
       )}
+
+      <SubscribeForm className="mt-16" />
     </main>
   );
 }
