@@ -39,7 +39,7 @@ function Shell({ children }) {
     {
       style: {
         width: 1200,
-        height: 630,
+        height: 675,
         backgroundColor: BG,
         fontFamily: "DejaVu Sans",
       },
@@ -50,7 +50,7 @@ function Shell({ children }) {
         style: {
           display: "flex",
           flexDirection: "column",
-          paddingTop: 64,
+          paddingTop: 72,
           marginRight: 72,
           marginBottom: 64,
           marginLeft: 72,
@@ -93,7 +93,7 @@ function Avatar({ size }) {
 }
 
 async function render(element, outName) {
-  const svg = await satori(element, { width: 1200, height: 630, fonts });
+  const svg = await satori(element, { width: 1200, height: 675, fonts });
   await sharp(Buffer.from(svg)).png().toFile(path.join(OUT, outName));
   console.log("wrote", outName);
 }
@@ -115,7 +115,7 @@ function ProfileCard() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "flex-end",
-          marginTop: 56,
+          marginTop: 72,
         },
       },
       h(
@@ -150,7 +150,7 @@ function ArticleCard({ kicker, title, meta }) {
     ),
     h(
       "div",
-      { style: { display: "flex", flexDirection: "column", marginTop: 88 } },
+      { style: { display: "flex", flexDirection: "column", marginTop: 104 } },
       h(
         "div",
         { style: { fontSize: 56, fontWeight: 700, color: TEXT, lineHeight: 1.15 } },

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description:
       "Proof-first DevRel portfolio featuring projects, content, open-source contributions, and community work.",
     type: "website",
-    images: [{ url: "/og/profile.png", width: 1200, height: 630 }],
+    images: [{ url: "/og/profile.png", width: 1200, height: 675 }],
   },
   twitter: {
     card: "summary_large_image",

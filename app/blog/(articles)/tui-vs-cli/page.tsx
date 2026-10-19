@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
       "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
     type: "article",
-    images: [{ url: "/og/tui-vs-cli.png", width: 1200, height: 630 }],
+    images: [{ url: "/og/tui-vs-cli.png", width: 1200, height: 675 }],
   },
   twitter: {
     card: "summary_large_image",
