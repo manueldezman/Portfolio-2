@@ -5,11 +5,16 @@ import { useEffect, useState } from "react";
 type TocItem = readonly [id: string, label: string];
 
 type TableOfContentsProps = {
+  heading?: string;
   items: readonly TocItem[];
   label?: string;
 };
 
-export function TableOfContents({ items, label = "On this page" }: TableOfContentsProps) {
+export function TableOfContents({
+  heading,
+  items,
+  label = "On this page",
+}: TableOfContentsProps) {
   const [active, setActive] = useState<string>(items[0]?.[0] ?? "");
 
   useEffect(() => {
@@ -53,6 +58,11 @@ export function TableOfContents({ items, label = "On this page" }: TableOfConten
 
   return (
     <nav aria-label={label} className="flex flex-col border-l border-[var(--rule-soft)]">
+      {heading ? (
+        <p className="px-3 pb-2 pl-5 text-base font-semibold leading-6 text-[var(--text)]">
+          {heading}
+        </p>
+      ) : null}
       {items.map(([id, text]) => {
         const isActive = active === id;
         return (

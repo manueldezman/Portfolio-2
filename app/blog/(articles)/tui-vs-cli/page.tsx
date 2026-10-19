@@ -53,8 +53,8 @@ const toc = [
 export default function TuiVsCliPost() {
   return (
     <main className="editorial-shell pb-16">
-      <div className="grid gap-6 lg:grid-cols-[220px_1fr_220px]">
-        <aside className="hidden lg:block">
+      <article className="grid gap-x-6 gap-y-8 lg:grid-cols-[220px_1fr_220px]">
+        <aside className="hidden lg:col-start-1 lg:row-start-2 lg:block">
           <div className="sticky top-32">
             <p className="text-base font-semibold leading-6 text-[var(--text)]">Recent posts</p>
             {recentByYear.map(([year, posts]) => (
@@ -90,21 +90,22 @@ export default function TuiVsCliPost() {
           </div>
         </aside>
 
-        <article className="min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:text-justify">
-          <header className="scroll-mt-32" id="overview">
-            <Heading className="text-left" level={1}>TUI vs CLI: Is There Any Difference?</Heading>
-            <p className="mt-3 font-mono text-xs text-[var(--muted)]">
-              by <Link className="link-ring underline underline-offset-4" href="/">Abdulganiy Adeleke</Link>, published on Oct 13, 2026
-            </p>
-            <MobileTableOfContents className="mt-6 lg:hidden" items={toc} />
-            <p className="mt-8 text-base leading-8 text-[var(--muted)]">
-              A basic mental model for differentiating between a GUI and a CLI is that one uses
-              graphical elements, while the other runs in a terminal. That was my mental model too,
-              until I encountered the term TUI, which also runs in the terminal and I thought:
-              aren&apos;t they the same thing?
-            </p>
-            <p className="mt-3 text-base leading-8 text-[var(--muted)]">That&apos;s the exact question this post aims to answer.</p>
-          </header>
+        <header className="min-w-0 scroll-mt-32 lg:col-start-2 lg:row-start-1" id="overview">
+          <Heading className="text-left" level={1}>TUI vs CLI: Is There Any Difference?</Heading>
+          <p className="mt-3 font-mono text-xs text-[var(--muted)]">
+            by <Link className="link-ring underline underline-offset-4" href="/">Abdulganiy Adeleke</Link>, published on Oct 13, 2026
+          </p>
+          <MobileTableOfContents className="mt-6 lg:hidden" items={toc} />
+        </header>
+
+        <div className="min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:col-start-2 lg:row-start-2 lg:text-justify">
+          <p className="text-base leading-8 text-[var(--muted)]">
+            A basic mental model for differentiating between a GUI and a CLI is that one uses
+            graphical elements, while the other runs in a terminal. That was my mental model too,
+            until I encountered the term TUI, which also runs in the terminal and I thought:
+            aren&apos;t they the same thing?
+          </p>
+          <p className="mt-3 text-base leading-8 text-[var(--muted)]">That&apos;s the exact question this post aims to answer.</p>
 
           <section className="mt-12 scroll-mt-32" id="express">
             <Heading className="text-left" level={2}>How they use the terminal</Heading>
@@ -240,17 +241,14 @@ export default function TuiVsCliPost() {
             </p>
             <ShareButtons title="TUI vs CLI: Is There Any Difference?" path="/blog/tui-vs-cli/" />
           </section>
-        </article>
+        </div>
 
-        <aside className="hidden lg:block">
+        <aside className="hidden lg:col-start-3 lg:row-start-2 lg:block">
           <div className="sticky top-32">
-            <p className="text-base font-semibold leading-6 text-[var(--text)]">On this page</p>
-            <div className="mt-3">
-              <TableOfContents items={toc} label="On this page" />
-            </div>
+            <TableOfContents heading="On this page" items={toc} label="On this page" />
           </div>
         </aside>
-      </div>
+      </article>
     </main>
   );
 }
