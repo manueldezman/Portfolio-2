@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Heading } from "@/components/Heading";
+import { MobileTableOfContents } from "@/components/MobileTableOfContents";
 import { ShareButtons } from "@/components/ShareButtons";
 import { TableOfContents } from "@/components/TableOfContents";
 import { blogPosts } from "@/content/blog";
@@ -89,13 +90,14 @@ export default function TuiVsCliPost() {
           </div>
         </aside>
 
-        <article className="min-w-0 max-w-3xl text-justify [text-justify:inter-word]">
+        <article className="min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:text-justify">
           <header className="scroll-mt-32" id="overview">
-            <Heading level={1}>TUI vs CLI: Is There Any Difference?</Heading>
+            <Heading className="text-left" level={1}>TUI vs CLI: Is There Any Difference?</Heading>
             <p className="mt-3 font-mono text-xs text-[var(--muted)]">
               by <Link className="link-ring underline underline-offset-4" href="/">Abdulganiy Adeleke</Link>, published on Oct 13, 2026
             </p>
-            <p className="mt-3 text-base leading-8 text-[var(--muted)]">
+            <MobileTableOfContents className="mt-6 lg:hidden" items={toc} />
+            <p className="mt-8 text-base leading-8 text-[var(--muted)]">
               A basic mental model for differentiating between a GUI and a CLI is that one uses
               graphical elements, while the other runs in a terminal. That was my mental model too,
               until I encountered the term TUI, which also runs in the terminal and I thought:
@@ -105,7 +107,7 @@ export default function TuiVsCliPost() {
           </header>
 
           <section className="mt-12 scroll-mt-32" id="express">
-            <Heading level={2}>How they use the terminal</Heading>
+            <Heading className="text-left" level={2}>How they use the terminal</Heading>
             <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
               <p>
                 CLIs and TUIs are both presented in the terminal environment, but they differ in how
@@ -186,7 +188,7 @@ export default function TuiVsCliPost() {
           </section>
 
           <section className="mt-12 scroll-mt-32" id="experience">
-            <Heading level={2}>User experience and automation</Heading>
+            <Heading className="text-left" level={2}>User experience and automation</Heading>
             <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
               <p>
                 The CLI is well suited to automation, but it can be difficult for beginners to
@@ -230,7 +232,7 @@ export default function TuiVsCliPost() {
           </section>
 
           <section className="mt-12 scroll-mt-32" id="wrap">
-            <Heading level={2}>Wrapping up</Heading>
+            <Heading className="text-left" level={2}>Wrapping up</Heading>
             <p className="mt-4 leading-8 text-[var(--muted)]">
               Thank you for reading to the end. I hope you can now boldly state the difference
               between TUI and CLI, but if there is a part that still feels confusing, do let me know
