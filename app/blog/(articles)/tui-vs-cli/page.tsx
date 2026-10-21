@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Heading } from "@/components/Heading";
 import { MobileTableOfContents } from "@/components/MobileTableOfContents";
+import { PageActions } from "@/components/PageActions";
 import { ShareButtons } from "@/components/ShareButtons";
 import { TableOfContents } from "@/components/TableOfContents";
 import { blogPosts } from "@/content/blog";
@@ -92,9 +93,12 @@ export default function TuiVsCliPost() {
 
         <header className="min-w-0 scroll-mt-32 lg:col-start-2 lg:row-start-1" id="overview">
           <Heading className="text-left" level={1}>TUI vs CLI: Is There Any Difference?</Heading>
-          <p className="mt-3 font-mono text-xs text-[var(--muted)]">
-            by <Link className="link-ring underline underline-offset-4" href="/">Abdulganiy Adeleke</Link>, published on Oct 13, 2026
-          </p>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <p className="font-mono text-xs text-[var(--muted)]">
+              by <Link className="link-ring underline underline-offset-4" href="/">Abdulganiy Adeleke</Link>, published on Oct 13, 2026
+            </p>
+            <PageActions className="ml-auto" />
+          </div>
           <MobileTableOfContents className="mt-6 lg:hidden" items={toc} />
         </header>
 
