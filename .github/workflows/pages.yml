@@ -35,6 +35,8 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: "true"
+          # Repository Actions variable, not a secret. Leave unset to disable analytics.
+          NEXT_PUBLIC_GOATCOUNTER_CODE: ${{ vars.NEXT_PUBLIC_GOATCOUNTER_CODE }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

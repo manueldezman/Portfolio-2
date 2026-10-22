@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@/components/Analytics";
 import { Header } from "@/components/Header";
 import { ThemeScript } from "@/components/ThemeScript";
 import { SkyScenery, GroundScenery } from "@/components/Scenery";
@@ -55,6 +56,8 @@ export default function RootLayout({
         
         {/* 3. Ground sits cleanly at the absolute bottom flow boundary */}
         <GroundScenery/>
+
+        <Analytics />
         
       </body>
     </html>
