@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-const siteCode = process.env.NEXT_PUBLIC_GOATCOUNTER_CODE?.trim();
+const ENDPOINT = "https://0xdezman.goatcounter.com/count";
 
 /**
  * Loads GoatCounter once and reports client-side route changes.
@@ -38,11 +38,9 @@ export function Analytics() {
     });
   }, [loaded, pathname]);
 
-  if (!siteCode) return null;
-
   return (
     <Script
-      data-goatcounter={`https://${siteCode}.goatcounter.com/count`}
+      data-goatcounter={ENDPOINT}
       data-goatcounter-settings='{"no_onload": true}'
       id="goatcounter"
       onLoad={() => setLoaded(true)}
