@@ -63,7 +63,6 @@ export type OpenSourceContribution = {
 export type OpenSourceRepository = {
   repository: string;
   organization: string;
-  heading: string;
   prLinks: OpenSourceContributionLink[];
   contributions: OpenSourceContribution[];
 };
@@ -242,7 +241,6 @@ export const openSourceRepositories: OpenSourceRepository[] = [
   {
     repository: "TheOdinProject/curriculum",
     organization: "Odin Project",
-    heading: "Update the form validation lesson to reflect the modern :user-valid and :user-invalid pseudo-classes.",
     prLinks: [
       {
         label: "PR #30815",
@@ -287,7 +285,6 @@ export const openSourceRepositories: OpenSourceRepository[] = [
   {
     repository: "0xIntuition/intuition-docs",
     organization: "Intuition",
-    heading: "Audit the developer documentation against the live product and fix the inconsistencies.",
     prLinks: [
       {
         label: "PR #90",
@@ -303,6 +300,11 @@ export const openSourceRepositories: OpenSourceRepository[] = [
         label: "PR #92",
         href: "https://github.com/0xIntuition/intuition-docs/pull/92",
         status: "Merged · corrected 19 outdated ETH references across 7 pages to TRUST",
+      },
+      {
+        label: "PR #110",
+        href: "https://github.com/0xIntuition/intuition-docs/pull/110",
+        status: "Merged · preserved MDX tab content in generated LLM docs",
       },
     ],
     contributions: [
@@ -322,12 +324,32 @@ export const openSourceRepositories: OpenSourceRepository[] = [
           },
         ],
       },
+      {
+        title: "Preserved MDX tab content in generated LLM documentation.",
+        problem:
+          "The LLM documentation generator removed multi-line MDX component blocks before preserving their useful child content. Package-manager tabs and network-specific tabs disappeared from `llms-full.txt` and `llms-medium.txt`, so generated Markdown omitted installation commands and configuration examples that readers and AI agents need to complete setup tasks.",
+        contribution:
+          "Added MDX component serialization before the general JSX cleanup, added regression tests for tab serialization and current docs pages with tabbed commands, wired the serialization test into the `generate-llms-txt` workflow, and regenerated `static/llms-full.txt` and `static/llms-medium.txt`.",
+        impact:
+          "The generated Markdown now keeps tab labels and commands, so readers and AI agents can follow package-manager and network-specific setup instructions without losing the content in the rendered docs.",
+        links: [
+          {
+            label: "Issue #109",
+            href: "https://github.com/0xIntuition/intuition-docs/issues/109",
+            status: "Closed · October 20, 2026",
+          },
+          {
+            label: "PR #110",
+            href: "https://github.com/0xIntuition/intuition-docs/pull/110",
+            status: "Merged · October 20, 2026",
+          },
+        ],
+      },
     ],
   },
   {
     repository: "rushikesh-bobade/empay-hrms",
     organization: "EmPay HRMS",
-    heading: "Added an OpenAPI 3.1 specification for the REST API endpoints (49 total endpoints).",
     prLinks: [
       {
         label: "PR #145",

@@ -44,33 +44,37 @@ export function OpenSourceContributions({ repositories }: { repositories: OpenSo
 
   return (
     <div className="mt-4 space-y-7">
-      {repositories.map((repository, repositoryIndex) =>
-        repository.contributions.map((contribution, contributionIndex) => (
-          <article
-            className="group scroll-mt-28"
-            id={repository.repository.replace("/", "-").toLowerCase()}
-            key={`${repository.repository}-${contribution.title}`}
-          >
-            <div>
-              <h3 className="text-sm font-semibold leading-7 text-[var(--text)]">
-                <button
-                  className="link-ring text-left underline decoration-[var(--rule-soft)] underline-offset-4 transition-colors duration-150 group-hover:text-[var(--accent)]"
-                  onClick={() => setSelection({ repositoryIndex, contributionIndex })}
-                  type="button"
-                >
-                  {repository.heading}
-                </button>{" "}
-                <span className="font-normal text-[var(--muted)]">— {repository.organization}</span>
-              </h3>
-              <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-                {`${repository.prLinks.length} merged PR${
-                  repository.prLinks.length === 1 ? "" : "s"
-                } to this repository`}
-              </p>
-            </div>
-          </article>
-        )),
-      )}
+      {repositories.map((repository, repositoryIndex) => {
+        const repositoryId = repository.repository.replace("/", "-").toLowerCase();
+
+        return (
+          <div className="scroll-mt-28 space-y-7" id={repositoryId} key={repository.repository}>
+            {repository.contributions.map((contribution, contributionIndex) => (
+              <article className="group" key={`${repository.repository}-${contribution.title}`}>
+                <div>
+                  <h3 className="text-sm font-semibold leading-7 text-[var(--text)]">
+                    <button
+                      className="link-ring text-left underline decoration-[var(--rule-soft)] underline-offset-4 transition-colors duration-150 group-hover:text-[var(--accent)]"
+                      onClick={() => setSelection({ repositoryIndex, contributionIndex })}
+                      type="button"
+                    >
+                      {contribution.title}
+                    </button>{" "}
+                    <span className="font-normal text-[var(--muted)]">— {repository.organization}</span>
+                  </h3>
+                  {contributionIndex === 0 ? (
+                    <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                      {`${repository.prLinks.length} merged PR${
+                        repository.prLinks.length === 1 ? "" : "s"
+                      } to this repository`}
+                    </p>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        );
+      })}
 
       {selectedRepository && selectedContribution ? (
         <DetailModal
