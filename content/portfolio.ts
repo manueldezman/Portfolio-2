@@ -325,7 +325,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
         ],
       },
       {
-        title: "Fixed markdown content loss in agent-facing documentation.",
+        title: "Fixed markdown content loss in AI agent-facing documentation.",
         problem:
           "The LLM documentation generator removed multi-line MDX component blocks before preserving their useful child content. Package-manager tabs and network-specific tabs disappeared from `llms-full.txt` and `llms-medium.txt`, so generated Markdown omitted installation commands and configuration examples that readers and AI agents need to complete setup tasks.",
         contribution:
