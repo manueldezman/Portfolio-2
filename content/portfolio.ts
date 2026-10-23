@@ -1,5 +1,6 @@
 import type { StaticImageData } from "next/image";
 import apiDocsScorecardImage from "@/images/portfolio/empay-afdocs-scorecard.png";
+import intuitionLlmsBeforeAfterImage from "@/images/portfolio/intuition-llms-before-after.png";
 import cohortAnnouncementImage from "@/images/community/kodespot-cohort-2-announcement.png";
 import cohortStudentThreadImage from "@/images/community/kodespot-cohort-2-student-thread.png";
 import eventFeedbackImage from "@/images/community/techie-soiree-feedback.jpg";
@@ -52,11 +53,18 @@ export type OpenSourceContributionLink = {
   status: string;
 };
 
+export type OpenSourceContributionImage = {
+  alt: string;
+  caption: string;
+  image: StaticImageData;
+};
+
 export type OpenSourceContribution = {
   title: string;
   problem: string;
   contribution: string;
   impact: string;
+  image?: OpenSourceContributionImage;
   links: OpenSourceContributionLink[];
 };
 
@@ -332,6 +340,11 @@ export const openSourceRepositories: OpenSourceRepository[] = [
           "Added MDX component serialization before the general JSX cleanup, added regression tests for tab serialization and current docs pages with tabbed commands, wired the serialization test into the `generate-llms-txt` workflow, and regenerated `static/llms-full.txt` and `static/llms-medium.txt`.",
         impact:
           "The generated Markdown now keeps tab labels and commands, so readers and AI agents can follow package-manager and network-specific setup instructions without losing the content in the rendered docs.",
+        image: {
+          alt: "Before and after comparison of the generated Intuition docs Markdown. The before pane omits the npm and pnpm installation tabs, while the after pane includes both commands.",
+          caption: "Generated Markdown for the Intuition SDK install guide before and after the fix.",
+          image: intuitionLlmsBeforeAfterImage,
+        },
         links: [
           {
             label: "Issue #109",
@@ -380,7 +393,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
 
 const educationWorkshopsActivity: CommunityActivity = {
   title: "Education & Workshops",
-  label: "Past",
+  label: "Kodespot Learning Hub",
   detail:
     "Co-founded Kodespot with friends as an undergraduate community where we tutored fellow students in DeFi, smart contract development, and software development. It ran for two cohorts until we graduated.",
   fields: [

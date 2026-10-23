@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { DetailModal } from "@/components/DetailModal";
 import { Heading } from "@/components/Heading";
@@ -91,6 +92,28 @@ export function OpenSourceContributions({ repositories }: { repositories: OpenSo
                 <RichText className="mt-2 leading-7 text-[var(--muted)]" text={value} />
               </section>
             ))}
+
+            {selectedContribution.image ? (
+              <figure>
+                <Image
+                  alt={selectedContribution.image.alt}
+                  className="h-auto w-full border border-[var(--rule-soft)]"
+                  sizes="(min-width: 1024px) 960px, 100vw"
+                  src={selectedContribution.image.image}
+                />
+                <figcaption className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm leading-6 text-[var(--muted)]">
+                  <span>{selectedContribution.image.caption}</span>
+                  <a
+                    className="link-ring font-semibold text-[var(--accent)] underline underline-offset-4"
+                    href={selectedContribution.image.image.src}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    View full size
+                  </a>
+                </figcaption>
+              </figure>
+            ) : null}
 
             <section>
               <Heading level={3}>Links for this contribution</Heading>
