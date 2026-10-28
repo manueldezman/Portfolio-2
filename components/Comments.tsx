@@ -73,23 +73,36 @@ export function Comments() {
     if (!container) return;
     const root = container;
 
-    let iframe = root.querySelector<HTMLIFrameElement>("iframe.giscus-frame");
+    let iframe: HTMLIFrameElement | null = null;
 
     function sendTheme() {
-      iframe?.contentWindow?.postMessage(
+      if (!iframe || iframe.dataset.giscusLoaded !== "true") return;
+
+      iframe.contentWindow?.postMessage(
         { giscus: { setConfig: { theme } } },
         "https://giscus.app",
       );
     }
 
+    function handleLoad() {
+      if (!iframe) return;
+      iframe.dataset.giscusLoaded = "true";
+      sendTheme();
+    }
+
     function attach() {
       const next = root.querySelector<HTMLIFrameElement>("iframe.giscus-frame");
-      if (!next || next === iframe) return;
+      if (!next) return;
 
-      iframe?.removeEventListener("load", sendTheme);
-      iframe = next;
-      iframe.addEventListener("load", sendTheme);
-      sendTheme();
+      if (next !== iframe) {
+        iframe?.removeEventListener("load", handleLoad);
+        iframe = next;
+        iframe.addEventListener("load", handleLoad);
+      }
+
+      if (iframe.dataset.giscusLoaded === "true") {
+        sendTheme();
+      }
     }
 
     attach();
@@ -98,7 +111,7 @@ export function Comments() {
 
     return () => {
       observer.disconnect();
-      iframe?.removeEventListener("load", sendTheme);
+      iframe?.removeEventListener("load", handleLoad);
     };
   }, [pathname, theme]);
 
