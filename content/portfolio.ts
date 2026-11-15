@@ -218,10 +218,11 @@ export const tutorialItems: PortfolioItem[] = [
 
 export const explainerItems: PortfolioItem[] = [
   {
-    title: "Blockchain State Simplified",
-    description: "An Excalidraw breakdown of the current snapshot of accounts, balances, contract storage, and network data.",
-    href: "https://x.com/0xDezman/status/2075505322450399654?s=20",
-    source: "X · Excalidraw",
+    title: "TUI vs CLI: Is There Any Difference?",
+    description:
+      "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
+    href: "/blog/tui-vs-cli/",
+    source: "Blog",
   },
   {
     title: "AI Tokens Video Explainer",

@@ -39,6 +39,13 @@ function PortfolioList({ items }: { items: PortfolioItem[] }) {
             >
               {item.title}
             </Link>
+          ) : item.href.startsWith("/") ? (
+            <Link
+              className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
+              href={item.href}
+            >
+              {item.title}
+            </Link>
           ) : (
             <a
               className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
