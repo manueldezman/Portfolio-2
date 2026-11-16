@@ -81,7 +81,7 @@ Agents cannot use Markdown pages they do not know exist.
 
 - I generated `llms.txt`, an index agents can follow, and `llms-full.txt`, the full text of every page. Each entry links to a page's Markdown version ([PR #354](https://github.com/mezo-org/documentation/pull/354)).
 - I added descriptions to 8 pages that had none. Agents use the descriptions to understand what each page covers, and the descriptions feed the `llms.txt` entries ([PR #347](https://github.com/mezo-org/documentation/pull/347)).
-- I added an `llms.txt` directive for agents to the regular pages ([PR #357](https://github.com/mezo-org/documentation/pull/357)). I later noticed it was missing from the Markdown pages, so I added it there too ([PR #360](https://github.com/mezo-org/documentation/pull/360)).
+- I added a directive to the HTML pages ([PR #357](https://github.com/mezo-org/documentation/pull/357)). A directive is a short instruction in the HTML source that points agents to `llms.txt`. I later noticed it was missing from the Markdown pages, so I added it there too ([PR #360](https://github.com/mezo-org/documentation/pull/360)).
 
 ### Observability and content health
 
@@ -126,9 +126,9 @@ This work taught me one important lesson about directive placement.
 
 **Place the `llms.txt` directive in both the HTML pages and the individual `.md` files.**
 
-I initially followed the implementation used in the Claude Code documentation. It hides the `llms.txt` directive in the HTML body, as shown below.
+I initially followed the implementation used in the Claude Code documentation. It hides the `llms.txt` directive in the HTML source, as shown below.
 
-![The Claude Code implementation hides the llms.txt directive in the HTML body.](/blog/how-i-made-mezo-documentation-agent-ready/claude.png)
+![The Claude Code implementation hides the llms.txt directive in the HTML source.](/blog/how-i-made-mezo-documentation-agent-ready/claude.png)
 
 I also updated my Markdown conversion script to add the directive at the top of each `.md` file, so agents could see it without visual noise or screen readers reading it aloud.
 
@@ -136,13 +136,13 @@ The reviewer raised a concern about `mozilla/readability`, a library that extrac
 
 Acting on that concern, he briefly removed the directive from the HTML pages and added a link to `llms.txt` in the footer instead. I wanted to know how that decision affected `llms.txt` discoverability.
 
-I then checked with OpenCode, which negotiates for Markdown, and the Markdown it received did not contain the directive.
+I then checked with OpenCode, which uses content negotiation to request Markdown instead of HTML, and the Markdown it received did not contain the directive.
 
 The agent negotiated for Markdown instead of HTML, and the server generated the Markdown from HTML. When it followed a `.md` link from `llms.txt`, it got the version I pre-generated.
 
 That meant an agent that negotiated for Markdown this way never saw the directive, so it never found `llms.txt`.
 
-Claude Code and Cursor use content negotiation, so they would also be affected. Agents cannot locate the `.md` files on their own. They find them only after they discover `llms.txt`, so the directive needed to be in both places.
+Claude Code and Cursor use the same content negotiation, so they would also be affected. Agents cannot locate the `.md` files on their own. They find them only after they discover `llms.txt`, so the directive needed to be in both places.
 
 I also tested the reviewer's `mozilla/readability` concern. Agents using an MCP server could still see the directive even when it was visually hidden. That kept `llms.txt` discoverable, so we added the directive back to the HTML pages.
 

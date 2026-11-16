@@ -386,8 +386,9 @@ export default function MezoDocumentationAgentReadyPost() {
                   <PrLink number={347} />).
                 </li>
                 <li>
-                  I added an <code className={codeStyle}>llms.txt</code> directive for agents to the
-                  regular pages (<PrLink number={357} />). I later noticed it was missing from the
+                  I added a directive to the HTML pages (<PrLink number={357} />). A directive is a
+                  short instruction in the HTML source that points agents to{" "}
+                  <code className={codeStyle}>llms.txt</code>. I later noticed it was missing from the
                   Markdown pages, so I added it there too (<PrLink number={360} />).
                 </li>
               </ul>
@@ -502,7 +503,7 @@ export default function MezoDocumentationAgentReadyPost() {
               </p>
               <p>
                 I initially followed the implementation used in the Claude Code documentation. It hides
-                the <code className={codeStyle}>llms.txt</code> directive in the HTML body, as shown
+                the <code className={codeStyle}>llms.txt</code> directive in the HTML source, as shown
                 below.
               </p>
             </div>
@@ -510,7 +511,7 @@ export default function MezoDocumentationAgentReadyPost() {
             <figure className="mt-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                alt="Claude Code documentation HTML showing the llms.txt directive hidden in a visually hidden blockquote."
+                alt="Claude Code documentation HTML source showing the llms.txt directive hidden in a visually hidden blockquote."
                 className="mx-auto h-auto w-full max-w-2xl border border-[var(--rule-soft)]"
                 height={184}
                 loading="lazy"
@@ -518,7 +519,7 @@ export default function MezoDocumentationAgentReadyPost() {
                 width={905}
               />
               <figcaption className="mt-2 text-center font-mono text-xs text-[var(--muted)]">
-                The Claude Code implementation hides the llms.txt directive in the HTML body.
+                The Claude Code implementation hides the llms.txt directive in the HTML source.
               </figcaption>
             </figure>
 
@@ -542,8 +543,8 @@ export default function MezoDocumentationAgentReadyPost() {
                 <code className={codeStyle}>llms.txt</code> discoverability.
               </p>
               <p>
-                I then checked with OpenCode, which negotiates for Markdown, and the Markdown it
-                received did not contain the directive.
+                I then checked with OpenCode, which uses content negotiation to request Markdown
+                instead of HTML, and the Markdown it received did not contain the directive.
               </p>
               <p>
                 The agent negotiated for Markdown instead of HTML, and the server generated the
@@ -556,7 +557,7 @@ export default function MezoDocumentationAgentReadyPost() {
                 so it never found <code className={codeStyle}>llms.txt</code>.
               </p>
               <p>
-                Claude Code and Cursor use content negotiation, so they would also be affected.
+                Claude Code and Cursor use the same content negotiation, so they would also be affected.
                 Agents cannot locate the <code className={codeStyle}>.md</code> files on their own.
                 They find them only after they discover <code className={codeStyle}>llms.txt</code>,
                 so the directive needed to be in both places.
