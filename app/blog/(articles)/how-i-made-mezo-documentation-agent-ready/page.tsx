@@ -165,8 +165,8 @@ export default function MezoDocumentationAgentReadyPost() {
             >
               Mezo
             </a>{" "}
-            is a blockchain network that provides a platform for blockchain developers. It enables
-            them to build decentralized applications for the Bitcoin community.
+            is a blockchain network that enables developers to build decentralized applications for
+            the Bitcoin community.
           </p>
           <p className="mt-3 text-base leading-8 text-[var(--muted)]">
             As a member of the Mezo community, I noticed they were preparing to host a hackathon,
@@ -328,8 +328,8 @@ export default function MezoDocumentationAgentReadyPost() {
               <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
                 <p>
                   The same script keeps headings and code blocks intact on every Markdown page.
-                  React components in MDX source become visual elements when the documentation is
-                  built.
+                  Usually, React components in MDX source become visual elements when the
+                  documentation is built.
                 </p>
                 <p>
                   Since the agent-facing Markdown depends on this same MDX source, the script strips
@@ -476,7 +476,7 @@ export default function MezoDocumentationAgentReadyPost() {
             </figure>
 
             <p className="mt-6 leading-8 text-[var(--muted)]">
-              Agents can now request the Markdown, since it is available. They can discover{" "}
+              Agents can now get the Markdown, since it is available. They can discover{" "}
               <code className={codeStyle}>llms.txt</code> and use it, and the Markdown is consistent
               with the live page.
             </p>
@@ -502,10 +502,12 @@ export default function MezoDocumentationAgentReadyPost() {
               What I learned
             </Heading>
             <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
-              <p>One important lesson from this work was about pointer placement.</p>
+              <p>One important lesson from this work was about directive placement.</p>
               <p>
-                Place the <code className={codeStyle}>llms.txt</code> directive in both the HTML
-                pages and the individual <code className={codeStyle}>.md</code> files.
+                <strong>
+                  Place the <code className={codeStyle}>llms.txt</code> directive in both the HTML
+                  pages and the individual <code className={codeStyle}>.md</code> files.
+                </strong>
               </p>
               <p>
                 I initially followed the implementation used in Claude Code documentation. It hides
@@ -525,7 +527,7 @@ export default function MezoDocumentationAgentReadyPost() {
                 width={905}
               />
               <figcaption className="mt-2 text-center font-mono text-xs text-[var(--muted)]">
-                The Claude Code implementation hides the llms.txt pointer in the HTML body.
+                The Claude Code implementation hides the llms.txt directive in the HTML body.
               </figcaption>
             </figure>
 
@@ -542,29 +544,36 @@ export default function MezoDocumentationAgentReadyPost() {
                 official MCP server uses this extraction mode by default.
               </p>
               <p>
-                He briefly removed the pointer from the HTML pages and added a link to{" "}
-                <code className={codeStyle}>llms.txt</code> in the footer instead. I was curious
-                about the impact on <code className={codeStyle}>llms.txt</code> discoverability.
+                Acting on that concern, he briefly removed the directive from the HTML pages and
+                added a link to <code className={codeStyle}>llms.txt</code> in the footer instead. I
+                was curious about the impact of this decision on{" "}
+                <code className={codeStyle}>llms.txt</code> discoverability.
               </p>
               <p>
-                I then checked with OpenCode, which is trained to request Markdown, and the Markdown
-                it received did not contain the pointer.
+                I then checked with OpenCode, which negotiates for Markdown, and the Markdown it
+                received did not contain the directive.
               </p>
               <p>
-                When the agent negotiates for Markdown instead of HTML, the Markdown is generated
-                from the HTML on the server side. When it follows a <code className={codeStyle}>.md</code>{" "}
-                link from <code className={codeStyle}>llms.txt</code>, it gets the version I
-                pre-generated.
+                When the agent negotiated for Markdown instead of HTML, the Markdown was generated
+                from the HTML on the server side. When it followed a{" "}
+                <code className={codeStyle}>.md</code> link from{" "}
+                <code className={codeStyle}>llms.txt</code>, it got the version I pre-generated.
               </p>
               <p>
-                That means an agent that requests Markdown this way never sees the pointer, so it
-                never finds <code className={codeStyle}>llms.txt</code>.
+                That meant an agent that negotiated for Markdown this way never saw the directive,
+                so it never found <code className={codeStyle}>llms.txt</code>.
               </p>
               <p>
                 Claude Code and Cursor use content negotiation, so they would be affected too.
                 Agents cannot locate the <code className={codeStyle}>.md</code> files on their own.
                 They only find them once they find <code className={codeStyle}>llms.txt</code>, so
-                the pointer has to be in both places.
+                the directive needed to be in both places.
+              </p>
+              <p>
+                I also tested the reviewer&apos;s <code className={codeStyle}>mozilla/readability</code>{" "}
+                concern. Thankfully, agents using an MCP server could still see the directive when it
+                was visually hidden. That kept <code className={codeStyle}>llms.txt</code>{" "}
+                discoverable, so we added the directive back to the HTML pages.
               </p>
             </div>
           </section>

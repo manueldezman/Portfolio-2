@@ -300,7 +300,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
         problem:
           "Mezo's documentation scored 41/100 on the AFDocs agent-readiness check. Agents could not discover or consume reliable Markdown versions of the docs, and five of seven scorecard categories could not be tested.",
         contribution:
-          "I opened an issue for each gap and fixed them in eight pull requests. I generated and validated per-page Markdown, built llms.txt and llms-full.txt, added missing descriptions, fixed internal links, and added the llms.txt pointer to both HTML and Markdown pages.",
+          "I opened an issue for each gap and fixed them in eight pull requests. I generated and validated per-page Markdown, built llms.txt and llms-full.txt, added missing descriptions, fixed internal links, and added the llms.txt directive to both HTML and Markdown pages.",
         impact:
           "Mezo's documentation score rose from 41/100 (F) to 100/100 (A+). Every AFDocs category now scores 100, and the generated files rebuild automatically when the docs change.",
         href: "/blog/how-i-made-mezo-documentation-agent-ready/",

@@ -166,7 +166,7 @@ Mezo's documentation scored 41/100 on the AFDocs agent-readiness check. Agents c
 
 #### Contribution
 
-I opened an issue for each gap and fixed them in eight pull requests. I generated and validated per-page Markdown, built `llms.txt` and `llms-full.txt`, added missing descriptions, fixed internal links, and added the `llms.txt` pointer to both HTML and Markdown pages.
+I opened an issue for each gap and fixed them in eight pull requests. I generated and validated per-page Markdown, built `llms.txt` and `llms-full.txt`, added missing descriptions, fixed internal links, and added the `llms.txt` directive to both HTML and Markdown pages.
 
 #### Impact
 

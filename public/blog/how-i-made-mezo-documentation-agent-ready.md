@@ -2,7 +2,7 @@
 
 by Abdulganiy Adeleke, published on Nov 16, 2026
 
-[Mezo](https://mezo.org/) is a blockchain network that provides a platform for blockchain developers. It enables them to build decentralized applications for the Bitcoin community.
+[Mezo](https://mezo.org/) is a blockchain network that enables developers to build decentralized applications for the Bitcoin community.
 
 As a member of the Mezo community, I noticed they were preparing to host a hackathon, the Mezo Buildathon. The event ran in two waves, each lasting about two weeks, from October 16 to November 15, 2026.
 
@@ -66,7 +66,7 @@ The build process also runs this script automatically.
 
 ### Content structure
 
-The same script keeps headings and code blocks intact on every Markdown page. React components in MDX source become visual elements when the documentation is built.
+The same script keeps headings and code blocks intact on every Markdown page. Usually, React components in MDX source become visual elements when the documentation is built.
 
 Since the agent-facing Markdown depends on this same MDX source, the script strips the component syntax and turns its content into plain text. This prevents agents from receiving the raw components as code.
 
@@ -117,7 +117,7 @@ N/A means the check had nothing to test.
 
 ![AFDocs scorecard after the fixes, November 12, 2026.](/blog/how-i-made-mezo-documentation-agent-ready/after.png)
 
-Agents can now request the Markdown, since it is available. They can discover `llms.txt` and use it, and the Markdown is consistent with the live page.
+Agents can now get the Markdown, since it is available. They can discover `llms.txt` and use it, and the Markdown is consistent with the live page.
 
 ## Verify it yourself
 
@@ -131,27 +131,29 @@ This shows the current score. The before result is in the screenshot in the Prob
 
 ## What I learned
 
-One important lesson from this work was about pointer placement.
+One important lesson from this work was about directive placement.
 
-Place the `llms.txt` directive in both the HTML pages and the individual `.md` files.
+**Place the `llms.txt` directive in both the HTML pages and the individual `.md` files.**
 
 I initially followed the implementation used in Claude Code documentation. It hides the `llms.txt` directive in the HTML body, as shown below.
 
-![The Claude Code implementation hides the llms.txt pointer in the HTML body.](/blog/how-i-made-mezo-documentation-agent-ready/claude.png)
+![The Claude Code implementation hides the llms.txt directive in the HTML body.](/blog/how-i-made-mezo-documentation-agent-ready/claude.png)
 
 I also updated my Markdown conversion script to add the directive at the top of each `.md` file. The purpose was to make it available to agents without adding visual noise or having it read out by screen readers.
 
 During review, the reviewer raised a concern about `mozilla/readability`. He said this extraction method available to agents removes hidden content. He also mentioned that the official MCP server uses this extraction mode by default.
 
-He briefly removed the pointer from the HTML pages and added a link to `llms.txt` in the footer instead. I was curious about the impact on `llms.txt` discoverability.
+Acting on that concern, he briefly removed the directive from the HTML pages and added a link to `llms.txt` in the footer instead. I was curious about the impact of this decision on `llms.txt` discoverability.
 
-I then checked with OpenCode, which is trained to request Markdown, and the Markdown it received did not contain the pointer.
+I then checked with OpenCode, which negotiates for Markdown, and the Markdown it received did not contain the directive.
 
-When the agent negotiates for Markdown instead of HTML, the Markdown is generated from the HTML on the server side. When it follows a `.md` link from `llms.txt`, it gets the version I pre-generated.
+When the agent negotiated for Markdown instead of HTML, the Markdown was generated from the HTML on the server side. When it followed a `.md` link from `llms.txt`, it got the version I pre-generated.
 
-That means an agent that requests Markdown this way never sees the pointer, so it never finds `llms.txt`.
+That meant an agent that negotiated for Markdown this way never saw the directive, so it never found `llms.txt`.
 
-Claude Code and Cursor use content negotiation, so they would be affected too. Agents cannot locate the `.md` files on their own. They only find them once they find `llms.txt`, so the pointer has to be in both places.
+Claude Code and Cursor use content negotiation, so they would be affected too. Agents cannot locate the `.md` files on their own. They only find them once they find `llms.txt`, so the directive needed to be in both places.
+
+I also tested the reviewer's `mozilla/readability` concern. Thankfully, agents using an MCP server could still see the directive when it was visually hidden. That kept `llms.txt` discoverable, so we added the directive back to the HTML pages.
 
 ## Want results like this?
 
