@@ -2,11 +2,15 @@
 
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { DetailModal } from "@/components/DetailModal";
 import { Heading } from "@/components/Heading";
 import { RichText } from "@/components/RichText";
 import type { OpenSourceContributionLink, OpenSourceRepository } from "@/content/portfolio";
+
+const contributionTitleClass =
+  "link-ring text-left underline decoration-[var(--rule-soft)] underline-offset-4 transition-colors duration-150 group-hover:text-[var(--accent)]";
 
 function ContributionLinkList({ links }: { links: OpenSourceContributionLink[] }) {
   if (links.length === 0) {
@@ -54,13 +58,30 @@ export function OpenSourceContributions({ repositories }: { repositories: OpenSo
               {repository.contributions.map((contribution, contributionIndex) => (
                 <article className="group" key={`${repository.repository}-${contribution.title}`}>
                   <h3 className="text-sm font-semibold leading-7 text-[var(--text)]">
-                    <button
-                      className="link-ring text-left underline decoration-[var(--rule-soft)] underline-offset-4 transition-colors duration-150 group-hover:text-[var(--accent)]"
-                      onClick={() => setSelection({ repositoryIndex, contributionIndex })}
-                      type="button"
-                    >
-                      {contribution.title}
-                    </button>{" "}
+                    {contribution.href ? (
+                      contribution.href.startsWith("/") ? (
+                        <Link className={contributionTitleClass} href={contribution.href}>
+                          {contribution.title}
+                        </Link>
+                      ) : (
+                        <a
+                          className={contributionTitleClass}
+                          href={contribution.href}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {contribution.title}
+                        </a>
+                      )
+                    ) : (
+                      <button
+                        className={contributionTitleClass}
+                        onClick={() => setSelection({ repositoryIndex, contributionIndex })}
+                        type="button"
+                      >
+                        {contribution.title}
+                      </button>
+                    )}{" "}
                     <span className="font-normal text-[var(--muted)]">— {repository.organization}</span>
                   </h3>
                 </article>

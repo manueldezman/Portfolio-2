@@ -126,12 +126,12 @@ Walks through a JavaScript closure and IIFE pitfall that causes stale returned p
 
 ## Explainers
 
-### Blockchain State Simplified
+### TUI vs CLI: Is There Any Difference?
 
-An Excalidraw breakdown of the current snapshot of accounts, balances, contract storage, and network data.
+A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.
 
-- Source: X · Excalidraw
-- [View on X](https://x.com/0xDezman/status/2075505322450399654?s=20)
+- Source: Blog
+- [Read the article](/blog/tui-vs-cli/)
 
 ### AI Tokens Video Explainer
 
@@ -146,6 +146,31 @@ Video explainers on AI and blockchain fundamentals:
 - [Blockchain fundamentals playlist](https://youtube.com/playlist?list=PLXTXM9gvoaaI&si=G1pfMZGY6dVjHSRw)
 
 ## Open-source contributions
+
+### [Mezo documentation](/blog/how-i-made-mezo-documentation-agent-ready/)
+
+**Contribution:** Made Mezo's documentation agent-ready and raised its AFDocs score from 41 to 100.
+
+- [PR #345](https://github.com/mezo-org/documentation/pull/345) — Merged · October 21, 2026
+- [PR #347](https://github.com/mezo-org/documentation/pull/347) — Merged · October 21, 2026
+- [PR #349](https://github.com/mezo-org/documentation/pull/349) — Merged · October 21, 2026
+- [PR #352](https://github.com/mezo-org/documentation/pull/352) — Merged · October 28, 2026
+- [PR #354](https://github.com/mezo-org/documentation/pull/354) — Merged · October 28, 2026
+- [PR #357](https://github.com/mezo-org/documentation/pull/357) — Merged · November 9, 2026
+- [PR #360](https://github.com/mezo-org/documentation/pull/360) — Merged · November 12, 2026
+- [PR #362](https://github.com/mezo-org/documentation/pull/362) — Merged · November 12, 2026
+
+#### Problem
+
+Mezo's documentation scored 41/100 on the AFDocs agent-readiness check. Agents could not discover or consume reliable Markdown versions of the docs, and five of seven scorecard categories could not be tested.
+
+#### Contribution
+
+I opened an issue for each gap and fixed them in eight pull requests. I generated and validated per-page Markdown, built `llms.txt` and `llms-full.txt`, added missing descriptions, fixed internal links, and added the `llms.txt` pointer to both HTML and Markdown pages.
+
+#### Impact
+
+Mezo's documentation score rose from 41/100 (F) to 100/100 (A+). Every AFDocs category now scores 100, and the generated files rebuild automatically when the docs change.
 
 ### The Odin Project curriculum
 

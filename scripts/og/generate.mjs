@@ -183,3 +183,11 @@ await render(
   }),
   "tui-vs-cli.png",
 );
+await render(
+  h(ArticleCard, {
+    kicker: "BLOG",
+    title: "How I Made Mezo's Documentation Agent-Ready",
+    meta: "Abdulganiy Adeleke · Nov 16, 2026",
+  }),
+  "mezo-documentation-agent-ready.png",
+);

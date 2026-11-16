@@ -2,6 +2,14 @@
 
 Writings about ideas that emerge from what I learn, build, observe, and experience across technology, money, and personal growth.
 
+## How I Made Mezo's Documentation Agent-Ready
+
+- Published: November 2026
+- Summary: How I improved Mezo's documentation agent-readiness score from 41 to 100 with 8 PRs.
+- Tags: documentation, ai agents, afdocs, mezo
+- Read: [How I Made Mezo's Documentation Agent-Ready](/blog/how-i-made-mezo-documentation-agent-ready/)
+- Full text: [how-i-made-mezo-documentation-agent-ready.md](/blog/how-i-made-mezo-documentation-agent-ready.md)
+
 ## TUI vs CLI: Is There Any Difference?
 
 - Published: October 2026

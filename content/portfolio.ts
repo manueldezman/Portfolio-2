@@ -64,6 +64,7 @@ export type OpenSourceContribution = {
   problem: string;
   contribution: string;
   impact: string;
+  href?: string;
   image?: OpenSourceContributionImage;
   links: OpenSourceContributionLink[];
 };
@@ -247,6 +248,66 @@ export const explainerPlaylistNote: ExplainerPlaylistNote = {
 };
 
 export const openSourceRepositories: OpenSourceRepository[] = [
+  {
+    repository: "mezo-org/documentation",
+    organization: "Mezo",
+    prLinks: [
+      {
+        label: "PR #345",
+        href: "https://github.com/mezo-org/documentation/pull/345",
+        status: "Merged · October 21, 2026",
+      },
+      {
+        label: "PR #347",
+        href: "https://github.com/mezo-org/documentation/pull/347",
+        status: "Merged · October 21, 2026",
+      },
+      {
+        label: "PR #349",
+        href: "https://github.com/mezo-org/documentation/pull/349",
+        status: "Merged · October 21, 2026",
+      },
+      {
+        label: "PR #352",
+        href: "https://github.com/mezo-org/documentation/pull/352",
+        status: "Merged · October 28, 2026",
+      },
+      {
+        label: "PR #354",
+        href: "https://github.com/mezo-org/documentation/pull/354",
+        status: "Merged · October 28, 2026",
+      },
+      {
+        label: "PR #357",
+        href: "https://github.com/mezo-org/documentation/pull/357",
+        status: "Merged · November 9, 2026",
+      },
+      {
+        label: "PR #360",
+        href: "https://github.com/mezo-org/documentation/pull/360",
+        status: "Merged · November 12, 2026",
+      },
+      {
+        label: "PR #362",
+        href: "https://github.com/mezo-org/documentation/pull/362",
+        status: "Merged · November 12, 2026",
+      },
+    ],
+    contributions: [
+      {
+        title:
+          "Made Mezo's documentation agent-ready and raised its AFDocs score from 41 to 100.",
+        problem:
+          "Mezo's documentation scored 41/100 on the AFDocs agent-readiness check. Agents could not discover or consume reliable Markdown versions of the docs, and five of seven scorecard categories could not be tested.",
+        contribution:
+          "I opened an issue for each gap and fixed them in eight pull requests. I generated and validated per-page Markdown, built llms.txt and llms-full.txt, added missing descriptions, fixed internal links, and added the llms.txt pointer to both HTML and Markdown pages.",
+        impact:
+          "Mezo's documentation score rose from 41/100 (F) to 100/100 (A+). Every AFDocs category now scores 100, and the generated files rebuild automatically when the docs change.",
+        href: "/blog/how-i-made-mezo-documentation-agent-ready/",
+        links: [],
+      },
+    ],
+  },
   {
     repository: "TheOdinProject/curriculum",
     organization: "Odin Project",

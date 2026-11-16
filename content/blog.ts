@@ -8,6 +8,14 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    title: "How I Made Mezo's Documentation Agent-Ready",
+    href: "/blog/how-i-made-mezo-documentation-agent-ready/",
+    date: "2026-11-16",
+    description:
+      "How I improved Mezo's documentation agent-readiness score from 41 to 100 with 8 PRs.",
+    tags: ["documentation", "ai agents", "afdocs", "mezo"],
+  },
+  {
     title: "TUI vs CLI: Is There Any Difference?",
     href: "/blog/tui-vs-cli/",
     date: "2026-10-13",
