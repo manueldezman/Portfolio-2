@@ -200,9 +200,9 @@ export default function MezoDocumentationAgentReadyPost() {
               </p>
               <p>Developer experience now depends on how well agents navigate documentation.</p>
               <p>
-                AI agents read documentation differently from people. They need a clear map of the
-                pages (<code className={codeStyle}>llms.txt</code>) and a clean Markdown version of
-                each page.
+                AI agents read documentation differently from people. They need an index file (
+                <code className={codeStyle}>llms.txt</code>) that tells them where each page lives,
+                and a clean Markdown version of each page.
               </p>
               <p>
                 Mezo&apos;s documentation lacked the structure agents need to navigate and consume
@@ -277,7 +277,8 @@ export default function MezoDocumentationAgentReadyPost() {
                 so every listed page opens (<PrLink number={345} />).
               </p>
               <p>
-                The second change kept the README out of the agent-facing files (
+                The second change kept the README out of the files agents read, such as{" "}
+                <code className={codeStyle}>llms.txt</code> and the Markdown pages (
                 <PrLink number={352} />).
               </p>
               <p>
@@ -321,7 +322,7 @@ export default function MezoDocumentationAgentReadyPost() {
                   from receiving the raw components as code.
                 </p>
                 <p>
-                  I also made tabbed content serialize one tab after another, each with its label.
+                  I also made tabbed content write out one tab after another, each with its label.
                   This ensures one tab&apos;s content is never mistaken for another&apos;s (
                   <PrLink number={349} />).
                 </p>
@@ -529,9 +530,10 @@ export default function MezoDocumentationAgentReadyPost() {
               </p>
               <p>
                 The reviewer raised a concern about{" "}
-                <code className={codeStyle}>mozilla/readability</code>. He said this extraction
-                method, which agents can use, removes hidden content. He also mentioned that the
-                official MCP server uses this mode by default.
+                <code className={codeStyle}>mozilla/readability</code>, a library that extracts the
+                main text from a page. He said this extraction method, which agents can use, removes
+                hidden content. He also mentioned that the official Model Context Protocol (MCP)
+                server uses this mode by default.
               </p>
               <p>
                 Acting on that concern, he briefly removed the directive from the HTML pages and

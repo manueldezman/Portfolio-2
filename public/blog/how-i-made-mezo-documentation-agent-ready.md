@@ -14,7 +14,7 @@ Coding agents now read documentation on behalf of developers. They rely on it to
 
 Developer experience now depends on how well agents navigate documentation.
 
-AI agents read documentation differently from people. They need a clear map of the pages (`llms.txt`) and a clean Markdown version of each page.
+AI agents read documentation differently from people. They need an index file (`llms.txt`) that tells them where each page lives, and a clean Markdown version of each page.
 
 Mezo's documentation lacked the structure agents need to navigate and consume its content.
 
@@ -43,7 +43,7 @@ I opened an issue for each problem and fixed them in eight pull requests.
 
 My first change was to the internal documentation, a README for the repository owner. The file listed many pages that did not exist. I fixed the links so every listed page opens ([PR #345](https://github.com/mezo-org/documentation/pull/345)).
 
-The second change kept the README out of the agent-facing files ([PR #352](https://github.com/mezo-org/documentation/pull/352)).
+The second change kept the README out of the files agents read, such as `llms.txt` and the Markdown pages ([PR #352](https://github.com/mezo-org/documentation/pull/352)).
 
 One PR ([PR #349](https://github.com/mezo-org/documentation/pull/349)) covers Markdown availability, structure, size, and URL stability. The four checks examine whether the Markdown files exist and whether their properties are correct.
 
@@ -59,7 +59,7 @@ The same script keeps headings and code blocks intact on every Markdown page. Us
 
 Since the agent-facing Markdown depends on the same MDX source, the script strips the component syntax and turns its content into plain text. This prevents agents from receiving the raw components as code.
 
-I also made tabbed content serialize one tab after another, each with its label. This ensures one tab's content is never mistaken for another's ([PR #349](https://github.com/mezo-org/documentation/pull/349)).
+I also made tabbed content write out one tab after another, each with its label. This ensures one tab's content is never mistaken for another's ([PR #349](https://github.com/mezo-org/documentation/pull/349)).
 
 The script also wrote links to other pages as short paths, such as `/docs/users/borrow`.
 
@@ -132,7 +132,7 @@ I initially followed the implementation used in the Claude Code documentation. I
 
 I also updated my Markdown conversion script to add the directive at the top of each `.md` file, so agents could see it without visual noise or screen readers reading it aloud.
 
-The reviewer raised a concern about `mozilla/readability`. He said this extraction method, which agents can use, removes hidden content. He also mentioned that the official MCP server uses this mode by default.
+The reviewer raised a concern about `mozilla/readability`, a library that extracts the main text from a page. He said this extraction method, which agents can use, removes hidden content. He also mentioned that the official Model Context Protocol (MCP) server uses this mode by default.
 
 Acting on that concern, he briefly removed the directive from the HTML pages and added a link to `llms.txt` in the footer instead. I wanted to know how that decision affected `llms.txt` discoverability.
 
