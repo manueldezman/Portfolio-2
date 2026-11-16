@@ -260,8 +260,8 @@ export default function MezoDocumentationAgentReadyPost() {
             <div className="mt-6 space-y-5 leading-8 text-[var(--muted)]">
               <p>Only two of seven categories could be scored.</p>
               <ul className="list-disc space-y-2 pl-5">
-                <li>Authentication and access. 100/100.</li>
-                <li>Content discoverability. 0/100.</li>
+                <li>Authentication and access (100/100).</li>
+                <li>Content discoverability (0/100).</li>
               </ul>
               <p>
                 Authentication and access scored 100 because the documentation already supported
@@ -276,7 +276,7 @@ export default function MezoDocumentationAgentReadyPost() {
                 <li>URL stability and redirects.</li>
                 <li>Observability and content health.</li>
               </ul>
-              <p>This was because there was no agent-facing content to test.</p>
+              <p>There was no agent-facing content to test.</p>
             </div>
           </section>
 
@@ -287,7 +287,7 @@ export default function MezoDocumentationAgentReadyPost() {
             <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
               <p>I opened an issue for each problem and fixed them in eight pull requests.</p>
               <p>
-                The first change I made was to the internal documentation, a README for the
+                My first change was to the internal documentation, a README for the
                 repository owner. The file listed many pages that did not exist. I fixed the links
                 so every listed page opens (<PrLink number={345} />).
               </p>
@@ -296,13 +296,13 @@ export default function MezoDocumentationAgentReadyPost() {
                 <PrLink number={352} />).
               </p>
               <p>
-                One of the PRs (<PrLink number={349} />) covers Markdown availability, structure,
+                One PR (<PrLink number={349} />) covers Markdown availability, structure,
                 size, and URL stability. The four checks examine whether the Markdown files exist
                 and whether their properties are correct.
               </p>
               <p>
-                The other PRs ensure that agents can discover and consume those files. Everything I
-                generated is rebuilt automatically whenever the site changes. This ensures nothing
+                The other PRs ensure that agents can discover and consume those files. The build
+                automatically regenerates everything I created whenever the site changes, so nothing
                 has to be updated by hand.
               </p>
             </div>
@@ -313,8 +313,8 @@ export default function MezoDocumentationAgentReadyPost() {
               </Heading>
               <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
                 <p>
-                  Markdown is easier for AI agents to read than the regular pages. I wrote a script
-                  that creates a Markdown version of each page from the live documentation pages (
+                  Markdown is easier for AI agents to read than HTML pages. I wrote a script that
+                  creates a Markdown version of each live documentation page (
                   <PrLink number={349} />).
                 </p>
                 <p>The build process also runs this script automatically.</p>
@@ -332,7 +332,7 @@ export default function MezoDocumentationAgentReadyPost() {
                   documentation is built.
                 </p>
                 <p>
-                  Since the agent-facing Markdown depends on this same MDX source, the script strips
+                  Since the agent-facing Markdown depends on the same MDX source, the script strips
                   the component syntax and turns its content into plain text. This prevents agents
                   from receiving the raw components as code.
                 </p>
@@ -342,7 +342,7 @@ export default function MezoDocumentationAgentReadyPost() {
                   <PrLink number={349} />).
                 </p>
                 <p>
-                  The generated Markdown also wrote links to other pages as short paths, such as{" "}
+                  The script also wrote links to other pages as short paths, such as{" "}
                   <code className={codeStyle}>/docs/users/borrow</code>.
                 </p>
                 <p>
@@ -363,8 +363,8 @@ export default function MezoDocumentationAgentReadyPost() {
                 Page size
               </Heading>
               <p className="mt-4 leading-8 text-[var(--muted)]">
-                I kept each Markdown page under 50,000 characters and retained its complete content.
-                This ensures an agent never has to open two pages to get one piece of information (
+                I kept each Markdown page under 50,000 characters without cutting its content. This
+                ensures an agent never has to open two pages to get one piece of information (
                 <PrLink number={349} />).
               </p>
             </section>
@@ -374,9 +374,9 @@ export default function MezoDocumentationAgentReadyPost() {
                 URL stability and redirects
               </Heading>
               <p className="mt-4 leading-8 text-[var(--muted)]">
-                This category checks that web addresses respond correctly. This includes a proper
-                error for bad addresses and a working redirect. Creating the Markdown pages gave
-                agents working links to follow, so the same work covered it (
+                This category checks that web addresses respond correctly. That includes a correct
+                error response for bad addresses and a working redirect. Creating the Markdown pages
+                gave agents working links to follow, so that work also covered this category (
                 <PrLink number={349} />).
               </p>
             </section>
@@ -395,12 +395,13 @@ export default function MezoDocumentationAgentReadyPost() {
                   page. Each entry links to a page&apos;s Markdown version (<PrLink number={354} />).
                 </li>
                 <li>
-                  I added descriptions to 8 pages that had none. Agents use them to tell what a page
-                  covers, and they feed the <code className={codeStyle}>llms.txt</code> entries (
+                  I added descriptions to 8 pages that had none. Agents use the descriptions to
+                  understand what each page covers, and the descriptions feed the{" "}
+                  <code className={codeStyle}>llms.txt</code> entries (
                   <PrLink number={347} />).
                 </li>
                 <li>
-                  I added a directive for agents to <code className={codeStyle}>llms.txt</code> on the
+                  I added an <code className={codeStyle}>llms.txt</code> directive for agents to the
                   regular pages (<PrLink number={357} />). I later noticed it was missing from the
                   Markdown pages, so I added it there too (<PrLink number={360} />).
                 </li>
@@ -476,9 +477,8 @@ export default function MezoDocumentationAgentReadyPost() {
             </figure>
 
             <p className="mt-6 leading-8 text-[var(--muted)]">
-              Agents can now get the Markdown, since it is available. They can discover{" "}
-              <code className={codeStyle}>llms.txt</code> and use it, and the Markdown is consistent
-              with the live page.
+              Agents can now get the Markdown version of each page. They can discover and use{" "}
+              <code className={codeStyle}>llms.txt</code>. The Markdown matches the live page.
             </p>
           </section>
 
@@ -508,7 +508,7 @@ export default function MezoDocumentationAgentReadyPost() {
               What I learned
             </Heading>
             <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
-              <p>One important lesson from this work was about directive placement.</p>
+              <p>This work taught me one important lesson about directive placement.</p>
               <p>
                 <strong>
                   Place the <code className={codeStyle}>llms.txt</code> directive in both the HTML
@@ -516,7 +516,7 @@ export default function MezoDocumentationAgentReadyPost() {
                 </strong>
               </p>
               <p>
-                I initially followed the implementation used in Claude Code documentation. It hides
+                I initially followed the implementation used in the Claude Code documentation. It hides
                 the <code className={codeStyle}>llms.txt</code> directive in the HTML body, as shown
                 below.
               </p>
@@ -540,19 +540,19 @@ export default function MezoDocumentationAgentReadyPost() {
             <div className="mt-6 space-y-5 leading-8 text-[var(--muted)]">
               <p>
                 I also updated my Markdown conversion script to add the directive at the top of each{" "}
-                <code className={codeStyle}>.md</code> file. The purpose was to make it available to
-                agents without adding visual noise or having it read out by screen readers.
+                <code className={codeStyle}>.md</code> file, so agents could see it without visual
+                noise or screen readers reading it aloud.
               </p>
               <p>
-                During review, the reviewer raised a concern about{" "}
+                The reviewer raised a concern about{" "}
                 <code className={codeStyle}>mozilla/readability</code>. He said this extraction
-                method available to agents removes hidden content. He also mentioned that the
-                official MCP server uses this extraction mode by default.
+                method, which agents can use, removes hidden content. He also mentioned that the
+                official MCP server uses this mode by default.
               </p>
               <p>
                 Acting on that concern, he briefly removed the directive from the HTML pages and
                 added a link to <code className={codeStyle}>llms.txt</code> in the footer instead. I
-                was curious about the impact of this decision on{" "}
+                wanted to know how that decision affected{" "}
                 <code className={codeStyle}>llms.txt</code> discoverability.
               </p>
               <p>
@@ -560,8 +560,8 @@ export default function MezoDocumentationAgentReadyPost() {
                 received did not contain the directive.
               </p>
               <p>
-                When the agent negotiated for Markdown instead of HTML, the Markdown was generated
-                from the HTML on the server side. When it followed a{" "}
+                The agent negotiated for Markdown instead of HTML, and the server generated the
+                Markdown from HTML. When it followed a{" "}
                 <code className={codeStyle}>.md</code> link from{" "}
                 <code className={codeStyle}>llms.txt</code>, it got the version I pre-generated.
               </p>
@@ -570,15 +570,15 @@ export default function MezoDocumentationAgentReadyPost() {
                 so it never found <code className={codeStyle}>llms.txt</code>.
               </p>
               <p>
-                Claude Code and Cursor use content negotiation, so they would be affected too.
+                Claude Code and Cursor use content negotiation, so they would also be affected.
                 Agents cannot locate the <code className={codeStyle}>.md</code> files on their own.
-                They only find them once they find <code className={codeStyle}>llms.txt</code>, so
-                the directive needed to be in both places.
+                They find them only after they discover <code className={codeStyle}>llms.txt</code>,
+                so the directive needed to be in both places.
               </p>
               <p>
                 I also tested the reviewer&apos;s <code className={codeStyle}>mozilla/readability</code>{" "}
-                concern. Thankfully, agents using an MCP server could still see the directive when it
-                was visually hidden. That kept <code className={codeStyle}>llms.txt</code>{" "}
+                concern. Agents using an MCP server could still see the directive even when it was
+                visually hidden. That kept <code className={codeStyle}>llms.txt</code>{" "}
                 discoverable, so we added the directive back to the HTML pages.
               </p>
             </div>
@@ -589,8 +589,7 @@ export default function MezoDocumentationAgentReadyPost() {
               Want results like this?
             </Heading>
             <p className="mt-4 leading-8 text-[var(--muted)]">
-              I write developer documentation that serves both human developers and AI agents,
-              driving business results.
+              I write developer documentation that serves both human developers and AI agents.
             </p>
             <p className="mt-3 leading-8 text-[var(--muted)]">Let&apos;s talk about your docs.</p>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
