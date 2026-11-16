@@ -91,7 +91,10 @@ export default function TuiVsCliPost() {
           </div>
         </aside>
 
-        <header className="min-w-0 scroll-mt-32 lg:col-start-2 lg:row-start-1" id="overview">
+        <header
+          className="mx-auto w-full min-w-0 max-w-3xl scroll-mt-32 lg:col-start-2 lg:row-start-1"
+          id="overview"
+        >
           <Heading className="text-left" level={1}>TUI vs CLI: Is There Any Difference?</Heading>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <p className="font-mono text-xs text-[var(--muted)]">
@@ -102,7 +105,7 @@ export default function TuiVsCliPost() {
           <MobileTableOfContents className="mt-6 lg:hidden" items={toc} />
         </header>
 
-        <div className="min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:col-start-2 lg:row-start-2 lg:text-justify">
+        <div className="mx-auto w-full min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:col-start-2 lg:row-start-2 lg:text-justify">
           <p className="text-base leading-8 text-[var(--muted)]">
             A basic mental model for differentiating between a GUI and a CLI is that one uses
             graphical elements, while the other runs in a terminal. That was my mental model too,

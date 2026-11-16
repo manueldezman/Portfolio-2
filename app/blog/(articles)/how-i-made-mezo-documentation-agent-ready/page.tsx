@@ -127,7 +127,10 @@ export default function MezoDocumentationAgentReadyPost() {
           </div>
         </aside>
 
-        <header className="min-w-0 scroll-mt-32 lg:col-start-2 lg:row-start-1" id="overview">
+        <header
+          className="mx-auto w-full min-w-0 max-w-3xl scroll-mt-32 lg:col-start-2 lg:row-start-1"
+          id="overview"
+        >
           <Heading className="text-left" level={1}>
             {title}
           </Heading>
@@ -144,7 +147,7 @@ export default function MezoDocumentationAgentReadyPost() {
           <MobileTableOfContents className="mt-6 lg:hidden" items={toc} />
         </header>
 
-        <div className="min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:col-start-2 lg:row-start-2 lg:text-justify">
+        <div className="mx-auto w-full min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:col-start-2 lg:row-start-2 lg:text-justify">
           <BeforeAfterSlider
             afterAlt="AFDocs scorecard for Mezo documentation dated November 12, 2026, showing an overall score of 100 out of 100, an A+."
             afterSrc="/blog/how-i-made-mezo-documentation-agent-ready/after.png"
