@@ -121,13 +121,15 @@ Agents can now get the Markdown, since it is available. They can discover `llms.
 
 ## Verify it yourself
 
-Run this command from a machine with Node.js and network access. It queries Mezo's live docs and prints the current AFDocs scorecard.
+You need Node.js to run this command. It queries Mezo's live docs and prints the current AFDocs scorecard.
 
 ```bash
 npx afdocs check https://mezo.org/docs/developers --format scorecard
 ```
 
-The output is a scorecard like the screenshots above, with one line for each category and an overall score. The before result is in the screenshot in the Problem section. My runs were on October 10, 2026 and November 12, 2026. Mezo's docs may have changed since.
+The output is a scorecard like the screenshots above, with one line for each category and an overall score.
+
+*Note. My runs were on October 10, 2026 and November 12, 2026. Mezo's docs may have changed since.*
 
 ## What I learned
 

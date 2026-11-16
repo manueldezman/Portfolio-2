@@ -487,17 +487,19 @@ export default function MezoDocumentationAgentReadyPost() {
               Verify it yourself
             </Heading>
             <p className="mt-4 leading-8 text-[var(--muted)]">
-              Run this command from a machine with Node.js and network access. It queries
-              Mezo&apos;s live docs and prints the current AFDocs scorecard.
+              You need Node.js to run this command. It queries Mezo&apos;s live docs and prints the
+              current AFDocs scorecard.
             </p>
             <pre className="mt-4 overflow-x-auto bg-[var(--surface-strong)] p-4 font-mono text-sm leading-7 text-[var(--background)]">
               <code>npx afdocs check https://mezo.org/docs/developers --format scorecard</code>
             </pre>
             <p className="mt-4 leading-8 text-[var(--muted)]">
               The output is a scorecard like the screenshots above, with one line for each category
-              and an overall score. The before result is in the screenshot in the Problem section.
-              My runs were on October 10, 2026 and November 12, 2026. Mezo&apos;s docs may have
-              changed since.
+              and an overall score.
+            </p>
+            <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+              Note. My runs were on October 10, 2026 and November 12, 2026. Mezo&apos;s docs may
+              have changed since.
             </p>
           </section>
 
