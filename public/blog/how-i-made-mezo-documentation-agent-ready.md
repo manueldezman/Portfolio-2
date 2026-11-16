@@ -10,22 +10,15 @@ Recently, I have focused on agent-ready documentation. I saw the Buildathon as a
 
 ## The Problem
 
-The advent of AI has changed the tools developers use to build software. AI-assisted workflows are becoming part of software development. Developers now use coding agents to help them build applications.
+Coding agents now read documentation on behalf of developers. They rely on it to understand products and complete development tasks, and they are becoming its primary consumers. [Fern published a report](https://buildwithfern.com/post/state-of-docs) on November 10, 2026 that found 52% of documentation traffic comes from agents, up from 14% in January.
 
-Coding agents also rely on documentation to understand products and perform development tasks. They are becoming the primary consumers of developer documentation.
-
-[Fern published a report](https://buildwithfern.com/post/state-of-docs) on November 10, 2026. It found that 52% of documentation traffic now comes from agents, up from 14% in January.
-
-This reveals two things.
-
-- Agents read documentation on behalf of developers.
-- Developer experience is now closely tied to the AI agent's experience navigating documentation.
+Developer experience now depends on how well agents navigate documentation.
 
 AI agents read documentation differently from people. They need a clear map of the pages (`llms.txt`) and a clean Markdown version of each page.
 
 Mezo's documentation lacked the structure agents need to navigate and consume its content.
 
-When agents cannot navigate documentation effectively, they may miss important information. They may also provide wrong answers. Developers who rely on those answers may become frustrated. This creates a poor developer experience.
+When agents cannot navigate documentation, they miss information or give wrong answers. Developers who rely on those answers lose trust, and the developer experience suffers.
 
 On October 10, 2026, I assessed Mezo's documentation using [AFDocs](https://afdocs.dev/). AFDocs is a specification for evaluating how well documentation supports AI agents. Mezo's documentation scored 41 out of 100, an F.
 
@@ -36,15 +29,13 @@ Only two of seven categories could be scored.
 - Authentication and access (100/100).
 - Content discoverability (0/100).
 
-Authentication and access scored 100 because the documentation already supported standard HTTP behavior. Content discoverability scored 0 because the documentation lacked agent-facing content. The check marked the following five categories as Not Applicable (N/A).
+Authentication and access scored 100 because the documentation already supported standard HTTP behavior. Content discoverability scored 0 because there was no agent-facing content. The check marked the following five categories as Not Applicable (N/A) for the same reason.
 
 - Markdown availability.
 - Page size and truncation risk.
 - Content structure.
 - URL stability and redirects.
 - Observability and content health.
-
-There was no agent-facing content to test.
 
 ## Solution
 
@@ -61,8 +52,6 @@ The other PRs ensure that agents can discover and consume those files. The build
 ### Markdown availability
 
 Markdown is easier for AI agents to read than HTML pages. I wrote a script that creates a Markdown version of each live documentation page ([PR #349](https://github.com/mezo-org/documentation/pull/349)).
-
-The build process also runs this script automatically.
 
 ### Content structure
 
@@ -117,7 +106,7 @@ N/A means the check had nothing to test.
 
 ![AFDocs scorecard after the fixes, November 12, 2026.](/blog/how-i-made-mezo-documentation-agent-ready/after.png)
 
-Agents can now get the Markdown version of each page. They can discover and use `llms.txt`. The Markdown matches the live page.
+Agents now get the Markdown version and the `llms.txt` map they need.
 
 ## Verify it yourself
 

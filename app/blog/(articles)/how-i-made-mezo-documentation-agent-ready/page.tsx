@@ -184,16 +184,9 @@ export default function MezoDocumentationAgentReadyPost() {
             </Heading>
             <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
               <p>
-                The advent of AI has changed the tools developers use to build software.
-                AI-assisted workflows are becoming part of software development. Developers now use
-                coding agents to help them build applications.
-              </p>
-              <p>
-                Coding agents also rely on documentation to understand products and perform
-                development tasks. They are becoming the primary consumers of developer
-                documentation.
-              </p>
-              <p>
+                Coding agents now read documentation on behalf of developers. They rely on it to
+                understand products and complete development tasks, and they are becoming its
+                primary consumers.{" "}
                 <a
                   className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
                   href="https://buildwithfern.com/post/state-of-docs"
@@ -202,17 +195,10 @@ export default function MezoDocumentationAgentReadyPost() {
                 >
                   Fern published a report
                 </a>{" "}
-                on November 10, 2026. It found that 52% of documentation traffic now comes from
-                agents, up from 14% in January.
+                on November 10, 2026 that found 52% of documentation traffic comes from agents, up
+                from 14% in January.
               </p>
-              <p>This reveals two things.</p>
-              <ul className="list-disc space-y-2 pl-5">
-                <li>Agents read documentation on behalf of developers.</li>
-                <li>
-                  Developer experience is now closely tied to the AI agent&apos;s experience
-                  navigating documentation.
-                </li>
-              </ul>
+              <p>Developer experience now depends on how well agents navigate documentation.</p>
               <p>
                 AI agents read documentation differently from people. They need a clear map of the
                 pages (<code className={codeStyle}>llms.txt</code>) and a clean Markdown version of
@@ -223,9 +209,9 @@ export default function MezoDocumentationAgentReadyPost() {
                 its content.
               </p>
               <p>
-                When agents cannot navigate documentation effectively, they may miss important
-                information. They may also provide wrong answers. Developers who rely on those
-                answers may become frustrated. This creates a poor developer experience.
+                When agents cannot navigate documentation, they miss information or give wrong
+                answers. Developers who rely on those answers lose trust, and the developer
+                experience suffers.
               </p>
               <p>
                 On October 10, 2026, I assessed Mezo&apos;s documentation using{" "}
@@ -265,9 +251,9 @@ export default function MezoDocumentationAgentReadyPost() {
               </ul>
               <p>
                 Authentication and access scored 100 because the documentation already supported
-                standard HTTP behavior. Content discoverability scored 0 because the documentation
-                lacked agent-facing content. The check marked the following five categories as Not
-                Applicable (N/A).
+                standard HTTP behavior. Content discoverability scored 0 because there was no
+                agent-facing content. The check marked the following five categories as Not
+                Applicable (N/A) for the same reason.
               </p>
               <ul className="list-disc space-y-2 pl-5">
                 <li>Markdown availability.</li>
@@ -276,7 +262,6 @@ export default function MezoDocumentationAgentReadyPost() {
                 <li>URL stability and redirects.</li>
                 <li>Observability and content health.</li>
               </ul>
-              <p>There was no agent-facing content to test.</p>
             </div>
           </section>
 
@@ -317,7 +302,6 @@ export default function MezoDocumentationAgentReadyPost() {
                   creates a Markdown version of each live documentation page (
                   <PrLink number={349} />).
                 </p>
-                <p>The build process also runs this script automatically.</p>
               </div>
             </section>
 
@@ -477,8 +461,8 @@ export default function MezoDocumentationAgentReadyPost() {
             </figure>
 
             <p className="mt-6 leading-8 text-[var(--muted)]">
-              Agents can now get the Markdown version of each page. They can discover and use{" "}
-              <code className={codeStyle}>llms.txt</code>. The Markdown matches the live page.
+              Agents now get the Markdown version and the{" "}
+              <code className={codeStyle}>llms.txt</code> map they need.
             </p>
           </section>
 
