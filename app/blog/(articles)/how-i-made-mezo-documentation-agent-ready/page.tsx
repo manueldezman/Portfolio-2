@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { Heading } from "@/components/Heading";
 import { MobileTableOfContents } from "@/components/MobileTableOfContents";
 import { PageActions } from "@/components/PageActions";
@@ -144,6 +145,14 @@ export default function MezoDocumentationAgentReadyPost() {
         </header>
 
         <div className="min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:col-start-2 lg:row-start-2 lg:text-justify">
+          <BeforeAfterSlider
+            afterAlt="AFDocs scorecard for Mezo documentation dated November 12, 2026, showing an overall score of 100 out of 100, an A+."
+            afterSrc="/blog/how-i-made-mezo-documentation-agent-ready/after.png"
+            beforeAlt="AFDocs scorecard for Mezo documentation dated October 10, 2026, showing an overall score of 41 out of 100, an F."
+            beforeSrc="/blog/how-i-made-mezo-documentation-agent-ready/before.png"
+            className="mb-8"
+          />
+
           <p className="text-base leading-8 text-[var(--muted)]">
             <a
               className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
