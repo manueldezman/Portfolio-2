@@ -162,9 +162,7 @@ html {
 
 body {
   min-height: 100vh;
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--accent) 18%, transparent) 1px, transparent 1px) 8% 0 / 1px 100% no-repeat,
-    var(--background);
+  background: var(--background);
   color: var(--text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 14px;
