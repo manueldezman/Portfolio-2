@@ -58,13 +58,13 @@ One of the PRs ([PR #349](https://github.com/mezo-org/documentation/pull/349)) c
 
 The other PRs ensure that agents can discover and consume those files. Everything I generated is rebuilt automatically whenever the site changes. This ensures nothing has to be updated by hand.
 
-## Markdown availability
+### Markdown availability
 
 Markdown is easier for AI agents to read than the regular pages. I wrote a script that creates a Markdown version of each page from the live documentation pages ([PR #349](https://github.com/mezo-org/documentation/pull/349)).
 
 The build process also runs this script automatically.
 
-## Content structure
+### Content structure
 
 The same script keeps headings and code blocks intact on every Markdown page. React components in MDX source become visual elements when the documentation is built.
 
@@ -78,15 +78,15 @@ Those links only work while the reader is on `mezo.org`. Once you copy the Markd
 
 The link check `markdown-link-portability`, which failed before, now passes ([PR #362](https://github.com/mezo-org/documentation/pull/362)).
 
-## Page size
+### Page size
 
 I kept each Markdown page under 50,000 characters and retained its complete content. This ensures an agent never has to open two pages to get one piece of information ([PR #349](https://github.com/mezo-org/documentation/pull/349)).
 
-## URL stability and redirects
+### URL stability and redirects
 
 This category checks that web addresses respond correctly. This includes a proper error for bad addresses and a working redirect. Creating the Markdown pages gave agents working links to follow, so the same work covered it ([PR #349](https://github.com/mezo-org/documentation/pull/349)).
 
-## Content discoverability
+### Content discoverability
 
 Agents cannot use Markdown pages they do not know exist.
 
@@ -94,7 +94,7 @@ Agents cannot use Markdown pages they do not know exist.
 - I added descriptions to 8 pages that had none. Agents use them to tell what a page covers, and they feed the `llms.txt` entries ([PR #347](https://github.com/mezo-org/documentation/pull/347)).
 - I added a directive for agents to `llms.txt` on the regular pages ([PR #357](https://github.com/mezo-org/documentation/pull/357)). I later noticed it was missing from the Markdown pages, so I added it there too ([PR #360](https://github.com/mezo-org/documentation/pull/360)).
 
-## Observability and content health
+### Observability and content health
 
 I created a script that generates `llms.txt` from the same Markdown files, so the index and the pages remain in sync ([PR #354](https://github.com/mezo-org/documentation/pull/354)).
 

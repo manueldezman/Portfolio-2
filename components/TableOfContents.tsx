@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-type TocItem = readonly [id: string, label: string];
+type TocItem = readonly [id: string, label: string, depth?: number];
 
 type TableOfContentsProps = {
   heading?: string;
@@ -63,12 +63,14 @@ export function TableOfContents({
           {heading}
         </p>
       ) : null}
-      {items.map(([id, text]) => {
+      {items.map(([id, text, depth = 0]) => {
         const isActive = active === id;
         return (
           <a
             aria-current={isActive ? "true" : undefined}
-            className={`link-ring relative block py-1.5 pl-5 pr-3 text-[0.8rem] leading-6 transition-colors ${
+            className={`link-ring relative block py-1.5 pr-3 leading-6 transition-colors ${
+              depth > 0 ? "pl-8 text-[0.75rem]" : "pl-5 text-[0.8rem]"
+            } ${
               isActive
                 ? "font-semibold text-[var(--accent)]"
                 : "text-[var(--muted)] hover:text-[var(--text)]"

@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 
-type TocItem = readonly [id: string, label: string];
+type TocItem = readonly [id: string, label: string, depth?: number];
 
 type MobileTableOfContentsProps = {
   className?: string;
@@ -31,9 +31,11 @@ export function MobileTableOfContents({
         />
       </summary>
       <nav aria-label={label} className="mt-3 flex flex-col border-l border-[var(--rule-soft)]">
-        {items.map(([id, text]) => (
+        {items.map(([id, text, depth = 0]) => (
           <a
-            className="link-ring block py-1.5 pl-4 pr-2 text-sm leading-6 text-[var(--muted)]"
+            className={`link-ring block py-1.5 pr-2 leading-6 text-[var(--muted)] ${
+              depth > 0 ? "pl-8 text-[0.8rem]" : "pl-4 text-sm"
+            }`}
             href={`#${id}`}
             key={id}
           >

@@ -52,12 +52,12 @@ const toc = [
   ["overview", "Overview"],
   ["problem", "The Problem"],
   ["solution", "Solution"],
-  ["markdown", "Markdown availability"],
-  ["structure", "Content structure"],
-  ["size", "Page size"],
-  ["urls", "URL stability"],
-  ["discover", "Content discoverability"],
-  ["health", "Observability"],
+  ["markdown", "Markdown availability", 1],
+  ["structure", "Content structure", 1],
+  ["size", "Page size", 1],
+  ["urls", "URL stability", 1],
+  ["discover", "Content discoverability", 1],
+  ["health", "Observability", 1],
   ["outcome", "Outcome"],
   ["verify", "Verify it yourself"],
   ["learned", "What I learned"],
@@ -306,117 +306,117 @@ export default function MezoDocumentationAgentReadyPost() {
                 has to be updated by hand.
               </p>
             </div>
-          </section>
 
-          <section className="mt-12 scroll-mt-32" id="markdown">
-            <Heading className="text-left" level={2}>
-              Markdown availability
-            </Heading>
-            <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
-              <p>
-                Markdown is easier for AI agents to read than the regular pages. I wrote a script
-                that creates a Markdown version of each page from the live documentation pages (
+            <section className="mt-10 scroll-mt-32" id="markdown">
+              <Heading className="text-left" level={3}>
+                Markdown availability
+              </Heading>
+              <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
+                <p>
+                  Markdown is easier for AI agents to read than the regular pages. I wrote a script
+                  that creates a Markdown version of each page from the live documentation pages (
+                  <PrLink number={349} />).
+                </p>
+                <p>The build process also runs this script automatically.</p>
+              </div>
+            </section>
+
+            <section className="mt-10 scroll-mt-32" id="structure">
+              <Heading className="text-left" level={3}>
+                Content structure
+              </Heading>
+              <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
+                <p>
+                  The same script keeps headings and code blocks intact on every Markdown page.
+                  React components in MDX source become visual elements when the documentation is
+                  built.
+                </p>
+                <p>
+                  Since the agent-facing Markdown depends on this same MDX source, the script strips
+                  the component syntax and turns its content into plain text. This prevents agents
+                  from receiving the raw components as code.
+                </p>
+                <p>
+                  I also made tabbed content serialize one tab after another, each with its label.
+                  This ensures one tab&apos;s content is never mistaken for another&apos;s (
+                  <PrLink number={349} />).
+                </p>
+                <p>
+                  The generated Markdown also wrote links to other pages as short paths, such as{" "}
+                  <code className={codeStyle}>/docs/users/borrow</code>.
+                </p>
+                <p>
+                  Those links only work while the reader is on <code className={codeStyle}>mezo.org</code>.
+                  Once you copy the Markdown locally, the path points to the wrong place. I changed
+                  the script to write every link as a full web address and fixed nine links that led
+                  to missing pages (404).
+                </p>
+                <p>
+                  The link check <code className={codeStyle}>markdown-link-portability</code>, which
+                  failed before, now passes (<PrLink number={362} />).
+                </p>
+              </div>
+            </section>
+
+            <section className="mt-10 scroll-mt-32" id="size">
+              <Heading className="text-left" level={3}>
+                Page size
+              </Heading>
+              <p className="mt-4 leading-8 text-[var(--muted)]">
+                I kept each Markdown page under 50,000 characters and retained its complete content.
+                This ensures an agent never has to open two pages to get one piece of information (
                 <PrLink number={349} />).
               </p>
-              <p>The build process also runs this script automatically.</p>
-            </div>
-          </section>
+            </section>
 
-          <section className="mt-12 scroll-mt-32" id="structure">
-            <Heading className="text-left" level={2}>
-              Content structure
-            </Heading>
-            <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
-              <p>
-                The same script keeps headings and code blocks intact on every Markdown page.
-                React components in MDX source become visual elements when the documentation is
-                built.
-              </p>
-              <p>
-                Since the agent-facing Markdown depends on this same MDX source, the script strips
-                the component syntax and turns its content into plain text. This prevents agents
-                from receiving the raw components as code.
-              </p>
-              <p>
-                I also made tabbed content serialize one tab after another, each with its label.
-                This ensures one tab&apos;s content is never mistaken for another&apos;s (
+            <section className="mt-10 scroll-mt-32" id="urls">
+              <Heading className="text-left" level={3}>
+                URL stability and redirects
+              </Heading>
+              <p className="mt-4 leading-8 text-[var(--muted)]">
+                This category checks that web addresses respond correctly. This includes a proper
+                error for bad addresses and a working redirect. Creating the Markdown pages gave
+                agents working links to follow, so the same work covered it (
                 <PrLink number={349} />).
               </p>
-              <p>
-                The generated Markdown also wrote links to other pages as short paths, such as{" "}
-                <code className={codeStyle}>/docs/users/borrow</code>.
+            </section>
+
+            <section className="mt-10 scroll-mt-32" id="discover">
+              <Heading className="text-left" level={3}>
+                Content discoverability
+              </Heading>
+              <p className="mt-4 leading-8 text-[var(--muted)]">
+                Agents cannot use Markdown pages they do not know exist.
               </p>
-              <p>
-                Those links only work while the reader is on <code className={codeStyle}>mezo.org</code>.
-                Once you copy the Markdown locally, the path points to the wrong place. I changed
-                the script to write every link as a full web address and fixed nine links that led
-                to missing pages (404).
+              <ul className="mt-4 list-disc space-y-3 pl-5 leading-8 text-[var(--muted)]">
+                <li>
+                  I generated <code className={codeStyle}>llms.txt</code>, an index agents can
+                  follow, and <code className={codeStyle}>llms-full.txt</code>, the full text of every
+                  page. Each entry links to a page&apos;s Markdown version (<PrLink number={354} />).
+                </li>
+                <li>
+                  I added descriptions to 8 pages that had none. Agents use them to tell what a page
+                  covers, and they feed the <code className={codeStyle}>llms.txt</code> entries (
+                  <PrLink number={347} />).
+                </li>
+                <li>
+                  I added a directive for agents to <code className={codeStyle}>llms.txt</code> on the
+                  regular pages (<PrLink number={357} />). I later noticed it was missing from the
+                  Markdown pages, so I added it there too (<PrLink number={360} />).
+                </li>
+              </ul>
+            </section>
+
+            <section className="mt-10 scroll-mt-32" id="health">
+              <Heading className="text-left" level={3}>
+                Observability and content health
+              </Heading>
+              <p className="mt-4 leading-8 text-[var(--muted)]">
+                I created a script that generates <code className={codeStyle}>llms.txt</code> from the
+                same Markdown files, so the index and the pages remain in sync (
+                <PrLink number={354} />).
               </p>
-              <p>
-                The link check <code className={codeStyle}>markdown-link-portability</code>, which
-                failed before, now passes (<PrLink number={362} />).
-              </p>
-            </div>
-          </section>
-
-          <section className="mt-12 scroll-mt-32" id="size">
-            <Heading className="text-left" level={2}>
-              Page size
-            </Heading>
-            <p className="mt-4 leading-8 text-[var(--muted)]">
-              I kept each Markdown page under 50,000 characters and retained its complete content.
-              This ensures an agent never has to open two pages to get one piece of information (
-              <PrLink number={349} />).
-            </p>
-          </section>
-
-          <section className="mt-12 scroll-mt-32" id="urls">
-            <Heading className="text-left" level={2}>
-              URL stability and redirects
-            </Heading>
-            <p className="mt-4 leading-8 text-[var(--muted)]">
-              This category checks that web addresses respond correctly. This includes a proper
-              error for bad addresses and a working redirect. Creating the Markdown pages gave
-              agents working links to follow, so the same work covered it (
-              <PrLink number={349} />).
-            </p>
-          </section>
-
-          <section className="mt-12 scroll-mt-32" id="discover">
-            <Heading className="text-left" level={2}>
-              Content discoverability
-            </Heading>
-            <p className="mt-4 leading-8 text-[var(--muted)]">
-              Agents cannot use Markdown pages they do not know exist.
-            </p>
-            <ul className="mt-4 list-disc space-y-3 pl-5 leading-8 text-[var(--muted)]">
-              <li>
-                I generated <code className={codeStyle}>llms.txt</code>, an index agents can
-                follow, and <code className={codeStyle}>llms-full.txt</code>, the full text of every
-                page. Each entry links to a page&apos;s Markdown version (<PrLink number={354} />).
-              </li>
-              <li>
-                I added descriptions to 8 pages that had none. Agents use them to tell what a page
-                covers, and they feed the <code className={codeStyle}>llms.txt</code> entries (
-                <PrLink number={347} />).
-              </li>
-              <li>
-                I added a directive for agents to <code className={codeStyle}>llms.txt</code> on the
-                regular pages (<PrLink number={357} />). I later noticed it was missing from the
-                Markdown pages, so I added it there too (<PrLink number={360} />).
-              </li>
-            </ul>
-          </section>
-
-          <section className="mt-12 scroll-mt-32" id="health">
-            <Heading className="text-left" level={2}>
-              Observability and content health
-            </Heading>
-            <p className="mt-4 leading-8 text-[var(--muted)]">
-              I created a script that generates <code className={codeStyle}>llms.txt</code> from the
-              same Markdown files, so the index and the pages remain in sync (
-              <PrLink number={354} />).
-            </p>
+            </section>
           </section>
 
           <section className="mt-12 scroll-mt-32" id="outcome">
