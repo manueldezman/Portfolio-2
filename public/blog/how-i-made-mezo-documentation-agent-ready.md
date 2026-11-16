@@ -1,4 +1,4 @@
-# How I Made Mezo's Documentation Agent-Ready
+# Case Study: How I Made Mezo's Documentation Agent-Ready
 
 by Abdulganiy Adeleke, published on Nov 16, 2026
 

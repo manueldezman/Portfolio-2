@@ -8,7 +8,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { TableOfContents } from "@/components/TableOfContents";
 import { blogPosts } from "@/content/blog";
 
-const title = "How I Made Mezo's Documentation Agent-Ready";
+const title = "Case Study: How I Made Mezo's Documentation Agent-Ready";
 const description =
   "How I improved Mezo's documentation agent-readiness score from 41 to 100 with 8 PRs.";
 
@@ -599,7 +599,7 @@ export default function MezoDocumentationAgentReadyPost() {
             </div>
           </section>
 
-          <ShareButtons title="How I Made Mezo's Documentation Agent-Ready" path={currentHref} />
+          <ShareButtons title="Case Study: How I Made Mezo's Documentation Agent-Ready" path={currentHref} />
         </div>
 
         <aside className="hidden lg:col-start-3 lg:row-start-2 lg:block">

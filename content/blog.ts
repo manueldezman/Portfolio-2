@@ -8,7 +8,7 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
-    title: "How I Made Mezo's Documentation Agent-Ready",
+    title: "Case Study: How I Made Mezo's Documentation Agent-Ready",
     href: "/blog/how-i-made-mezo-documentation-agent-ready/",
     date: "2026-11-16",
     description:
