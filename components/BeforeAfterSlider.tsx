@@ -177,6 +177,14 @@ export function BeforeAfterSlider({
 
   return (
     <figure className={className}>
+      <div aria-hidden="true" className="mb-2 flex items-center justify-between">
+        <span className="rounded-full bg-[var(--surface-strong)] px-2.5 py-1 font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-[var(--background)]">
+          Before
+        </span>
+        <span className="rounded-full bg-[var(--surface-strong)] px-2.5 py-1 font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-[var(--background)]">
+          After
+        </span>
+      </div>
       <div
         aria-describedby={captionId}
         aria-label="Before and after comparison"
@@ -225,12 +233,6 @@ export function BeforeAfterSlider({
             style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}
             width={640}
           />
-          <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm">
-            Before
-          </span>
-          <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/55 px-2.5 py-1 font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm">
-            After
-          </span>
         </div>
 
         <div
