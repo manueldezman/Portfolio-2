@@ -105,7 +105,7 @@ export default function TuiVsCliPost() {
           <MobileTableOfContents className="mt-6 lg:hidden" items={toc} />
         </header>
 
-        <div className="mx-auto w-full min-w-0 max-w-3xl text-left [text-justify:inter-word] [&_p]:text-justify [&_p]:hyphens-auto [&_p_code]:hyphens-none lg:col-start-2 lg:row-start-2 lg:text-justify">
+        <div className="mx-auto w-full min-w-0 max-w-3xl text-left [text-justify:inter-word] lg:col-start-2 lg:row-start-2 lg:text-justify">
           <p className="text-base leading-8 text-[var(--muted)]">
             A basic mental model for differentiating between a GUI and a CLI is that one uses
             graphical elements, while the other runs in a terminal. That was my mental model too,

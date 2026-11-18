@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  main p:not(.font-mono) {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+
+  main p code {
+    hyphens: none;
+  }
+}
+
 html, body {
   /* `clip` (not `hidden`) keeps subpixel shifts from creating horizontal
      scrollbars while still allowing `position: sticky` to work, since it does
