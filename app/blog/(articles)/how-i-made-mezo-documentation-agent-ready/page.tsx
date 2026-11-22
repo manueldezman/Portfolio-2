@@ -53,6 +53,16 @@ Output one table for <DOCS_NAME>.
 
 Below the table, print the directive text for each passing surface. State the pages tested and the date. Print a separate table for each site.`;
 
+const checkPromptPreview = `Test whether an agent can see the llms.txt directive on <DOCS_NAME> at <DOCS_URL>.
+
+Use these three surfaces.
+
+1. HTML extracted with Mozilla Readability.
+2. The MCP server configured in your environment.
+3. The .md file.
+
+...`;
+
 const currentHref = "/blog/how-i-made-mezo-documentation-agent-ready/";
 const liveDocsHref = "https://mezo.org/docs/";
 const bookingHref = "https://calendly.com/adelekeabdulganiy/30min";
@@ -629,17 +639,19 @@ export default function MezoDocumentationAgentReadyPost() {
               <p>To check your own docs, give this prompt to an agent.</p>
             </div>
 
-            <details className="group mt-4 border-y border-[var(--rule-soft)] py-3">
-              <summary className="link-ring flex cursor-pointer list-none items-center justify-between gap-3 font-mono text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--text)] [&::-webkit-details-marker]:hidden">
-                <span className="group-open:hidden">View more</span>
-                <span className="hidden group-open:inline">View less</span>
-                <ChevronDown
-                  aria-hidden="true"
-                  className="shrink-0 text-[var(--muted)] transition-transform group-open:rotate-180"
-                  size={15}
-                />
+            <details className="group mt-4 border border-[var(--rule-soft)]">
+              <summary className="list-none cursor-pointer [&::-webkit-details-marker]:hidden">
+                <pre className="m-0 overflow-x-auto border-b border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_5%,transparent)] p-4 font-mono text-[0.72rem] leading-6 text-[var(--text)]">
+                  <code className="block">
+                    {checkPromptPreview}
+                    <span className="block mt-3 font-mono text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--muted)]">
+                      <span className="group-open:hidden">View more</span>
+                      <span className="hidden group-open:inline">View less</span>
+                    </span>
+                  </code>
+                </pre>
               </summary>
-              <pre className="mt-3 overflow-x-auto border border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_5%,transparent)] p-4 font-mono text-[0.72rem] leading-6 text-[var(--text)]">
+              <pre className="overflow-x-auto border-t border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_5%,transparent)] p-4 font-mono text-[0.72rem] leading-6 text-[var(--text)]">
                 <code>{checkPrompt}</code>
               </pre>
             </details>

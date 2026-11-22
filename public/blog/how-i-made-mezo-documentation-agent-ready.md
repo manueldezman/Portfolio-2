@@ -155,8 +155,17 @@ The Claude Code result reveals that its implementation did not work for agents t
 
 To check your own docs, give this prompt to an agent.
 
-```text
-Test whether an agent can see the llms.txt directive on <DOCS_NAME> at <DOCS_URL>.
+<details>
+<summary><pre>Test whether an agent can see the llms.txt directive on <DOCS_NAME> at <DOCS_URL>.
+
+Use these three surfaces.
+
+1. HTML extracted with Mozilla Readability.
+2. The MCP server configured in your environment.
+3. The .md file.
+
+... View more</pre></summary>
+<pre>Test whether an agent can see the llms.txt directive on <DOCS_NAME> at <DOCS_URL>.
 
 Use these three surfaces.
 
@@ -174,8 +183,8 @@ Output one table for <DOCS_NAME>.
 | MCP server | Yes or No |
 | .md file | Yes or No |
 
-Below the table, print the directive text for each passing surface. State the pages tested and the date. Print a separate table for each site.
-```
+Below the table, print the directive text for each passing surface. State the pages tested and the date. Print a separate table for each site.</pre>
+</details>
 
 This was my experience contributing to the Mezo documentation. All credit to William Pyke, who reviewed my contributions.
 
