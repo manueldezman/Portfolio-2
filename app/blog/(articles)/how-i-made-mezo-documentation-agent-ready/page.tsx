@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { Heading } from "@/components/Heading";
 import { MobileTableOfContents } from "@/components/MobileTableOfContents";
@@ -31,6 +32,26 @@ export const metadata: Metadata = {
 
 const codeStyle =
   "rounded-sm border border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_7%,transparent)] px-1.5 py-0.5 font-mono text-[0.85em] font-semibold not-italic text-[var(--text)]";
+
+const checkPrompt = `Test whether an agent can see the llms.txt directive on <DOCS_NAME> at <DOCS_URL>.
+
+Use these three surfaces.
+
+1. HTML extracted with Mozilla Readability.
+2. The MCP server configured in your environment.
+3. The .md file.
+
+For each page and surface, check whether the extracted text contains a directive to llms.txt.
+
+Output one table for <DOCS_NAME>.
+
+| Surface | Directive visible |
+| --- | --- |
+| HTML via Readability | Yes or No |
+| MCP server | Yes or No |
+| .md file | Yes or No |
+
+Below the table, print the directive text for each passing surface. State the pages tested and the date. Print a separate table for each site.`;
 
 const currentHref = "/blog/how-i-made-mezo-documentation-agent-ready/";
 const liveDocsHref = "https://mezo.org/docs/";
@@ -494,17 +515,25 @@ export default function MezoDocumentationAgentReadyPost() {
               What I learned
             </Heading>
             <div className="mt-4 space-y-5 leading-8 text-[var(--muted)]">
-              <p>This work taught me one important lesson about directive placement.</p>
               <p>
-                <strong>
-                  Place the <code className={codeStyle}>llms.txt</code> directive in both the HTML
-                  pages and the individual <code className={codeStyle}>.md</code> files.
-                </strong>
+                This contribution taught me two lessons about{" "}
+                <code className={codeStyle}>llms.txt</code> directive placement:
               </p>
+              <ul className="list-disc space-y-2 pl-6">
+                <li>
+                  Place the <code className={codeStyle}>llms.txt</code> directive in the HTML pages
+                  and in each <code className={codeStyle}>.md</code> file.
+                </li>
+                <li>
+                  Do not hide the directive with <code className={codeStyle}>aria-hidden</code>.
+                </li>
+              </ul>
               <p>
-                I initially followed the implementation used in the Claude Code documentation. It hides
-                the <code className={codeStyle}>llms.txt</code> directive in the HTML source, as shown
-                below.
+                I initially followed the implementation used in the Claude Code documentation. It
+                hides the HTML <code className={codeStyle}>llms.txt</code> directive with two
+                accessibility tools. <code className={codeStyle}>sr-only</code> hides text visually
+                but keeps it in the page. <code className={codeStyle}>aria-hidden</code> removes it
+                from the accessibility tree, so extraction tools skip it.
               </p>
             </div>
 
@@ -525,50 +554,100 @@ export default function MezoDocumentationAgentReadyPost() {
 
             <div className="mt-6 space-y-5 leading-8 text-[var(--muted)]">
               <p>
-                I also updated my Markdown conversion script to add the directive at the top of each{" "}
-                <code className={codeStyle}>.md</code> file, so agents could see it without visual
-                noise or screen readers reading it aloud.
+                The Markdown conversion script also adds the directive to the top of each{" "}
+                <code className={codeStyle}>.md</code> file.
               </p>
               <p>
                 The reviewer raised a concern about{" "}
                 <code className={codeStyle}>mozilla/readability</code>, a library that extracts the
                 main text from a page. He said this extraction method, which agents can use, removes
-                hidden content. He also mentioned that the official Model Context Protocol (MCP)
-                server uses this mode by default.
+                hidden content. He added that the official Model Context Protocol (MCP) server uses
+                this mode by default.
               </p>
               <p>
-                Acting on that concern, he briefly removed the directive from the HTML pages and
-                added a link to <code className={codeStyle}>llms.txt</code> in the footer instead. I
-                wanted to know how that decision affected{" "}
-                <code className={codeStyle}>llms.txt</code> discoverability.
+                I set out to verify the claim. I asked my agent to read the Claude Code docs three
+                ways. One route applied readability extraction to the HTML, one went through the MCP
+                server, and one opened the <code className={codeStyle}>.md</code> file directly.
+              </p>
+              <figure className="mt-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt="Claude Code docs test results. HTML via Readability shows No, the MCP server fetch shows Yes, and the .md file shows Yes."
+                  className="mx-auto h-auto w-full max-w-2xl border border-[var(--rule-soft)]"
+                  height={348}
+                  loading="lazy"
+                  src="/blog/how-i-made-mezo-documentation-agent-ready/claude-result.png"
+                  width={829}
+                />
+                <figcaption className="mt-2 text-center font-mono text-xs text-[var(--muted)]">
+                  The Claude Code docs show the directive on two of three surfaces.
+                </figcaption>
+              </figure>
+              <p>
+                The agent did not see the directive through readability extraction. It saw the
+                directive through the MCP server and in the <code className={codeStyle}>.md</code>{" "}
+                file.
               </p>
               <p>
-                I then checked with OpenCode, which uses content negotiation to request Markdown
-                instead of HTML, and the Markdown it received did not contain the directive.
+                This is because the MCP server calls the <code className={codeStyle}>fetch</code>{" "}
+                tool before <code className={codeStyle}>readability</code>. That tool can negotiate
+                content, which means it asks for Markdown instead of HTML and receives a Markdown
+                file when the server has one. If it gets the Markdown, it skips the extraction step.
+                The directive sits in the first lines of that Markdown, so the agent finds{" "}
+                <code className={codeStyle}>llms.txt</code>.
               </p>
               <p>
-                The agent negotiated for Markdown instead of HTML, and the server generated the
-                Markdown from HTML. When it followed a{" "}
-                <code className={codeStyle}>.md</code> link from{" "}
-                <code className={codeStyle}>llms.txt</code>, it got the version I pre-generated.
+                When the server does not negotiate Markdown and returns HTML instead, the agent
+                extracts the text from the HTML. If that HTML lacks the{" "}
+                <code className={codeStyle}>llms.txt</code> directive, the agent cannot find{" "}
+                <code className={codeStyle}>llms.txt</code>, even when the{" "}
+                <code className={codeStyle}>.md</code> file has it.
               </p>
               <p>
-                That meant an agent that negotiated for Markdown this way never saw the directive,
-                so it never found <code className={codeStyle}>llms.txt</code>.
+                I removed the <code className={codeStyle}>aria-hidden</code> attribute from the Mezo
+                HTML files and ran the same check. Here is what I found.
               </p>
+              <figure className="mt-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt="Mezo docs test results. HTML via Readability, the MCP server fetch, and the .md file all show Yes."
+                  className="mx-auto h-auto w-full max-w-2xl border border-[var(--rule-soft)]"
+                  height={354}
+                  loading="lazy"
+                  src="/blog/how-i-made-mezo-documentation-agent-ready/mezo-result.png"
+                  width={803}
+                />
+                <figcaption className="mt-2 text-center font-mono text-xs text-[var(--muted)]">
+                  The Mezo docs show the directive on all three surfaces.
+                </figcaption>
+              </figure>
+              <p>For Mezo, the agent saw the directive through all three methods.</p>
               <p>
-                Claude Code and Cursor use the same content negotiation, so they would also be affected.
-                Agents cannot locate the <code className={codeStyle}>.md</code> files on their own.
-                They find them only after they discover <code className={codeStyle}>llms.txt</code>,
-                so the directive needed to be in both places.
+                The Claude Code result reveals that its implementation did not work for agents that
+                use readability extraction.
               </p>
-              <p>
-                I also tested the reviewer&apos;s <code className={codeStyle}>mozilla/readability</code>{" "}
-                concern. Agents using an MCP server could still see the directive even when it was
-                visually hidden. That kept <code className={codeStyle}>llms.txt</code>{" "}
-                discoverable, so we added the directive back to the HTML pages.
-              </p>
+              <p>To check your own docs, give this prompt to an agent.</p>
             </div>
+
+            <details className="group mt-4 border-y border-[var(--rule-soft)] py-3">
+              <summary className="link-ring flex cursor-pointer list-none items-center justify-between gap-3 font-mono text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--text)] [&::-webkit-details-marker]:hidden">
+                <span className="group-open:hidden">View more</span>
+                <span className="hidden group-open:inline">View less</span>
+                <ChevronDown
+                  aria-hidden="true"
+                  className="shrink-0 text-[var(--muted)] transition-transform group-open:rotate-180"
+                  size={15}
+                />
+              </summary>
+              <pre className="mt-3 overflow-x-auto border border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_5%,transparent)] p-4 font-mono text-[0.72rem] leading-6 text-[var(--text)]">
+                <code>{checkPrompt}</code>
+              </pre>
+            </details>
+
+            <p className="mt-6 leading-8 text-[var(--muted)]">
+              This was my experience contributing to the Mezo documentation. All credit to William
+              Pyke, who reviewed my contributions.
+            </p>
           </section>
 
           <section className="mt-12 scroll-mt-32" id="work-with-me">

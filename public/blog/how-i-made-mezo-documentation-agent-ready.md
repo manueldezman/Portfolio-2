@@ -122,29 +122,62 @@ The output is a scorecard like the screenshots above, with one line for each cat
 
 ## What I learned
 
-This work taught me one important lesson about directive placement.
+This contribution taught me two lessons about `llms.txt` directive placement:
 
-**Place the `llms.txt` directive in both the HTML pages and the individual `.md` files.**
+- Place the `llms.txt` directive in the HTML pages and in each `.md` file.
+- Do not hide the directive with `aria-hidden`.
 
-I initially followed the implementation used in the Claude Code documentation. It hides the `llms.txt` directive in the HTML source, as shown below.
+I initially followed the implementation used in the Claude Code documentation. It hides the HTML `llms.txt` directive with two accessibility tools. `sr-only` hides text visually but keeps it in the page. `aria-hidden` removes it from the accessibility tree, so extraction tools skip it.
 
 ![The Claude Code implementation hides the llms.txt directive in the HTML source.](/blog/how-i-made-mezo-documentation-agent-ready/claude.png)
 
-I also updated my Markdown conversion script to add the directive at the top of each `.md` file, so agents could see it without visual noise or screen readers reading it aloud.
+The Markdown conversion script also adds the directive to the top of each `.md` file.
 
-The reviewer raised a concern about `mozilla/readability`, a library that extracts the main text from a page. He said this extraction method, which agents can use, removes hidden content. He also mentioned that the official Model Context Protocol (MCP) server uses this mode by default.
+The reviewer raised a concern about `mozilla/readability`, a library that extracts the main text from a page. He said this extraction method, which agents can use, removes hidden content. He added that the official Model Context Protocol (MCP) server uses this mode by default.
 
-Acting on that concern, he briefly removed the directive from the HTML pages and added a link to `llms.txt` in the footer instead. I wanted to know how that decision affected `llms.txt` discoverability.
+I set out to verify the claim. I asked my agent to read the Claude Code docs three ways. One route applied readability extraction to the HTML, one went through the MCP server, and one opened the `.md` file directly.
 
-I then checked with OpenCode, which uses content negotiation to request Markdown instead of HTML, and the Markdown it received did not contain the directive.
+![Claude Code docs test results. HTML via Readability shows No, the MCP server fetch shows Yes, and the .md file shows Yes.](/blog/how-i-made-mezo-documentation-agent-ready/claude-result.png)
 
-The agent negotiated for Markdown instead of HTML, and the server generated the Markdown from HTML. When it followed a `.md` link from `llms.txt`, it got the version I pre-generated.
+The agent did not see the directive through readability extraction. It saw the directive through the MCP server and in the `.md` file.
 
-That meant an agent that negotiated for Markdown this way never saw the directive, so it never found `llms.txt`.
+This is because the MCP server calls the `fetch` tool before `readability`. That tool can negotiate content, which means it asks for Markdown instead of HTML and receives a Markdown file when the server has one. If it gets the Markdown, it skips the extraction step. The directive sits in the first lines of that Markdown, so the agent finds `llms.txt`.
 
-Claude Code and Cursor use the same content negotiation, so they would also be affected. Agents cannot locate the `.md` files on their own. They find them only after they discover `llms.txt`, so the directive needed to be in both places.
+When the server does not negotiate Markdown and returns HTML instead, the agent extracts the text from the HTML. If that HTML lacks the `llms.txt` directive, the agent cannot find `llms.txt`, even when the `.md` file has it.
 
-I also tested the reviewer's `mozilla/readability` concern. Agents using an MCP server could still see the directive even when it was visually hidden. That kept `llms.txt` discoverable, so we added the directive back to the HTML pages.
+I removed the `aria-hidden` attribute from the Mezo HTML files and ran the same check. Here is what I found.
+
+![Mezo docs test results. HTML via Readability, the MCP server fetch, and the .md file all show Yes.](/blog/how-i-made-mezo-documentation-agent-ready/mezo-result.png)
+
+For Mezo, the agent saw the directive through all three methods.
+
+The Claude Code result reveals that its implementation did not work for agents that use readability extraction.
+
+To check your own docs, give this prompt to an agent.
+
+```text
+Test whether an agent can see the llms.txt directive on <DOCS_NAME> at <DOCS_URL>.
+
+Use these three surfaces.
+
+1. HTML extracted with Mozilla Readability.
+2. The MCP server configured in your environment.
+3. The .md file.
+
+For each page and surface, check whether the extracted text contains a directive to llms.txt.
+
+Output one table for <DOCS_NAME>.
+
+| Surface | Directive visible |
+| --- | --- |
+| HTML via Readability | Yes or No |
+| MCP server | Yes or No |
+| .md file | Yes or No |
+
+Below the table, print the directive text for each passing surface. State the pages tested and the date. Print a separate table for each site.
+```
+
+This was my experience contributing to the Mezo documentation. All credit to William Pyke, who reviewed my contributions.
 
 ## Want results like this?
 
