@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { HooklineCaseStudy } from "@/components/HooklineCaseStudy";
 import { PortfolioCaseStudyLayout } from "@/components/PortfolioCaseStudyLayout";
 import { portfolioCaseStudies } from "@/content/portfolio";
 
@@ -35,6 +36,10 @@ export default function PortfolioCaseStudyPage({ params }: PortfolioCaseStudyPag
 
   if (!caseStudy) {
     notFound();
+  }
+
+  if (caseStudy.layout === "hookline") {
+    return <HooklineCaseStudy />;
   }
 
   return <PortfolioCaseStudyLayout caseStudy={caseStudy} />;

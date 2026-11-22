@@ -43,6 +43,7 @@ export type PortfolioCaseStudy = {
   title: string;
   summary: string;
   links: Array<{ label: string; href: string }>;
+  layout?: "hookline";
   demoVideo?: { youtubeId: string; title: string };
   sections: Array<{ id: string; label: string; body: string }>;
 };
@@ -152,9 +153,10 @@ export const apiDocumentationItems: PortfolioItem[] = [
   {
     title: "Hookline docs: a documentation pipeline",
     description:
-      "A docs-as-code pipeline on Docusaurus: Vale, codespell, front matter, and link checks in CI, plus Markdown twins and llms.txt for AI agents.",
+      "A docs-as-code pipeline on Docusaurus: Vale, codespell, front matter, code example, and link checks in CI, plus Markdown twins and llms.txt for AI agents.",
     href: "https://github.com/manueldezman/hookline-docs#hookline-docs-a-documentation-pipeline",
     source: "Docusaurus · GitHub",
+    caseStudySlug: "hookline-docs-pipeline",
   },
 ];
 
@@ -583,6 +585,19 @@ export const developerCommunityEntries: DeveloperCommunityEntry[] = [
 //   },
 
 export const portfolioCaseStudies: PortfolioCaseStudy[] = [
+  {
+    slug: "hookline-docs-pipeline",
+    title: "Automated Docs-as-Code & AI Documentation Pipeline",
+    summary:
+      "An end-to-end engineering workflow connecting product code changes to validated, auto-deployed Docusaurus documentation.",
+    layout: "hookline",
+    links: [
+      { label: "View Live Docs", href: "https://manueldezman.github.io/hookline-docs/" },
+      { label: "Product Repo", href: "https://github.com/manueldezman/hookline" },
+      { label: "Docs Repo", href: "https://github.com/manueldezman/hookline-docs" },
+    ],
+    sections: [],
+  },
   {
     slug: "botchain-skills-and-mcp",
     title: "botchain skills and MCP",

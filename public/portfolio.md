@@ -47,9 +47,11 @@ npx afdocs check https://empay-sample.mintlify.app/ --format scorecard
 
 ### Hookline docs: a documentation pipeline
 
-A docs-as-code pipeline on Docusaurus: Vale, codespell, front matter, and link checks in CI, plus Markdown twins and `llms.txt` for AI agents.
+A docs-as-code pipeline on Docusaurus: Vale, codespell, front matter, code example, and link checks in CI, plus Markdown twins and `llms.txt` for AI agents.
 
 - Source: Docusaurus · GitHub
+- [Full case study](https://abdulganiy.dev/portfolio/hookline-docs-pipeline)
+- [Full case study in Markdown](https://abdulganiy.dev/portfolio/hookline-docs-pipeline.md)
 - [GitHub project](https://github.com/manueldezman/hookline-docs#hookline-docs-a-documentation-pipeline)
 
 ## AI agent and developer tools
