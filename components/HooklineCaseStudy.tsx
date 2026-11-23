@@ -222,7 +222,7 @@ export function HooklineCaseStudy() {
                   {pillar.notes.map((note) => (
                     <li className="flex gap-2 text-sm leading-6 text-[var(--muted)]" key={note}>
                       <span aria-hidden="true" className="mt-[0.55rem] h-[2px] w-3 shrink-0 bg-[var(--accent)]" />
-                      <span>{note}</span>
+                      <RichText text={note} />
                     </li>
                   ))}
                 </ul>

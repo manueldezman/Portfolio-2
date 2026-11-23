@@ -2,7 +2,7 @@
 
 import Image, { type StaticImageData } from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export type ImageViewerItem = {
   alt: string;
@@ -30,7 +30,6 @@ export function ImageViewer({ index, items, onClose, onIndexChange }: ImageViewe
   indexRef.current = index;
   const total = items.length;
   const item = items[index];
-  const labelId = useId();
 
   function goTo(next: number) {
     navRef.current(((next % total) + total) % total);
@@ -132,24 +131,20 @@ export function ImageViewer({ index, items, onClose, onIndexChange }: ImageViewe
           </button>
         ) : null}
 
-        <div
-          className="relative flex min-h-0 w-full max-w-5xl items-center justify-center"
-          id={labelId}
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              onClose();
-            }
-          }}
-        >
-          <Image
-            alt={item.alt}
-            className="object-contain"
-            fill
-            sizes="100vw"
-            src={item.image}
-            unoptimized
-          />
-        </div>
+        <figure className="flex min-h-0 flex-1 flex-col items-center justify-center gap-2">
+          <div className="flex min-h-0 w-full flex-1 items-center justify-center">
+            <Image
+              alt={item.alt}
+              className="h-auto w-auto max-h-full max-w-full object-contain"
+              sizes="100vw"
+              src={item.image}
+              unoptimized
+            />
+          </div>
+          <figcaption className="text-center text-sm leading-6 text-[var(--muted)]">
+            {item.caption ?? item.alt}
+          </figcaption>
+        </figure>
 
         {total > 1 ? (
           <button
@@ -161,12 +156,6 @@ export function ImageViewer({ index, items, onClose, onIndexChange }: ImageViewe
             <ChevronRight size={20} />
           </button>
         ) : null}
-      </div>
-
-      <div className="mt-0 min-h-[3.5rem] text-center">
-        <p className="mx-auto max-w-3xl text-sm leading-6 text-[var(--muted)]">
-          {item.caption ?? item.alt}
-        </p>
       </div>
     </div>
   );
