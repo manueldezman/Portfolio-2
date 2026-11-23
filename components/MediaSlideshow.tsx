@@ -84,33 +84,46 @@ export function MediaSlideshow({ figureNumbers, onOpenImage, slides }: MediaSlid
       role="group"
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[color-mix(in_srgb,var(--text)_7%,var(--background))]">
-        {slides.map((item, itemIndex) => (
-          <div
-            aria-hidden={itemIndex !== index}
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              itemIndex === index ? "opacity-100" : "pointer-events-none opacity-0"
-            }`}
-            key={item.image.src}
-          >
-            <Image
-              alt={item.alt}
-              className="object-contain"
-              fill
-              sizes="(min-width: 1024px) 45rem, 100vw"
-              src={item.image}
-            />
-            <button
-              aria-label={`Open full size image. ${item.alt}`}
-              className="absolute right-2 top-2 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md border border-[rgba(238,232,221,0.32)] bg-[rgba(18,17,15,0.78)] text-sm leading-none text-[#eee8dd] transition-colors hover:bg-[rgba(18,17,15,0.95)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-              onClick={() => onOpenImage(itemIndex)}
-              tabIndex={itemIndex === index ? 0 : -1}
-              title="View full size"
-              type="button"
+        {slides.map((item, itemIndex) => {
+          const isActive = itemIndex === index;
+          const isPrev = itemIndex === (index - 1 + total) % total;
+          const isNext = itemIndex === (index + 1) % total;
+          const classes = isActive
+            ? "translate-x-0 opacity-100"
+            : isPrev
+              ? "-translate-x-full opacity-0"
+              : isNext
+                ? "translate-x-full opacity-0"
+                : "translate-x-0 opacity-0";
+
+          return (
+            <div
+              aria-hidden={itemIndex !== index}
+              className={`absolute inset-0 transition-[transform,opacity] duration-500 ease-in-out ${classes} ${
+                isActive ? "" : "pointer-events-none"
+              }`}
+              key={item.image.src}
             >
-              <span aria-hidden="true">⤢</span>
-            </button>
-          </div>
-        ))}
+              <Image
+                alt={item.alt}
+                className="object-contain"
+                fill
+                sizes="(min-width: 1024px) 45rem, 100vw"
+                src={item.image}
+              />
+              <button
+                aria-label={`Open full size image. ${item.alt}`}
+                className="absolute right-2 top-2 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md border border-[rgba(238,232,221,0.32)] bg-[rgba(18,17,15,0.78)] text-sm leading-none text-[#eee8dd] transition-colors hover:bg-[rgba(18,17,15,0.95)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                onClick={() => onOpenImage(itemIndex)}
+                tabIndex={itemIndex === index ? 0 : -1}
+                title="View full size"
+                type="button"
+              >
+                <span aria-hidden="true">⤢</span>
+              </button>
+            </div>
+          );
+        })}
 
         <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-gradient-to-t from-[rgba(9,8,7,0.9)] to-transparent px-2 py-1.5">
           <div className="flex items-center gap-1">
