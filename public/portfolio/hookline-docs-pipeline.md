@@ -107,9 +107,9 @@ Figure 22: Screenshot showing lychee finding a 404 on an external URL.
 
 Proof: [Blocked quality gate PR](https://github.com/manueldezman/hookline-docs/pull/2)
 
-## 05 Ephemeral Preview Environments
+## 05 PR Preview Links
 
-Netlify builds every pull request and posts the preview link as a comment. Production stays on GitHub Pages.
+Netlify builds every pull request and posts the preview link as a comment.
 
 Figure 23: Event flow showing a docs pull request through the Netlify preview to a deployed site.
 
@@ -121,7 +121,7 @@ Proof: [Live preview PR](https://github.com/manueldezman/hookline-docs/pull/2)
 
 ## Agent-Facing Documentation
 
-AI agents read documentation differently to humans. They prefer Markdown rather than rendered HTML, so I prepared this surface to serve them.
+AI agents read documentation differently to humans. They prefer Markdown rather than rendered HTML, so I prepared these surfaces to serve them.
 
 | Output | URL | Purpose |
 | --- | --- | --- |

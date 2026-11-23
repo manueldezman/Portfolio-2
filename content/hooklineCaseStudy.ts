@@ -335,8 +335,8 @@ export const hooklineCaseStudy = {
     {
       id: "preview-environments",
       index: "05",
-      title: "Ephemeral Preview Environments",
-      body: "Netlify builds every pull request and posts the preview link as a comment. Production stays on GitHub Pages.",
+      title: "PR Preview Links",
+      body: "Netlify builds every pull request and posts the preview link as a comment.",
       diagram: {
         alt: "Flow from a docs pull request to a Netlify build, a live deploy preview, a maintainer review, and a merge that deploys the site.",
         caption: "Event flow showing a docs pull request through the Netlify preview to a deployed site.",
