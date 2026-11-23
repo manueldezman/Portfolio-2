@@ -131,14 +131,15 @@ export function ImageViewer({ index, items, onClose, onIndexChange }: ImageViewe
           </button>
         ) : null}
 
-        <figure className="flex min-h-0 flex-1 flex-col items-center justify-center gap-2">
-          <div className="flex min-h-0 w-full flex-1 items-center justify-center">
+        <figure className="flex flex-col gap-1">
+          <div className="relative">
             <Image
               alt={item.alt}
-              className="h-auto w-auto max-h-full max-w-full object-contain"
-              sizes="100vw"
+              className="block max-h-[70vh] max-w-full object-contain"
+              height={item.image.height}
               src={item.image}
               unoptimized
+              width={item.image.width}
             />
           </div>
           <figcaption className="text-center text-sm leading-6 text-[var(--muted)]">
