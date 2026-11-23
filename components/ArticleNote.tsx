@@ -25,7 +25,7 @@ export function ArticleNoteItem({ item, note }: { item: PortfolioItem; note: Art
           <div className="grid gap-6">
             <div>
               <a
-                className="editorial-button editorial-button-secondary gap-2 px-4 py-3"
+                className="editorial-button"
                 href={item.href}
                 rel="noreferrer"
                 target="_blank"

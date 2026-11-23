@@ -36,7 +36,7 @@ export function DemoVideo({ youtubeId, title }: { youtubeId: string; title: stri
             src={poster}
           />
           <span className="absolute inset-0 flex items-center justify-center bg-black/35 transition-colors duration-150 group-hover:bg-black/20">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[var(--cream)] bg-[var(--accent)] pl-1 text-[var(--cream)]">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-[var(--cream)] bg-[var(--accent)] pl-1 text-[var(--background)]">
               <Play size={22} />
             </span>
           </span>

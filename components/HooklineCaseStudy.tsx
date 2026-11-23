@@ -1,10 +1,31 @@
-import Image, { type StaticImageData } from "next/image";
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { useState } from "react";
 import { Heading } from "@/components/Heading";
+import { ImageViewer, type ImageViewerItem } from "@/components/ImageViewer";
 import { MediaSlideshow } from "@/components/MediaSlideshow";
 import { RichText } from "@/components/RichText";
-import { hooklineCaseStudy } from "@/content/hooklineCaseStudy";
+import {
+  hooklineCaseStudy,
+  type HooklineFigure,
+  type HooklinePillar,
+} from "@/content/hooklineCaseStudy";
+
+const thClass =
+  "pb-2 pr-4 font-mono text-[0.6rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]";
+
+type FigureNumbers = {
+  diagram: number;
+  media: number[];
+  compare: number[];
+};
+
+function withNumber(number: number, caption: string) {
+  return `Figure ${number}: ${caption}`;
+}
 
 function SectionHeading({ index, title }: { index?: string; title: string }) {
   return (
@@ -17,38 +38,111 @@ function SectionHeading({ index, title }: { index?: string; title: string }) {
   );
 }
 
+function ZoomButton({ label, onOpen }: { label: string; onOpen: () => void }) {
+  return (
+    <button
+      aria-label={`Open full size image. ${label}`}
+      className="absolute right-2 top-2 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md border border-[rgba(238,232,221,0.32)] bg-[rgba(18,17,15,0.78)] text-sm leading-none text-[#eee8dd] transition-colors hover:bg-[rgba(18,17,15,0.95)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+      onClick={onOpen}
+      title="View full size"
+      type="button"
+    >
+      <span aria-hidden="true">⤢</span>
+    </button>
+  );
+}
+
 function FullFigure({
-  alt,
-  caption,
-  image,
+  figure,
+  number,
+  onOpen,
 }: {
-  alt: string;
-  caption?: string;
-  image: StaticImageData;
+  figure: HooklineFigure;
+  number: number;
+  onOpen: () => void;
 }) {
   return (
     <figure>
-      <a
-        className="link-ring block border-2 border-[var(--rule)] bg-[var(--background)]"
-        href={image.src}
-        rel="noreferrer"
-        target="_blank"
-      >
-        <Image alt={alt} className="h-auto w-full" sizes="(min-width: 1024px) 72rem, 100vw" src={image} />
-      </a>
-      {caption ? (
-        <figcaption className="mt-3 max-w-3xl text-sm leading-6 text-[var(--muted)]">{caption}</figcaption>
-      ) : null}
+      <div className="relative">
+        <Image
+          alt={figure.alt}
+          className="h-auto w-full"
+          sizes="(min-width: 1024px) 45rem, 100vw"
+          src={figure.image}
+        />
+        <ZoomButton label={figure.alt} onOpen={onOpen} />
+      </div>
+      <figcaption className="mt-2 text-sm leading-6 text-[var(--muted)]">
+        {withNumber(number, figure.caption)}
+      </figcaption>
     </figure>
   );
 }
 
+function pillarViewerItems(pillar: HooklinePillar, numbers: FigureNumbers): ImageViewerItem[] {
+  const items: ImageViewerItem[] = [
+    {
+      alt: pillar.diagram.alt,
+      caption: withNumber(numbers.diagram, pillar.diagram.caption),
+      image: pillar.diagram.image,
+    },
+    ...pillar.media.map((item, itemIndex) => ({
+      alt: item.alt,
+      caption: withNumber(numbers.media[itemIndex], item.caption),
+      image: item.image,
+    })),
+  ];
+
+  if (pillar.compare) {
+    items.push(
+      {
+        alt: pillar.compare.before.alt,
+        caption: withNumber(numbers.compare[0], pillar.compare.before.caption),
+        image: pillar.compare.before.image,
+      },
+      {
+        alt: pillar.compare.after.alt,
+        caption: withNumber(numbers.compare[1], pillar.compare.after.caption),
+        image: pillar.compare.after.image,
+      },
+    );
+  }
+
+  return items;
+}
+
 export function HooklineCaseStudy() {
-  const { agentFiles, architecture, eyebrow, index, links, pillars, proofOfWork, summary, title, tools } =
+  const { agentFiles, architecture, eyebrow, index, intro, links, pillars, summary, title, tools } =
     hooklineCaseStudy;
+  const [viewer, setViewer] = useState<{ items: ImageViewerItem[]; index: number } | null>(null);
+
+  function openViewer(items: ImageViewerItem[], startIndex: number) {
+    setViewer({ index: startIndex, items });
+  }
+
+  const figureNumbers = (() => {
+    let current = 0;
+    const next = () => {
+      current += 1;
+      return current;
+    };
+    const architectureNumbers = architecture.figures.map(() => next());
+    const pillarNumbers = pillars.map((pillar) => ({
+      diagram: next(),
+      media: pillar.media.map(() => next()),
+      compare: pillar.compare ? [next(), next()] : [],
+    }));
+    return { architectureNumbers, pillarNumbers };
+  })();
+
+  const architectureItems: ImageViewerItem[] = architecture.figures.map((figure, figureIndex) => ({
+    alt: figure.alt,
+    caption: withNumber(figureNumbers.architectureNumbers[figureIndex], figure.caption),
+    image: figure.image,
+  }));
 
   return (
-    <main className="editorial-shell py-16">
+    <main className="mx-auto w-full max-w-3xl px-5 pb-20 pt-10">
       <Link className="link-ring font-mono text-xs text-[var(--muted)]" href="/portfolio">
         ← back
       </Link>
@@ -56,17 +150,17 @@ export function HooklineCaseStudy() {
       <header className="mt-10 border-b-[3px] border-[var(--rule)] pb-12">
         <p className="font-mono text-sm font-black text-[var(--accent)]">{index}</p>
         <p className="eyebrow mt-4">{eyebrow}</p>
-        <Heading className="mt-4 max-w-4xl" level={1}>
+        <Heading className="mt-4" level={1}>
           {title}
         </Heading>
         <RichText
-          className="mt-6 max-w-3xl text-lg font-semibold italic leading-8 text-[var(--muted)]"
+          className="mt-6 max-w-[34rem] text-lg font-semibold italic leading-8 text-[var(--muted)]"
           text={summary}
         />
         <div className="mt-8 flex flex-wrap gap-3">
           {links.map((link) => (
             <a
-              className="editorial-button editorial-button-secondary gap-2 px-4 py-3"
+              className="editorial-button"
               href={link.href}
               key={link.href}
               rel="noreferrer"
@@ -79,157 +173,209 @@ export function HooklineCaseStudy() {
         </div>
       </header>
 
+      <section className="border-b-[3px] border-[var(--rule)] py-12">
+        <p className="text-[1.05rem] leading-[1.8] text-[var(--text)]">{intro}</p>
+      </section>
+
       <section className="border-b-[3px] border-[var(--rule)] py-12" id="system-architecture">
-        <SectionHeading title="System Architecture" />
-        <div className="mt-8 space-y-10">
-          {architecture.figures.map((figure) => (
+        <SectionHeading title="How the system works" />
+        <p className="mt-4 text-base leading-7 text-[var(--text)]">
+          Every step of the pipeline runs on one of these tools.
+        </p>
+        <ul className="mt-8 border-t-2 border-[var(--rule)]">
+          {tools.map((tool) => (
+            <li
+              className="grid gap-1 border-b border-[var(--rule-soft)] py-3 sm:grid-cols-[11rem_1fr] sm:gap-6"
+              key={tool.name}
+            >
+              <p className="font-mono text-sm font-black text-[var(--text)]">{tool.name}</p>
+              <p className="text-sm leading-6 text-[var(--muted)]">{tool.role}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-10 space-y-8">
+          {architecture.figures.map((figure, figureIndex) => (
             <FullFigure
-              alt={figure.alt}
-              caption={figure.caption}
-              image={figure.image}
+              figure={figure}
               key={figure.image.src}
+              number={figureNumbers.architectureNumbers[figureIndex]}
+              onOpen={() => openViewer(architectureItems, figureIndex)}
             />
           ))}
         </div>
       </section>
 
-      <section className="border-b-[3px] border-[var(--rule)] py-12" id="tools">
-        <SectionHeading title="Tools Used" />
-        <ul className="mt-8 border-t-2 border-[var(--rule)]">
-          <li className="hidden gap-4 border-b border-[var(--rule-soft)] pb-2 pt-2 font-mono text-[0.6rem] font-black uppercase tracking-[0.16em] text-[var(--muted)] sm:grid sm:grid-cols-[13rem_1fr_auto]">
-            <span>Tool</span>
-            <span>Role</span>
-            <span>Blocks</span>
-          </li>
-          {tools.map((tool) => (
-            <li
-              className="grid gap-1 border-b border-[var(--rule-soft)] py-3 sm:grid-cols-[13rem_1fr_auto] sm:items-baseline sm:gap-4"
-              key={tool.name}
-            >
-              <p className="font-mono text-sm font-black text-[var(--text)]">{tool.name}</p>
-              <p className="text-sm leading-6 text-[var(--muted)]">{tool.role}</p>
-              <p className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-[var(--accent)]">{tool.blocks}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {pillars.map((pillar, pillarIndex) => {
+        const numbers = figureNumbers.pillarNumbers[pillarIndex];
+        const items = pillarViewerItems(pillar, numbers);
+        const compareOffset = 1 + pillar.media.length;
 
-      {pillars.map((pillar) => (
-        <section className="border-b-[3px] border-[var(--rule)] py-12" id={pillar.id} key={pillar.id}>
-          <SectionHeading index={pillar.index} title={pillar.title} />
+        return (
+          <section className="border-b-[3px] border-[var(--rule)] py-12" id={pillar.id} key={pillar.id}>
+            <SectionHeading index={pillar.index} title={pillar.title} />
 
-          {pillar.wide ? (
-            <div className="mt-8 space-y-8">
-              <FullFigure alt={pillar.diagram.alt} image={pillar.diagram.image} />
-              <div className="mx-auto lg:max-w-4xl">
-                <MediaSlideshow slides={pillar.media} title={pillar.title} />
-              </div>
+            <div className="mt-6">
+              <RichText className="text-base leading-7 text-[var(--text)]" text={pillar.body} />
+
+              {pillar.notes ? (
+                <ul className="mt-4 space-y-2">
+                  {pillar.notes.map((note) => (
+                    <li className="flex gap-2 text-sm leading-6 text-[var(--muted)]" key={note}>
+                      <span aria-hidden="true" className="mt-[0.55rem] h-[2px] w-3 shrink-0 bg-[var(--accent)]" />
+                      <span>{note}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              {pillar.gates ? (
+                <div className="mt-6 overflow-x-auto">
+                  <table className="w-full min-w-[30rem] border-collapse text-left">
+                    <thead>
+                      <tr className="border-b-2 border-[var(--rule)]">
+                        <th className={`${thClass} w-[22%]`}>Check</th>
+                        <th className={`${thClass} w-[24%]`}>Tool</th>
+                        <th className={`${thClass} w-[24%]`}>When it runs</th>
+                        <th className={`${thClass} w-[30%]`}>What it blocks</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-[var(--rule-soft)] align-top">
+                        <td className="py-3 pr-4 font-semibold text-[var(--text)]">Style and terminology</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Vale</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Pull request</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Errors block the merge</td>
+                      </tr>
+                      <tr className="border-b border-[var(--rule-soft)] align-top">
+                        <td className="py-3 pr-4 font-semibold text-[var(--text)]">Spelling</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">codespell</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Pull request</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Any known misspelling blocks the merge</td>
+                      </tr>
+                      <tr className="border-b border-[var(--rule-soft)] align-top">
+                        <td className="py-3 pr-4 font-semibold text-[var(--text)]">Front matter</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">check-frontmatter.js (Node)</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Pull request</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Missing or malformed metadata blocks the merge</td>
+                      </tr>
+                      <tr className="border-b border-[var(--rule-soft)] align-top">
+                        <td className="py-3 pr-4 font-semibold text-[var(--text)]">Internal links and build</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Docusaurus</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Pull request</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Any broken internal link blocks the merge</td>
+                      </tr>
+                      <tr className="border-b border-[var(--rule-soft)] align-top">
+                        <td className="py-3 pr-4 font-semibold text-[var(--text)]">Code examples</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">check-docs-code-examples.mjs (Node)</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Pull request</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Any curl or CLI example that does not match the product blocks the merge</td>
+                      </tr>
+                      <tr className="border-b border-[var(--rule-soft)] align-top">
+                        <td className="py-3 pr-4 font-semibold text-[var(--text)]">Agent-file parity</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">validate-agent-files.js and Node tests</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Pull request</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Any missing or broken agent file blocks the merge</td>
+                      </tr>
+                      <tr className="border-b border-[var(--rule-soft)] align-top">
+                        <td className="py-3 pr-4 font-semibold text-[var(--text)]">External links</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Lychee</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Pull request</td>
+                        <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Any dead URL blocks the merge</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              ) : null}
             </div>
-          ) : (
-            <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.1fr_1fr]">
+
+            <div className="mt-10 flex flex-col gap-10">
               <figure>
-                <a
-                  className="link-ring block border-2 border-[var(--rule)] bg-[var(--background)]"
-                  href={pillar.diagram.image.src}
-                  rel="noreferrer"
-                  target="_blank"
-                >
+                <div className="relative">
                   <Image
                     alt={pillar.diagram.alt}
                     className="h-auto w-full"
-                    height={pillar.diagram.image.height}
-                    sizes="(min-width: 1024px) 36rem, 100vw"
+                    sizes="(min-width: 1024px) 45rem, 100vw"
                     src={pillar.diagram.image}
-                    width={pillar.diagram.image.width}
                   />
-                </a>
+                  <ZoomButton
+                    label={pillar.diagram.alt}
+                    onOpen={() => openViewer(items, 0)}
+                  />
+                </div>
+                <figcaption className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                  {withNumber(numbers.diagram, pillar.diagram.caption)}
+                </figcaption>
               </figure>
-              <MediaSlideshow slides={pillar.media} title={pillar.title} />
+
+              <MediaSlideshow
+                figureNumbers={numbers.media}
+                onOpenImage={(slideIndex) => openViewer(items, 1 + slideIndex)}
+                slides={pillar.media}
+              />
+
+              {pillar.compare
+                ? [pillar.compare.before, pillar.compare.after].map((item, itemIndex) => (
+                    <figure key={item.label}>
+                      <p className="eyebrow">{item.label}</p>
+                      <div className="relative mt-2">
+                        <Image
+                          alt={item.alt}
+                          className="h-auto w-full"
+                          sizes="(min-width: 1024px) 45rem, 100vw"
+                          src={item.image}
+                        />
+                        <ZoomButton
+                          label={item.alt}
+                          onOpen={() => openViewer(items, compareOffset + itemIndex)}
+                        />
+                      </div>
+                      <figcaption className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                        <RichText
+                          text={withNumber(numbers.compare[itemIndex], item.caption)}
+                        />
+                      </figcaption>
+                    </figure>
+                  ))
+                : null}
             </div>
-          )}
 
-          {pillar.compare ? (
-            <div className="mt-10 grid gap-8 md:grid-cols-2">
-              {[pillar.compare.before, pillar.compare.after].map((item) => (
-                <figure key={item.label}>
-                  <p className="eyebrow">{item.label}</p>
-                  <a
-                    className="link-ring mt-3 block border-2 border-[var(--rule)] bg-[var(--background)]"
-                    href={item.image.src}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <span className="relative block aspect-[16/9] overflow-hidden">
-                      <Image
-                        alt={item.alt}
-                        className="object-cover object-top"
-                        fill
-                        sizes="(min-width: 768px) 32rem, 100vw"
-                        src={item.image}
-                      />
-                    </span>
-                  </a>
-                  <figcaption className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                    <RichText text={item.caption} />
-                  </figcaption>
-                </figure>
-              ))}
+            <div className="mt-10">
+              <a
+                className="editorial-button"
+                href={pillar.proof.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {pillar.proof.label}
+                <ArrowUpRight size={14} />
+              </a>
             </div>
-          ) : null}
+          </section>
+        );
+      })}
 
-          <div className="mt-8 max-w-3xl">
-            <RichText className="text-base leading-7 text-[var(--text)]" text={pillar.body} />
-            {pillar.notes ? (
-              <ul className="mt-4 space-y-2">
-                {pillar.notes.map((note) => (
-                  <li className="flex gap-2 text-sm leading-6 text-[var(--muted)]" key={note}>
-                    <span aria-hidden="true" className="mt-[0.55rem] h-[2px] w-3 shrink-0 bg-[var(--accent)]" />
-                    <span>{note}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-            <a
-              className="editorial-button editorial-button-dark mt-6 gap-2 px-4 py-3"
-              href={pillar.proof.href}
-              rel="noreferrer"
-              target="_blank"
-            >
-              {pillar.proof.label}
-              <ArrowUpRight size={14} />
-            </a>
-          </div>
-        </section>
-      ))}
-
-      <section className="border-b-[3px] border-[var(--rule)] py-12" id="agent-files">
-        <SectionHeading title="Agent-Facing Documentation" />
-        <RichText className="mt-4 max-w-2xl text-base leading-7 text-[var(--text)]" text={agentFiles.lead} />
-        <div className="mt-6 overflow-x-auto border-2 border-[var(--rule)]">
+      <section className="py-12" id="agent-files">
+        <SectionHeading title="Agent-facing documentation" />
+        <p className="mt-4 text-base leading-7 text-[var(--text)]">{agentFiles.lead}</p>
+        <div className="mt-6 overflow-x-auto">
           <table className="w-full min-w-[34rem] border-collapse text-left">
             <thead>
               <tr className="border-b-2 border-[var(--rule)]">
-                <th className="px-3 py-2 font-mono text-[0.6rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]">
-                  Output
-                </th>
-                <th className="px-3 py-2 font-mono text-[0.6rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]">
-                  URL
-                </th>
-                <th className="px-3 py-2 font-mono text-[0.6rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]">
-                  Purpose
-                </th>
+                <th className={`${thClass} w-[26%]`}>Output</th>
+                <th className={`${thClass} w-[37%]`}>URL</th>
+                <th className={`${thClass} w-[37%]`}>Purpose</th>
               </tr>
             </thead>
             <tbody>
               {agentFiles.rows.map((row) => (
                 <tr className="border-b border-[var(--rule-soft)] align-top last:border-b-0" key={row.output}>
-                  <td className="px-3 py-3 text-sm font-semibold text-[var(--text)]">
+                  <td className="py-3 pr-4 text-sm font-semibold text-[var(--text)]">
                     <RichText text={row.output} />
                   </td>
-                  <td className="px-3 py-3 text-sm text-[var(--muted)]">
+                  <td className="py-3 pr-4 text-sm text-[var(--muted)]">
                     <RichText text={row.url} />
                   </td>
-                  <td className="px-3 py-3 text-sm text-[var(--muted)]">{row.purpose}</td>
+                  <td className="py-3 pr-4 text-sm text-[var(--muted)]">{row.purpose}</td>
                 </tr>
               ))}
             </tbody>
@@ -237,32 +383,16 @@ export function HooklineCaseStudy() {
         </div>
       </section>
 
-      <section className="py-12" id="proof-of-work">
-        <SectionHeading title="Proof of Work" />
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {proofOfWork.map((item, itemIndex) => (
-            <a
-              className="link-ring flex flex-col justify-between border-2 border-[var(--rule)] p-5"
-              href={item.href}
-              key={`${item.title}-${itemIndex}`}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <div>
-                <p className="font-mono text-[0.6rem] font-black uppercase tracking-[0.16em] text-[var(--muted)]">
-                  Scenario {itemIndex + 1}
-                </p>
-                <p className="mt-2 text-base font-black leading-6 text-[var(--text)]">{item.title}</p>
-                <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{item.description}</p>
-              </div>
-              <p className="mt-5 inline-flex items-center gap-1 font-mono text-[0.62rem] font-black uppercase tracking-[0.14em] text-[var(--accent)]">
-                View PR
-                <ArrowUpRight size={12} />
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
+      {viewer ? (
+        <ImageViewer
+          index={viewer.index}
+          items={viewer.items}
+          onClose={() => setViewer(null)}
+          onIndexChange={(next) =>
+            setViewer((current) => (current ? { ...current, index: next } : current))
+          }
+        />
+      ) : null}
     </main>
   );
 }

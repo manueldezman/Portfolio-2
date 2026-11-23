@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import { CodeBlock } from "@/components/CodeBlock";
 import { Heading } from "@/components/Heading";
 import { MobileTableOfContents } from "@/components/MobileTableOfContents";
 import { PageActions } from "@/components/PageActions";
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 const codeStyle =
   "rounded-sm border border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_7%,transparent)] px-1.5 py-0.5 font-mono text-[0.85em] font-semibold not-italic text-[var(--text)]";
 
-const checkPrompt = `Test whether an agent can see the llms.txt directive on <DOCS_NAME> at <DOCS_URL>.
+const checkPrompt = `Test whether an agent can see the llms.txt directive at <DOCS_URL>.
 
 Use these three surfaces.
 
@@ -43,7 +44,7 @@ Use these three surfaces.
 
 For each page and surface, check whether the extracted text contains a directive to llms.txt.
 
-Output one table for <DOCS_NAME>.
+Output one table.
 
 | Surface | Directive visible |
 | --- | --- |
@@ -52,16 +53,6 @@ Output one table for <DOCS_NAME>.
 | .md file | Yes or No |
 
 Below the table, print the directive text for each passing surface. State the pages tested and the date. Print a separate table for each site.`;
-
-const checkPromptPreview = `Test whether an agent can see the llms.txt directive on <DOCS_NAME> at <DOCS_URL>.
-
-Use these three surfaces.
-
-1. HTML extracted with Mozilla Readability.
-2. The MCP server configured in your environment.
-3. The .md file.
-
-...`;
 
 const currentHref = "/blog/how-i-made-mezo-documentation-agent-ready/";
 const liveDocsHref = "https://mezo.org/docs/";
@@ -507,9 +498,11 @@ export default function MezoDocumentationAgentReadyPost() {
               You need Node.js to run this command. It queries Mezo&apos;s live docs and prints the
               current AFDocs scorecard.
             </p>
-            <pre className="mt-4 overflow-x-auto bg-[var(--surface-strong)] p-4 font-mono text-sm leading-7 text-[var(--background)]">
-              <code>npx afdocs check https://mezo.org/docs/developers --format scorecard</code>
-            </pre>
+            <CodeBlock
+              className="mt-4"
+              code="npx afdocs check https://mezo.org/docs/developers --format scorecard"
+              label="Bash"
+            />
             <p className="mt-4 leading-8 text-[var(--muted)]">
               The output is a scorecard like the screenshots above, with one line for each category
               and an overall score.
@@ -636,25 +629,13 @@ export default function MezoDocumentationAgentReadyPost() {
                 The Claude Code result reveals that its implementation did not work for agents that
                 use readability extraction.
               </p>
-              <p>To check your own docs, give this prompt to an agent.</p>
+              <p>
+                To check your own docs, replace <code className={codeStyle}>{"<DOCS_URL>"}</code>{" "}
+                with your own docs URL, then give this prompt to an agent.
+              </p>
             </div>
 
-            <details className="group mt-4 border border-[var(--rule-soft)]">
-              <summary className="list-none cursor-pointer [&::-webkit-details-marker]:hidden">
-                <pre className="m-0 overflow-x-auto border-b border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_5%,transparent)] p-4 font-mono text-[0.72rem] leading-6 text-[var(--text)]">
-                  <code className="block">
-                    {checkPromptPreview}
-                    <span className="block mt-3 font-mono text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--muted)]">
-                      <span className="group-open:hidden">View more</span>
-                      <span className="hidden group-open:inline">View less</span>
-                    </span>
-                  </code>
-                </pre>
-              </summary>
-              <pre className="overflow-x-auto border-t border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_5%,transparent)] p-4 font-mono text-[0.72rem] leading-6 text-[var(--text)]">
-                <code>{checkPrompt}</code>
-              </pre>
-            </details>
+            <CodeBlock className="mt-4" code={checkPrompt} expandable label="Agent prompt" />
 
             <p className="mt-6 leading-8 text-[var(--muted)]">
               This was my experience contributing to the Mezo documentation. All credit to William

@@ -1,21 +1,29 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Maximize2, Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { RichText } from "@/components/RichText";
 import type { HooklineSlide } from "@/content/hooklineCaseStudy";
 
-const INTERVAL_MS = 6000;
+const INTERVAL_MS = 2000;
 
-export function MediaSlideshow({ slides, title }: { slides: HooklineSlide[]; title: string }) {
+const overlayButton =
+  "link-ring inline-flex h-7 w-7 items-center justify-center border border-[rgba(238,232,221,0.22)] bg-[rgba(18,17,15,0.8)] text-[#eee8dd]";
+
+type MediaSlideshowProps = {
+  figureNumbers: number[];
+  onOpenImage: (slideIndex: number) => void;
+  slides: HooklineSlide[];
+};
+
+export function MediaSlideshow({ figureNumbers, onOpenImage, slides }: MediaSlideshowProps) {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const frameRef = useRef<HTMLDivElement | null>(null);
-  const labelId = useId();
+  const captionId = useId();
   const total = slides.length;
   const slide = slides[index];
 
@@ -61,8 +69,7 @@ export function MediaSlideshow({ slides, title }: { slides: HooklineSlide[]; tit
 
   return (
     <div
-      aria-labelledby={labelId}
-      className="border-2 border-[var(--rule)] bg-[var(--background)]"
+      aria-labelledby={captionId}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
           setFocused(false);
@@ -74,10 +81,7 @@ export function MediaSlideshow({ slides, title }: { slides: HooklineSlide[]; tit
       onMouseLeave={() => setHovered(false)}
       role="group"
     >
-      <div
-        className="relative aspect-[19/10] w-full overflow-hidden bg-[color-mix(in_srgb,var(--text)_7%,var(--background))]"
-        ref={frameRef}
-      >
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[color-mix(in_srgb,var(--text)_7%,var(--background))]">
         {slides.map((item, itemIndex) => (
           <div
             aria-hidden={itemIndex !== index}
@@ -86,92 +90,83 @@ export function MediaSlideshow({ slides, title }: { slides: HooklineSlide[]; tit
             }`}
             key={item.image.src}
           >
-            <a
+            <Image
+              alt={item.alt}
+              className="object-contain"
+              fill
+              sizes="(min-width: 1024px) 45rem, 100vw"
+              src={item.image}
+            />
+            <button
               aria-label={`Open full size image. ${item.alt}`}
-              className="link-ring block h-full w-full"
-              href={item.image.src}
-              rel="noreferrer"
+              className="absolute right-2 top-2 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md border border-[rgba(238,232,221,0.32)] bg-[rgba(18,17,15,0.78)] text-sm leading-none text-[#eee8dd] transition-colors hover:bg-[rgba(18,17,15,0.95)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              onClick={() => onOpenImage(itemIndex)}
               tabIndex={itemIndex === index ? 0 : -1}
-              target="_blank"
+              title="View full size"
+              type="button"
             >
-              <Image
-                alt={item.alt}
-                className="object-contain"
-                fill
-                sizes="(min-width: 1024px) 40rem, 100vw"
-                src={item.image}
-              />
-            </a>
+              <span aria-hidden="true">⤢</span>
+            </button>
           </div>
         ))}
 
-        <p className="pointer-events-none absolute bottom-2 right-2 border border-[var(--rule)] bg-[var(--background)] px-2 py-1 font-mono text-[0.6rem] font-black uppercase tracking-[0.14em] text-[var(--muted)]">
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </p>
-
-        <a
-          aria-label={`Open full size image. ${slide.alt}`}
-          className="link-ring absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center border border-[var(--rule)] bg-[var(--background)] text-[var(--text)]"
-          href={slide.image.src}
-          rel="noreferrer"
-          target="_blank"
-        >
-          <Maximize2 size={13} />
-        </a>
-      </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t-2 border-[var(--rule)] px-2 py-2">
-        <div className="flex items-center gap-1">
-          <button
-            aria-label="Previous image"
-            className="link-ring inline-flex h-7 w-7 items-center justify-center border border-[var(--rule-soft)] text-[var(--text)]"
-            onClick={() => goTo(index - 1)}
-            type="button"
-          >
-            <ChevronLeft size={14} />
-          </button>
-          <button
-            aria-label="Next image"
-            className="link-ring inline-flex h-7 w-7 items-center justify-center border border-[var(--rule-soft)] text-[var(--text)]"
-            onClick={() => goTo(index + 1)}
-            type="button"
-          >
-            <ChevronRight size={14} />
-          </button>
-          <button
-            aria-label={playing ? "Pause slideshow" : "Play slideshow"}
-            aria-pressed={playing}
-            className="link-ring inline-flex h-7 w-7 items-center justify-center border border-[var(--rule-soft)] text-[var(--text)]"
-            onClick={() => setPlaying((current) => !current)}
-            type="button"
-          >
-            {playing ? <Pause size={12} /> : <Play size={12} />}
-          </button>
-        </div>
-
-        <div className="flex items-center gap-1">
-          {slides.map((item, itemIndex) => (
+        <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-gradient-to-t from-[rgba(9,8,7,0.9)] to-transparent px-2 py-1.5">
+          <div className="flex items-center gap-1">
             <button
-              aria-label={`Show ${item.label}`}
-              aria-pressed={itemIndex === index}
-              className={`link-ring h-2 border ${
-                itemIndex === index
-                  ? "w-7 border-[var(--accent)] bg-[var(--accent)]"
-                  : "w-4 border-[var(--rule-soft)] bg-transparent"
-              }`}
-              key={item.image.src}
-              onClick={() => goTo(itemIndex)}
+              aria-label="Previous image"
+              className={overlayButton}
+              onClick={() => goTo(index - 1)}
               type="button"
-            />
-          ))}
+            >
+              <ChevronLeft size={14} />
+            </button>
+            <button
+              aria-label="Next image"
+              className={overlayButton}
+              onClick={() => goTo(index + 1)}
+              type="button"
+            >
+              <ChevronRight size={14} />
+            </button>
+            <button
+              aria-label={playing ? "Pause slideshow" : "Play slideshow"}
+              aria-pressed={playing}
+              className={overlayButton}
+              onClick={() => setPlaying((current) => !current)}
+              type="button"
+            >
+              {playing ? <Pause size={12} /> : <Play size={12} />}
+            </button>
+          </div>
+
+          <div className="flex items-center gap-1">
+            {slides.map((item, itemIndex) => (
+              <button
+                aria-label={`Show ${item.label}`}
+                aria-pressed={itemIndex === index}
+                className={`link-ring h-2 border ${
+                  itemIndex === index
+                    ? "w-7 border-[var(--accent)] bg-[var(--accent)]"
+                    : "w-4 border-[rgba(238,232,221,0.35)] bg-transparent"
+                }`}
+                key={item.image.src}
+                onClick={() => goTo(itemIndex)}
+                type="button"
+              />
+            ))}
+          </div>
+
+          <span className="font-mono text-[0.6rem] font-black uppercase tracking-[0.14em] text-[#a39b91]">
+            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </span>
         </div>
       </div>
 
-      <div className="min-h-[4.6rem] border-t border-[var(--rule-soft)] px-3 py-2">
-        <p className="font-mono text-[0.62rem] font-black uppercase tracking-[0.16em] text-[var(--accent)]" id={labelId}>
-          {slide.label}
-        </p>
-        <RichText className="mt-1 text-sm leading-6 text-[var(--muted)]" text={slide.caption} />
+      <div className="mt-3" id={captionId}>
+        <RichText
+          className="text-sm leading-6 text-[var(--muted)]"
+          text={`Figure ${figureNumbers[index]}: ${slide.caption}`}
+        />
       </div>
     </div>
   );

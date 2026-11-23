@@ -36,6 +36,12 @@ html, body {
   --teal-soft: rgba(22, 143, 134, 0.12);
   --cream: #eee8dd;
   --shadow: none;
+  --code-surface: #171512;
+  --code-border: transparent;
+  --code-text: #eee8dd;
+  --code-muted: rgba(238, 232, 221, 0.66);
+  --code-rule: rgba(238, 232, 221, 0.14);
+  --code-shadow: 0 1px 2px rgba(18, 17, 15, 0.2), 0 18px 40px -24px rgba(18, 17, 15, 0.55);
   color-scheme: light;
 }
 
@@ -47,12 +53,18 @@ html, body {
   --muted: #a39b91;
   --rule: #eee8dd;
   --rule-soft: rgba(238, 232, 221, 0.22);
-  --accent: #ff5a36;
-  --accent-strong: #ff4b24;
+  --accent: #bde0fe;
+  --accent-strong: #3b82f6;
   --teal: #3fd5cc;
   --teal-soft: rgba(63, 213, 204, 0.12);
   --cream: #eee8dd;
   --shadow: none;
+  --code-surface: #1c1a17;
+  --code-border: rgba(238, 232, 221, 0.14);
+  --code-text: #eee8dd;
+  --code-muted: rgba(238, 232, 221, 0.7);
+  --code-rule: rgba(238, 232, 221, 0.12);
+  --code-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 40px -24px rgba(0, 0, 0, 0.8);
   color-scheme: dark;
 }
 
@@ -291,7 +303,7 @@ body::after {
   background: var(--accent);
   border: 0;
   border-radius: 0.65rem;
-  color: #fff8ef;
+  color: var(--background);
   flex: 0 0 auto;
   font-family: inherit;
   font-size: 0.72rem;
@@ -380,41 +392,28 @@ body::after {
 }
 
 .editorial-button {
-  border: 2px solid var(--rule);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  text-transform: uppercase;
-  transition:
-    background-color 120ms,
-    color 120ms,
-    border-color 120ms,
-    scale 120ms;
+  gap: 0.4rem;
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.42em;
+  transition: color 120ms;
 }
 
-.editorial-button:active {
-  scale: 0.96;
+.editorial-button:focus-visible,
+.editorial-button:hover {
+  color: var(--accent-strong);
 }
 
-.editorial-button-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff8ef;
-}
-
-.editorial-button-secondary {
-  background: transparent;
-  color: var(--text);
-}
-
+.editorial-button-primary,
+.editorial-button-secondary,
 .editorial-button-dark {
-  background: var(--text);
-  border-color: var(--text);
-  color: var(--background);
+  color: var(--accent);
 }
 
 .typewriter-caret {

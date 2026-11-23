@@ -23,7 +23,7 @@ export function PortfolioCaseStudyLayout({ caseStudy }: { caseStudy: PortfolioCa
         <div className="mt-8 flex flex-wrap gap-3">
           {caseStudy.links.map((link) => (
             <a
-              className="editorial-button editorial-button-secondary gap-2 px-4 py-3"
+              className="editorial-button"
               href={link.href}
               key={link.href}
               rel="noreferrer"

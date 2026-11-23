@@ -9,8 +9,7 @@ type ResumePdfActionsProps = {
 };
 
 const MOBILE_QUERY = "(max-width: 767px)";
-const ACTION_CLASS =
-  "editorial-button flex-1 gap-2 whitespace-nowrap px-3 py-3 sm:flex-none sm:px-4";
+const ACTION_CLASS = "editorial-button whitespace-nowrap";
 
 export function ResumePdfActions({ emailHref, pdfHref }: ResumePdfActionsProps) {
   const [isMobile, setIsMobile] = useState(false);
@@ -26,7 +25,7 @@ export function ResumePdfActions({ emailHref, pdfHref }: ResumePdfActionsProps) 
   }, []);
 
   return (
-    <div className="mt-8 flex flex-nowrap gap-2 sm:flex-wrap sm:gap-3">
+    <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
       <a
         className={`${ACTION_CLASS} editorial-button-primary`}
         href={pdfHref}

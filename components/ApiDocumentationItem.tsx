@@ -42,7 +42,7 @@ export function ApiDocumentationItem({ item, readiness }: ApiDocumentationItemPr
           <div className="grid gap-7">
             <div>
               <a
-                className="editorial-button editorial-button-secondary gap-2 px-4 py-3"
+                className="editorial-button"
                 href={item.href}
                 rel="noreferrer"
                 target="_blank"
@@ -78,7 +78,7 @@ export function ApiDocumentationItem({ item, readiness }: ApiDocumentationItemPr
                   {readiness.command}
                 </code>
                 <button
-                  className="editorial-button editorial-button-secondary gap-2 px-4 py-3"
+                  className="editorial-button"
                   onClick={handleCopy}
                   type="button"
                 >

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CodeBlock } from "@/components/CodeBlock";
 import { Heading } from "@/components/Heading";
 import { MobileTableOfContents } from "@/components/MobileTableOfContents";
 import { PageActions } from "@/components/PageActions";
@@ -232,9 +233,7 @@ export default function TuiVsCliPost() {
                 Alternatively, you can use the <code className={codeStyle}>-p</code> flag to run a
                 prompt directly from the CLI:
               </p>
-              <pre className="overflow-x-auto bg-[var(--surface-strong)] p-4 font-mono text-sm leading-7 text-[var(--background)]">
-                <code>claude -p &quot;Explain this code&quot;</code>
-              </pre>
+              <CodeBlock code={'claude -p "Explain this code"'} label="Bash" />
               <p>Both approaches let you work with Claude Code, but they differ in how you experience it.</p>
             </div>
           </section>
