@@ -154,7 +154,7 @@ export function HooklineCaseStudy() {
           {title}
         </Heading>
         <RichText
-          className="mt-6 max-w-[34rem] text-lg font-semibold italic leading-8 text-[var(--muted)]"
+          className="mt-6 text-lg font-semibold italic leading-8 text-[var(--muted)]"
           text={summary}
         />
         <div className="mt-8 flex flex-wrap gap-3">
@@ -173,11 +173,11 @@ export function HooklineCaseStudy() {
         </div>
       </header>
 
-      <section className="border-b-[3px] border-[var(--rule)] py-12">
+      <section className="py-12">
         <p className="text-[1.05rem] leading-[1.8] text-[var(--text)]">{intro}</p>
       </section>
 
-      <section className="border-b-[3px] border-[var(--rule)] py-12" id="system-architecture">
+      <section className="py-12" id="system-architecture">
         <SectionHeading title="How the system works" />
         <p className="mt-4 text-base leading-7 text-[var(--text)]">
           Every step of the pipeline runs on one of these tools.
@@ -211,7 +211,7 @@ export function HooklineCaseStudy() {
         const compareOffset = 1 + pillar.media.length;
 
         return (
-          <section className="border-b-[3px] border-[var(--rule)] py-12" id={pillar.id} key={pillar.id}>
+          <section className="py-12" id={pillar.id} key={pillar.id}>
             <SectionHeading index={pillar.index} title={pillar.title} />
 
             <div className="mt-6">
