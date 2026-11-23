@@ -112,7 +112,7 @@ function pillarViewerItems(pillar: HooklinePillar, numbers: FigureNumbers): Imag
 }
 
 export function HooklineCaseStudy() {
-  const { agentFiles, architecture, eyebrow, index, intro, links, pillars, summary, title, tools } =
+  const { architecture, eyebrow, index, intro, links, pillars, summary, title, tools } =
     hooklineCaseStudy;
   const [viewer, setViewer] = useState<{ items: ImageViewerItem[]; index: number } | null>(null);
 
@@ -217,7 +217,7 @@ export function HooklineCaseStudy() {
             <div className="mt-6">
               <RichText className="text-base leading-7 text-[var(--text)]" text={pillar.body} />
 
-              {pillar.notes ? (
+              {pillar.notes && pillar.notes.length > 0 ? (
                 <ul className="mt-4 space-y-2">
                   {pillar.notes.map((note) => (
                     <li className="flex gap-2 text-sm leading-6 text-[var(--muted)]" key={note}>
@@ -228,7 +228,7 @@ export function HooklineCaseStudy() {
                 </ul>
               ) : null}
 
-              {pillar.gates ? (
+              {pillar.gates && pillar.gates.length > 0 ? (
                 <div className="mt-6 overflow-x-auto">
                   <table className="w-full min-w-[30rem] border-collapse text-left">
                     <thead>
@@ -282,6 +282,33 @@ export function HooklineCaseStudy() {
                         <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Pull request</td>
                         <td className="py-3 pr-4 text-sm leading-6 text-[var(--muted)]">Any dead URL blocks the merge</td>
                       </tr>
+                    </tbody>
+                  </table>
+                </div>
+              ) : null}
+
+              {pillar.files && pillar.files.length > 0 ? (
+                <div className="mt-6 overflow-x-auto">
+                  <table className="w-full min-w-[34rem] border-collapse text-left">
+                    <thead>
+                      <tr className="border-b-2 border-[var(--rule)]">
+                        <th className={`${thClass} w-[26%]`}>Output</th>
+                        <th className={`${thClass} w-[37%]`}>URL</th>
+                        <th className={`${thClass} w-[37%]`}>Purpose</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pillar.files.map((row) => (
+                        <tr className="border-b border-[var(--rule-soft)] align-top last:border-b-0" key={row.output}>
+                          <td className="py-3 pr-4 text-sm font-semibold text-[var(--text)]">
+                            <RichText text={row.output} />
+                          </td>
+                          <td className="py-3 pr-4 text-sm text-[var(--muted)]">
+                            <RichText text={row.url} />
+                          </td>
+                          <td className="py-3 pr-4 text-sm text-[var(--muted)]">{row.purpose}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -353,35 +380,6 @@ export function HooklineCaseStudy() {
           </section>
         );
       })}
-
-      <section className="py-12" id="agent-files">
-        <SectionHeading title="Agent-facing documentation" />
-        <p className="mt-4 text-base leading-7 text-[var(--text)]">{agentFiles.lead}</p>
-        <div className="mt-6 overflow-x-auto">
-          <table className="w-full min-w-[34rem] border-collapse text-left">
-            <thead>
-              <tr className="border-b-2 border-[var(--rule)]">
-                <th className={`${thClass} w-[26%]`}>Output</th>
-                <th className={`${thClass} w-[37%]`}>URL</th>
-                <th className={`${thClass} w-[37%]`}>Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              {agentFiles.rows.map((row) => (
-                <tr className="border-b border-[var(--rule-soft)] align-top last:border-b-0" key={row.output}>
-                  <td className="py-3 pr-4 text-sm font-semibold text-[var(--text)]">
-                    <RichText text={row.output} />
-                  </td>
-                  <td className="py-3 pr-4 text-sm text-[var(--muted)]">
-                    <RichText text={row.url} />
-                  </td>
-                  <td className="py-3 pr-4 text-sm text-[var(--muted)]">{row.purpose}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
 
       {viewer ? (
         <ImageViewer

@@ -52,6 +52,12 @@ export type HooklineGate = {
   name: string;
 };
 
+export type HooklineFile = {
+  output: string;
+  purpose: string;
+  url: string;
+};
+
 export type HooklinePillar = {
   body: string;
   compare?: {
@@ -59,6 +65,7 @@ export type HooklinePillar = {
     before: HooklineSlide;
   };
   diagram: HooklineDiagram;
+  files?: HooklineFile[];
   gates?: HooklineGate[];
   id: string;
   index: string;
@@ -87,7 +94,7 @@ export const hooklineCaseStudy = {
   index: "2026",
   eyebrow: "Case study · Docs as code",
   intro:
-    "I built this because I wanted documentation that cannot go stale. A page that falls behind a code change, or a link that dies, should fail before a reader finds it. So I used AI to draft the updates and CI to check them.",
+    "This is a working demonstration of an end-to-end documentation quality pipeline. It exists to show, with running code rather than claims, that I can design, implement, and maintain documentation systems that work for both human readers and AI agents.",
   links: [
     { href: liveDocs, label: "View Live Docs" },
     { href: productRepo, label: "Product Repo" },
@@ -362,38 +369,32 @@ export const hooklineCaseStudy = {
       id: "agent-facing",
       index: "06",
       title: "Agent-Facing Documentation",
-      body: "AI agents read documentation differently to humans. They prefer Markdown rather than rendered HTML.",
+      body: "AI agents read documentation differently to humans. They prefer Markdown rather than rendered HTML, so I prepared these surfaces to serve them.",
       diagram: {
         alt: "Agent-facing documentation surface",
         caption: "Screenshot of the agent-facing documentation section",
         image: agentFacingMarkdown,
       },
       media: [],
-      notes: [],
-      gates: [],
+      files: [
+        {
+          output: "Markdown twin of every page",
+          url: "Add `.md` to any page URL",
+          purpose: "The page as Markdown, with components resolved",
+        },
+        {
+          output: "`llms.txt`",
+          url: "`/llms.txt`",
+          purpose: "An index of every page with its description, following the llmstxt.org layout",
+        },
+        { output: "`llms-full.txt`", url: "`/llms-full.txt`", purpose: "Every page as Markdown in one file" },
+        {
+          output: "`sitemap.xml` and `robots.txt`",
+          url: "`/sitemap.xml`, `/robots.txt`",
+          purpose: "Lists every page for crawlers and tells bots which pages to skip",
+        },
+      ],
       proof: { href: "https://manueldezman.github.io/hookline-docs/llms.txt", label: "View llms.txt" },
     },
   ] satisfies HooklinePillar[],
-  agentFiles: {
-    lead: "AI agents read documentation differently to humans. They prefer Markdown rather than rendered HTML, so I prepared these surfaces to serve them.",
-    proof: { href: "https://manueldezman.github.io/hookline-docs/llms.txt", label: "View llms.txt" },
-    rows: [
-      {
-        output: "Markdown twin of every page",
-        url: "Add `.md` to any page URL",
-        purpose: "The page as Markdown, with components resolved",
-      },
-      {
-        output: "`llms.txt`",
-        url: "`/llms.txt`",
-        purpose: "An index of every page with its description, following the llmstxt.org layout",
-      },
-      { output: "`llms-full.txt`", url: "`/llms-full.txt`", purpose: "Every page as Markdown in one file" },
-      {
-        output: "`sitemap.xml` and `robots.txt`",
-        url: "`/sitemap.xml`, `/robots.txt`",
-        purpose: "Lists every page for crawlers and tells bots which pages to skip",
-      },
-    ],
-  },
 };

@@ -6,7 +6,7 @@ An end-to-end engineering workflow connecting product code changes to validated,
 - [Product repository](https://github.com/manueldezman/hookline)
 - [Docs repository](https://github.com/manueldezman/hookline-docs)
 
-I built this because I wanted documentation that cannot go stale. A page that falls behind a code change, or a link that dies, should fail before a reader finds it. So I used AI to draft the updates and CI to check them.
+This is a working demonstration of an end-to-end documentation quality pipeline. It exists to show, with running code rather than claims, that I can design, implement, and maintain documentation systems that work for both human readers and AI agents.
 
 ## How the system works
 
@@ -119,7 +119,7 @@ Figure 25: Screenshot showing the docs site on the Netlify preview domain.
 
 Proof: [Live preview PR](https://github.com/manueldezman/hookline-docs/pull/2)
 
-## Agent-Facing Documentation
+## 06 Agent-Facing Documentation
 
 AI agents read documentation differently to humans. They prefer Markdown rather than rendered HTML, so I prepared these surfaces to serve them.
 
@@ -129,3 +129,7 @@ AI agents read documentation differently to humans. They prefer Markdown rather 
 | `llms.txt` | `/llms.txt` | An index of every page with its description, following the llmstxt.org layout |
 | `llms-full.txt` | `/llms-full.txt` | Every page as Markdown in one file |
 | `sitemap.xml` and `robots.txt` | `/sitemap.xml`, `/robots.txt` | Lists every page for crawlers and tells bots which pages to skip |
+
+Figure 26: Screenshot of the agent-facing documentation section.
+
+Proof: [View llms.txt](https://manueldezman.github.io/hookline-docs/llms.txt)
