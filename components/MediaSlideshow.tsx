@@ -51,6 +51,8 @@ export function MediaSlideshow({ figureNumbers, onOpenImage, slides }: MediaSlid
     return () => window.clearInterval(timer);
   }, [playing, hovered, focused, reduceMotion, total]);
 
+  if (total === 0) return null;
+
   function goTo(next: number) {
     setIndex(((next % total) + total) % total);
   }

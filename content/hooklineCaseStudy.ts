@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import agentFacingMarkdown from "@/images/portfolio/hookline/agent-facing-markdown.png";
 import codeJobImage from "@/images/portfolio/hookline/code-job.webp";
 import codePrImage from "@/images/portfolio/hookline/code-pr.webp";
 import docsDiffImage from "@/images/portfolio/hookline/docs-diff.webp";
@@ -98,7 +99,7 @@ export const hooklineCaseStudy = {
         alt: "System architecture diagram with the product repo, the docs repo, the GitHub Actions jobs, the OpenCode agent, the Netlify preview and the GitHub Pages production site.",
         caption:
           "High-level system architecture illustrating the product repo, the docs repo, the GitHub Actions jobs, the OpenCode agent, and the two hosts that serve the docs.",
-        image: agent-facing-markdown.png,
+        image: systemArchitectureImage,
       },
       {
         alt: "Event path diagram with three phases, from a product pull request through the merge to main and the docs pull request, including the failure path.",
@@ -365,13 +366,12 @@ export const hooklineCaseStudy = {
       diagram: {
         alt: "Agent-facing documentation surface",
         caption: "Screenshot of the agent-facing documentation section",
-        image: agent-facing-markdown.png,
+        image: agentFacingMarkdown,
       },
       media: [],
       notes: [],
       gates: [],
       proof: { href: "https://manueldezman.github.io/hookline-docs/llms.txt", label: "View llms.txt" },
-      title: "Agent-Facing Documentation",
     },
   ] satisfies HooklinePillar[],
   agentFiles: {
