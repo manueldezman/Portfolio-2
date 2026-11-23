@@ -85,22 +85,15 @@ export function MediaSlideshow({ figureNumbers, onOpenImage, slides }: MediaSlid
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[color-mix(in_srgb,var(--text)_7%,var(--background))]">
         {slides.map((item, itemIndex) => {
-          const isActive = itemIndex === index;
-          const isPrev = itemIndex === (index - 1 + total) % total;
-          const isNext = itemIndex === (index + 1) % total;
-          const classes = isActive
-            ? "translate-x-0 opacity-100"
-            : isPrev
-              ? "-translate-x-full opacity-0"
-              : isNext
-                ? "translate-x-full opacity-0"
-                : "translate-x-0 opacity-0";
+          const diff = itemIndex - index;
+          const classes =
+            diff === 0 ? "translate-x-0" : diff > 0 ? "translate-x-full" : "-translate-x-full";
 
           return (
             <div
               aria-hidden={itemIndex !== index}
-              className={`absolute inset-0 transition-[transform,opacity] duration-500 ease-in-out ${classes} ${
-                isActive ? "" : "pointer-events-none"
+              className={`absolute inset-0 transition-transform duration-700 ${classes} ${
+                itemIndex === index ? "" : "pointer-events-none"
               }`}
               key={item.image.src}
             >
