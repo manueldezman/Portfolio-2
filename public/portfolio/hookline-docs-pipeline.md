@@ -36,11 +36,11 @@ Figure 4: Screenshot showing the impact job flagging six pages that read `src/co
 
 Figure 5: Screenshot showing the drafted pull request with each page it changed.
 
-BEFORE · PRODUCT REPO
+Before · Product repo
 
 Figure 6: Developer merges a feature or API change in the product codebase.
 
-AFTER · DOCS REPO
+After · Docs repo
 
 Figure 7: OpenCode maps the code change to the right Docusaurus file and drafts the documentation update.
 
