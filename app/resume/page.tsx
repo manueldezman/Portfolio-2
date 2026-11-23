@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Resume",
   description:
     "Resume for Abdulganiy Adeleke, Developer Relations Engineer and Technical Writer.",
+  alternates: {
+    canonical: "/resume/",
+  },
 };
 
 export default function ResumePage() {

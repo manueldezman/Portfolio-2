@@ -16,6 +16,9 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 export const metadata: Metadata = {
   title: "Blog",
   description: subtitle,
+  alternates: {
+    canonical: "/blog/",
+  },
 };
 
 export default function BlogPage() {

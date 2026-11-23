@@ -17,6 +17,9 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
+  alternates: {
+    canonical: "/blog/how-i-made-mezo-documentation-agent-ready/",
+  },
   openGraph: {
     title,
     description,

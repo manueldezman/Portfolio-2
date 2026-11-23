@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { FeedbackSection } from "@/components/FeedbackSection";
@@ -10,6 +11,12 @@ import intuitionLogo from "@/images/brands/intuition.png";
 import midnightLogo from "@/images/brands/midnight.png";
 import odinLogo from "@/images/brands/odin.png";
 import profileImage from "@/images/profile-iamge.jpeg";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
   return (

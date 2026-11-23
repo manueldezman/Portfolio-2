@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "TUI vs CLI: Is There Any Difference?",
   description:
     "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
+  alternates: {
+    canonical: "/blog/tui-vs-cli/",
+  },
   openGraph: {
     title: "TUI vs CLI: Is There Any Difference?",
     description:

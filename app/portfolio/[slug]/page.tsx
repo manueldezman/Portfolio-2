@@ -28,6 +28,9 @@ export function generateMetadata({ params }: PortfolioCaseStudyPageProps): Metad
   return {
     title: `${caseStudy.title} case study`,
     description: caseStudy.summary,
+    alternates: {
+      canonical: `/portfolio/${caseStudy.slug}/`,
+    },
   };
 }
 

@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: "Portfolio",
   description:
     "Selected technical writing, developer tooling, API documentation, open-source, and developer community work by Abdulganiy Adeleke.",
+  alternates: {
+    canonical: "/portfolio/",
+  },
 };
 
 function PortfolioList({ items }: { items: PortfolioItem[] }) {
