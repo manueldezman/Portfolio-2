@@ -1,10 +1,10 @@
-# Automated Docs-as-Code & AI Documentation Pipeline
+# Self-Updating Docs-as-Code Pipeline
 
-An end-to-end engineering workflow connecting product code changes to validated, auto-deployed Docusaurus documentation.
+How I connected product code changes to automated AI drafting, quality checks, and Docusaurus deployments.
 
-- [Live documentation](https://manueldezman.github.io/hookline-docs/)
-- [Product repository](https://github.com/manueldezman/hookline)
-- [Docs repository](https://github.com/manueldezman/hookline-docs)
+- [View Live Docs](https://manueldezman.github.io/hookline-docs/)
+- [Product Repo](https://github.com/manueldezman/hookline)
+- [Docs Repo](https://github.com/manueldezman/hookline-docs)
 
 This is a working demonstration of an end-to-end documentation quality pipeline. It exists to show, with running code rather than claims, that I can design, implement, and maintain documentation systems that work for both human readers and AI agents.
 
@@ -44,15 +44,15 @@ AFTER · DOCS REPO
 
 Figure 7: OpenCode maps the code change to the right Docusaurus file and drafts the documentation update.
 
-Proof: [AI-drafted docs PR](https://github.com/manueldezman/hookline-docs/pull/17)
+Proof: [Inspect AI-Drafted Docs PR](https://github.com/manueldezman/hookline-docs/pull/17)
 
 ## 02 Information Architecture
 
 Here are the architectural decisions I made, I used:
 
-- Audience first framing. The overview names four readers, from backend developers to security teams. Anyone going through the docs knows if the tool is for them.
-- 3 max levels of depth. Reference > Events > Create an event is the deepest path. Getting started and Guides stop at two. This follows the information architecture standards, which ensures information is easily reachable and easily retrieved.
-- Navigation organized by user's job. Sending an event sits in the Quickstart, signature checks sit in Guides, and the endpoint sits in Reference. A reader who wants to send an event finds it in the Quickstart, a reader who wants to verify a signature finds it in Guides, and a reader who wants the exact fields finds them in Reference, so nobody has to guess which section holds the page.
+- **Audience first framing**: The overview names four readers, from backend developers to security teams. Anyone going through the docs knows if the tool is for them.
+- **3 max levels of depth**: Reference > Events > Create an event is the deepest path. Getting started and Guides stop at two. This follows the information architecture standards, which ensures information is easily reachable and easily retrieved.
+- **Navigation organized by user's job**: Sending an event sits in the Quickstart, signature checks sit in Guides, and the endpoint sits in Reference. A reader who wants to send an event finds it in the Quickstart, a reader who wants to verify a signature finds it in Guides, and a reader who wants the exact fields finds them in Reference, so nobody has to guess which section holds the page.
 
 Figure 8: Hierarchical taxonomy of the Hookline documentation illustrating the parent-child relationships from broad product categories down to specific task-based topics.
 
@@ -66,7 +66,7 @@ Figure 12: Screenshot showing the generated endpoint pages under Reference.
 
 Figure 13: Screenshot showing the Node.js and Python SDK pages.
 
-Proof: [Live documentation](https://manueldezman.github.io/hookline-docs/)
+Proof: [Open the Live Docs](https://manueldezman.github.io/hookline-docs/)
 
 ## 03 Code Example Validation
 
@@ -78,20 +78,21 @@ Figure 15: Screenshot showing the test pull request that changes one example on 
 
 Figure 16: Screenshot showing the failed code examples job stopped on `docs/getting-started/quick-start.md` with expected 202 and got 404.
 
-Proof: [Blocked code validation PR](https://github.com/manueldezman/hookline-docs/pull/16)
+Proof: [Inspect Blocked Code-Validation PR](https://github.com/manueldezman/hookline-docs/pull/16)
 
 ## 04 Automated Quality Gates
 
 Here are the quality gates:
 
-| Gate | Does | Catches |
-| --- | --- | --- |
-| Vale (Prose) | Checks wording against the Vale style rules. | Style breaks and wrong product terms. |
-| codespell (Spelling) | Checks spelling in the docs and the README. | Misspellings. |
-| Front matter check (Front matter) | Checks the required page fields and the generated reference pages. | A missing title or description, a description over 160 characters, and reference pages out of sync with the OpenAPI spec. |
-| Docusaurus build (Build) | Builds the site and writes the Markdown twins and agent files. | Broken internal links, broken serializers, a missing Markdown twin, a page missing from llms.txt, and leaked MDX. |
-| Code examples check (Code examples) | Runs every curl and CLI example against the product. | Examples that do not run or return the wrong status. |
-| lychee (Links) | Checks external links in the built HTML. | Dead external links. |
+| Check | Tool | When it runs | What it blocks |
+| --- | --- | --- | --- |
+| Style and terminology | Vale | Pull request | Errors block the merge |
+| Spelling | codespell | Pull request | Any known misspelling blocks the merge |
+| Front matter | check-frontmatter.js (Node) | Pull request | Missing or malformed metadata blocks the merge |
+| Internal links and build | Docusaurus | Pull request | Any broken internal link blocks the merge |
+| Code examples | check-docs-code-examples.mjs (Node) | Pull request | Any curl or CLI example that does not match the product blocks the merge |
+| Agent-file parity | validate-agent-files.js and Node tests | Pull request | Any missing or broken agent file blocks the merge |
+| External links | Lychee | Pull request | Any dead URL blocks the merge |
 
 Figure 17: Event flow showing a docs pull request through the six gates to an unblocked merge.
 
@@ -105,7 +106,7 @@ Figure 21: Screenshot showing codespell flagging one word on line 14.
 
 Figure 22: Screenshot showing lychee finding a 404 on an external URL.
 
-Proof: [Blocked quality gate PR](https://github.com/manueldezman/hookline-docs/pull/2)
+Proof: [Inspect Blocked Quality-Gate PR](https://github.com/manueldezman/hookline-docs/pull/2)
 
 ## 05 PR Preview Links
 
@@ -117,7 +118,7 @@ Figure 24: Screenshot showing the Netlify comment with a deploy preview link.
 
 Figure 25: Screenshot showing the docs site on the Netlify preview domain.
 
-Proof: [Live preview PR](https://github.com/manueldezman/hookline-docs/pull/2)
+Proof: [Inspect Live Preview PR](https://github.com/manueldezman/hookline-docs/pull/2)
 
 ## 06 Agent-Facing Documentation
 
