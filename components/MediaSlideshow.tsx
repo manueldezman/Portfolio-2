@@ -6,7 +6,7 @@ import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { RichText } from "@/components/RichText";
 import type { HooklineSlide } from "@/content/hooklineCaseStudy";
 
-const INTERVAL_MS = 2000;
+const INTERVAL_MS = 4000;
 
 const overlayButton =
   "link-ring inline-flex h-7 w-7 items-center justify-center border border-[rgba(238,232,221,0.22)] bg-[rgba(18,17,15,0.8)] text-[#eee8dd]";
