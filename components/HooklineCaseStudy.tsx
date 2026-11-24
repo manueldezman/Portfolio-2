@@ -147,16 +147,20 @@ export function HooklineCaseStudy() {
         ← back
       </Link>
 
-      <header className="mt-10 border-b-[3px] border-[var(--rule)] pb-12">
-        <p className="font-mono text-sm font-black text-[var(--accent)]">{index}</p>
-        <p className="eyebrow mt-4">{eyebrow}</p>
-        <Heading className="mt-4" level={1}>
+      <div className="mt-6 border-b-2 border-[var(--rule)] pb-6">
+        <p className="font-mono text-sm font-black uppercase tracking-[0.16em] text-[var(--accent)]">
+          {index}
+        </p>
+        <Heading className="mt-2" level={1}>
           {title}
         </Heading>
         <RichText
-          className="mt-6 text-lg font-semibold italic leading-8 text-[var(--muted)]"
+          className="mt-4 max-w-2xl text-lg font-semibold italic leading-8 text-[var(--muted)]"
           text={summary}
         />
+      </div>
+
+      <header className="mt-10 border-b-[3px] border-[var(--rule)] pb-12">
         <div className="mt-8 flex flex-wrap gap-3">
           {links.map((link) => (
             <a
