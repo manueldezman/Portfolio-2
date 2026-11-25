@@ -54,7 +54,7 @@ export function OpenSourceContributions({ repositories }: { repositories: OpenSo
 
         return (
           <div className="scroll-mt-28" id={repositoryId} key={repository.repository}>
-            <ul className="space-y-7 pl-5 list-disc">
+            <ul className="space-y-7 pl-8 list-disc">
               {repository.contributions.map((contribution, contributionIndex) => (
                 <li className="group" key={`${repository.repository}-${contribution.title}`}>
                   <h3 className="text-sm font-semibold leading-7 text-[var(--text)]">

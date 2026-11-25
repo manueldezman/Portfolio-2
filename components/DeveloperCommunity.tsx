@@ -20,7 +20,7 @@ export function DeveloperCommunity({ entries }: DeveloperCommunityProps) {
 
   return (
     <div className="mt-4">
-      <ul className="space-y-3 pl-5 list-disc">
+      <ul className="space-y-3 pl-8 list-disc">
         {entries.map((entry) =>
           entry.kind === "activity" ? (
             <li className="leading-7" key={entry.activity.title}>

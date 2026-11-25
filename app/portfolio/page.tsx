@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 function PortfolioList({ items }: { items: PortfolioItem[] }) {
   return (
-    <ul className="mt-4 space-y-3 pl-5 list-disc">
+    <ul className="mt-4 space-y-3 pl-8 list-disc">
       {items.map((item) => (
         <li className="leading-7 text-[var(--text)]" key={item.caseStudySlug || item.href}>
           {item.readiness ? (
@@ -66,7 +66,14 @@ function PortfolioList({ items }: { items: PortfolioItem[] }) {
   );
 }
 
-import { PortfolioTabs } from "@/components/PortfolioTabs";
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="mt-12">
+      <Heading level={2}>{title}</Heading>
+      {children}
+    </section>
+  );
+}
 
 export default function PortfolioPage() {
   return (
@@ -82,60 +89,45 @@ export default function PortfolioPage() {
         </p>
       </header>
 
-      <PortfolioTabs
-        tabs={[
-          {
-            id: "api-documentation",
-            label: "API documentation",
-            content: <PortfolioList items={apiDocumentationItems} />,
-          },
-          {
-            id: "ai-agent-tools",
-            label: "AI agent/developer tools",
-            content: <PortfolioList items={developerToolItems} />,
-          },
-          {
-            id: "tutorials",
-            label: "Tutorials",
-            content: <PortfolioList items={tutorialItems} />,
-          },
-          {
-            id: "explainers",
-            label: "Explainers",
-            content: (
-              <>
-                <PortfolioList items={explainerItems} />
-                <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
-                  {explainerPlaylistNote.text}{" "}
-                  {explainerPlaylistNote.playlists.map((playlist, index) => (
-                    <span key={playlist.href}>
-                      {index > 0 ? " · " : ""}
-                      <a
-                        className="link-ring font-semibold text-[var(--accent)] underline underline-offset-4"
-                        href={playlist.href}
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        {playlist.label}
-                      </a>
-                    </span>
-                  ))}
-                </p>
-              </>
-            ),
-          },
-          {
-            id: "open-source",
-            label: "Open-source contributions",
-            content: <OpenSourceContributions repositories={openSourceRepositories} />,
-          },
-          {
-            id: "developer-community",
-            label: "Developer community",
-            content: <DeveloperCommunity entries={developerCommunityEntries} />,
-          },
-        ]}
-      />
+      <Section title="API documentation">
+        <PortfolioList items={apiDocumentationItems} />
+      </Section>
+
+      <Section title="AI agent/developer tools">
+        <PortfolioList items={developerToolItems} />
+      </Section>
+
+      <Section title="Tutorials">
+        <PortfolioList items={tutorialItems} />
+      </Section>
+
+      <Section title="Explainers">
+        <PortfolioList items={explainerItems} />
+        <p className="mt-4 pl-8 text-sm leading-7 text-[var(--muted)]">
+          {explainerPlaylistNote.text}{" "}
+          {explainerPlaylistNote.playlists.map((playlist, index) => (
+            <span key={playlist.href}>
+              {index > 0 ? " · " : ""}
+              <a
+                className="link-ring font-semibold text-[var(--accent)] underline underline-offset-4"
+                href={playlist.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {playlist.label}
+              </a>
+            </span>
+          ))}
+        </p>
+      </Section>
+
+      <Section title="Open-source contributions">
+        <OpenSourceContributions repositories={openSourceRepositories} />
+      </Section>
+
+      <Section title="Developer community">
+        <DeveloperCommunity entries={developerCommunityEntries} />
+      </Section>
 
       <p className="mt-16 border-t-[3px] border-[var(--rule)] pt-8 text-base leading-8 text-[var(--muted)]">
         Looking to hire?{" "}
