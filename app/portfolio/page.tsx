@@ -32,9 +32,9 @@ function PortfolioList({ items }: { items: PortfolioItem[] }) {
       {items.map((item) => (
         <li className="leading-7 text-[var(--text)]" key={item.caseStudySlug || item.href}>
           {item.readiness ? (
-            <ApiDocumentationItem item={item} readiness={item.readiness} />
+            <ApiDocumentationItem item={item} />
           ) : item.articleNote ? (
-            <ArticleNoteItem item={item} note={item.articleNote} />
+            <ArticleNoteItem item={item} />
           ) : item.caseStudySlug ? (
             <Link
               className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"

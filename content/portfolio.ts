@@ -14,6 +14,7 @@ export type PortfolioItem = {
   description: string;
   href: string;
   source: string;
+  slug?: string;
   caseStudySlug?: string;
   articleNote?: ArticleNote;
   readiness?: AgentReadiness;
@@ -63,6 +64,7 @@ export type OpenSourceContributionImage = {
 
 export type OpenSourceContribution = {
   title: string;
+  slug?: string;
   problem: string;
   contribution: string;
   impact: string;
@@ -85,6 +87,7 @@ export type CommunityActivityField = {
 
 export type CommunityActivity = {
   title: string;
+  slug?: string;
   label: string;
   detail: string;
   fields: CommunityActivityField[];
@@ -101,6 +104,7 @@ export type CommunityProofImage = {
 
 export type CommunityEvent = {
   title: string;
+  slug?: string;
   label: string;
   fields: CommunityActivityField[];
   proofLinks: Array<{ label: string; href: string }>;
@@ -119,6 +123,7 @@ export const apiDocumentationItems: PortfolioItem[] = [
   {
     title: "Agent ready API documentation",
     prefix: "Empay: ",
+    slug: "empay-agent-ready-api-documentation",
     description:
       "OpenAPI 3.1 and Mintlify documentation for the EmPay HRMS product, scored 99/100 on the AFDocs agent-friendly docs check.",
     href: "https://empay-sample.mintlify.site/product-overview",
@@ -157,7 +162,7 @@ export const apiDocumentationItems: PortfolioItem[] = [
     description:
       "A docs-as-code pipeline on Docusaurus: Vale, codespell, front matter, code example, and link checks in CI, plus Markdown twins and llms.txt for AI agents.",
     href: "https://github.com/manueldezman/hookline-docs#hookline-docs-a-documentation-pipeline",
-    source: "Docusaurus · GitHub",
+    source: "Docusaurus",
     caseStudySlug: "hookline-docs-pipeline",
   },
 ];
@@ -183,6 +188,7 @@ export const developerToolItems: PortfolioItem[] = [
 export const tutorialItems: PortfolioItem[] = [
   {
     title: "How to make technical documentation AI-ready: prevent information loss in Markdown",
+    slug: "ai-ready-documentation-information-loss",
     description: "Covers Markdown practices that make developer documentation easier for AI systems to consume.",
     href: "https://hackmamba.io/technical-documentation/how-to-make-technical-documentation-ai-ready-with-markdown/",
     source: "Hackmamba",
@@ -301,6 +307,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
       {
         title:
           "Made Mezo's documentation agent-ready and raised its AFDocs score from 41 to 100.",
+        slug: "mezo-agent-ready-documentation",
         problem:
           "Mezo's documentation scored 41/100 on the AFDocs agent-readiness check. Agents could not discover or consume reliable Markdown versions of the docs, and five of seven scorecard categories could not be tested.",
         contribution:
@@ -335,6 +342,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
     contributions: [
       {
         title: "Update the form validation lesson to reflect the modern :user-valid and :user-invalid pseudo-classes.",
+        slug: "odin-form-validation-lesson",
         problem:
           "While completing The Odin Project's Sign-up Form project immediately after its form validation lesson, I noticed validation styles appearing before I interacted with the form. Required fields matched `:invalid` on page load because HTML5 treats empty required fields as invalid, while fields such as email and password could match `:valid` before the user had provided meaningful input.",
         contribution:
@@ -384,6 +392,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
     contributions: [
       {
         title: "Audit the developer documentation against the live product and fix the inconsistencies.",
+        slug: "intuition-docs-audit",
         problem:
           "While building on Intuition with AI coding agents, I noticed the agents kept citing ETH instead of TRUST. The protocol migrated in August 2025 from the Base-based `EthMultiVault`, where deposits were denominated in ETH, to the current Intuition Network `MultiVault`, where payable deposits use the network's native TRUST currency. Several current and general documentation pages still used terminology from the earlier deployment.",
         contribution:
@@ -400,6 +409,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
       },
       {
         title: "Fixed markdown content loss in AI agent-facing documentation.",
+        slug: "intuition-markdown-content-loss",
         problem:
           "The LLM documentation generator removed multi-line MDX component blocks before preserving their useful child content. Package-manager tabs and network-specific tabs disappeared from `llms-full.txt` and `llms-medium.txt`, so generated Markdown omitted installation commands and configuration examples that readers and AI agents need to complete setup tasks.",
         contribution:
@@ -439,6 +449,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
     contributions: [
       {
         title: "Added an OpenAPI 3.1 specification for the REST API endpoints (49 total endpoints).",
+        slug: "empay-openapi-specification",
         problem:
           "After finishing Hackmamba's eight-week API documentation learning sprint, I wanted to contribute to an open-source project that needed API documentation. I found EmPay, an HRMS platform with 49 endpoints documented in `API.md` but no OpenAPI specification.",
         contribution:
@@ -459,6 +470,7 @@ export const openSourceRepositories: OpenSourceRepository[] = [
 
 const educationWorkshopsActivity: CommunityActivity = {
   title: "Education & Workshops",
+  slug: "kodespot-learning-hub",
   label: "Kodespot Learning Hub",
   detail:
     "Co-founded Kodespot with friends as an undergraduate community where we tutored fellow students in DeFi, smart contract development, and software development. It ran for two cohorts until we graduated.",
@@ -490,6 +502,7 @@ const educationWorkshopsActivity: CommunityActivity = {
 
 const speakingActivity: CommunityActivity = {
   title: "Speaking & Thought Leadership",
+  slug: "speaking-and-thought-leadership",
   label: "Open to opportunities",
   detail: "I'm open to talks, AMAs, panels, and recorded sessions.",
   fields: [],
@@ -497,6 +510,7 @@ const speakingActivity: CommunityActivity = {
 
 export const communityEvent: CommunityEvent = {
   title: "Developer Events — Techie Soiree",
+  slug: "techie-soiree",
   label: "Kodespot × AngelHack",
   fields: [
     { label: "Role", value: "Co-organizer" },
