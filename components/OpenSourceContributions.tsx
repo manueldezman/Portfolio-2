@@ -87,7 +87,7 @@ export function OpenSourceContributions({ repositories }: { repositories: OpenSo
                 </li>
               ))}
             </ul>
-            <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+            <p className="mt-2 pl-8 text-sm leading-7 text-[var(--muted)]">
               {`${repository.prLinks.length} merged PR${
                 repository.prLinks.length === 1 ? "" : "s"
               } to this repository`}
