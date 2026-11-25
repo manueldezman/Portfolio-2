@@ -34,11 +34,12 @@ export function ApiDocumentationItem({ item, readiness }: ApiDocumentationItemPr
         onClick={() => setIsOpen(true)}
         type="button"
       >
+        {item.prefix}
         {item.title}
       </button>
 
       {isOpen ? (
-        <DetailModal eyebrow={item.source} onClose={() => setIsOpen(false)} title={item.title}>
+        <DetailModal eyebrow={item.source} onClose={() => setIsOpen(false)} title={`${item.prefix}${item.title}`}>
           <div className="grid gap-7">
             <div>
               <a

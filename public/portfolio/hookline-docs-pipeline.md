@@ -1,5 +1,7 @@
 # Self-Updating Docs-as-Code Pipeline
 
+![Case study: Self-Updating Docs-as-Code Pipeline](../og/hookline-docs-pipeline.png)
+
 How I connected product code changes to automated AI drafting, quality checks, and Docusaurus deployments.
 
 - [View Live Docs](https://manueldezman.github.io/hookline-docs/)

@@ -17,6 +17,7 @@ export type PortfolioItem = {
   caseStudySlug?: string;
   articleNote?: ArticleNote;
   readiness?: AgentReadiness;
+  prefix?: string;
 };
 
 export type AgentReadiness = {
@@ -117,6 +118,7 @@ export type DeveloperCommunityEntry =
 export const apiDocumentationItems: PortfolioItem[] = [
   {
     title: "Agent ready API documentation",
+    prefix: "Empay: ",
     description:
       "OpenAPI 3.1 and Mintlify documentation for the EmPay HRMS product, scored 99/100 on the AFDocs agent-friendly docs check.",
     href: "https://empay-sample.mintlify.site/product-overview",
@@ -587,9 +589,9 @@ export const developerCommunityEntries: DeveloperCommunityEntry[] = [
 export const portfolioCaseStudies: PortfolioCaseStudy[] = [
   {
     slug: "hookline-docs-pipeline",
-    title: "Automated Docs-as-Code & AI Documentation Pipeline",
+    title: "Self-Updating Docs-as-Code Pipeline",
     summary:
-      "An end-to-end engineering workflow connecting product code changes to validated, auto-deployed Docusaurus documentation.",
+      "How I connected product code changes to automated AI drafting, quality checks, and Docusaurus deployments.",
     layout: "hookline",
     links: [
       { label: "View Live Docs", href: "https://manueldezman.github.io/hookline-docs/" },
