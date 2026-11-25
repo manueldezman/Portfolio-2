@@ -10,7 +10,7 @@ import { RichText } from "@/components/RichText";
 import type { OpenSourceContributionLink, OpenSourceRepository } from "@/content/portfolio";
 
 const contributionTitleClass =
-  "link-ring text-left underline decoration-[var(--rule-soft)] underline-offset-4 transition-colors duration-150 group-hover:text-[var(--accent)]";
+  "link-ring inline text-left underline decoration-[var(--rule-soft)] underline-offset-4 transition-colors duration-150 group-hover:text-[var(--accent)]";
 
 function ContributionLinkList({ links }: { links: OpenSourceContributionLink[] }) {
   if (links.length === 0) {

@@ -25,7 +25,7 @@ export function DeveloperCommunity({ entries }: DeveloperCommunityProps) {
           entry.kind === "activity" ? (
             <li className="leading-7" key={entry.activity.title}>
               <button
-                className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
+                className="link-ring inline font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
                 onClick={() => setSelectedActivity(entry.activity)}
                 type="button"
               >
@@ -36,7 +36,7 @@ export function DeveloperCommunity({ entries }: DeveloperCommunityProps) {
           ) : (
             <li className="leading-7" key={entry.event.title}>
               <button
-                className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
+                className="link-ring inline font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
                 onClick={() => setEventDetailsOpen(true)}
                 type="button"
               >

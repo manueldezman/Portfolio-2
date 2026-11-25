@@ -13,7 +13,7 @@ export function ArticleNoteItem({ item, note }: { item: PortfolioItem; note: Art
   return (
     <>
       <button
-        className="link-ring font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
+        className="link-ring inline font-semibold text-[var(--text)] underline decoration-[var(--rule-soft)] underline-offset-4"
         onClick={() => setIsOpen(true)}
         type="button"
       >
