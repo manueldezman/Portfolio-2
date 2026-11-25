@@ -31,7 +31,7 @@ export function PortfolioTabs({ tabs }: PortfolioTabsProps) {
   return (
     <div className="mt-8">
       <div
-        className="flex overflow-x-auto border-b-2 border-[var(--rule)] pb-px"
+        className="flex overflow-x-auto pb-px"
         role="tablist"
       >
         {tabs.map((tab, index) => {
@@ -72,7 +72,7 @@ export function PortfolioTabs({ tabs }: PortfolioTabsProps) {
           );
         })}
       </div>
-      <div className="mt-6">
+      <div className="mt-4">
         {tabs.map((tab) => (
           <div
             aria-labelledby={`tab-${tab.id}`}
