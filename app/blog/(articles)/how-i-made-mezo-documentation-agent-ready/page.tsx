@@ -24,13 +24,27 @@ export const metadata: Metadata = {
     title,
     description,
     type: "article",
-    images: [{ url: "/og/mezo-documentation-agent-ready.png", width: 1200, height: 675 }],
+    url: "https://0xdezman.cv/blog/how-i-made-mezo-documentation-agent-ready/",
+    siteName: "Abdulganiy Adeleke",
+    images: [
+      {
+        url: "/og/mezo-documentation-agent-ready.png",
+        width: 1200,
+        height: 675,
+        alt: title,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og/mezo-documentation-agent-ready.png"],
+    images: [
+      {
+        url: "/og/mezo-documentation-agent-ready.png",
+        alt: title,
+      },
+    ],
   },
 };
 
