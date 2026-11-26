@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
@@ -8,45 +7,11 @@ import { MobileTableOfContents } from "@/components/MobileTableOfContents";
 import { PageActions } from "@/components/PageActions";
 import { ShareButtons } from "@/components/ShareButtons";
 import { TableOfContents } from "@/components/TableOfContents";
-import { blogPosts } from "@/content/blog";
+import { blogPosts, buildBlogMetadata, getBlogPost } from "@/content/blog";
 
-const title = "Case Study: How I Made Mezo's Documentation Agent-Ready";
-const description =
-  "How I improved Mezo's documentation agent-readiness score from 41 to 100 with 8 PRs.";
+const post = getBlogPost("/blog/how-i-made-mezo-documentation-agent-ready/");
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    canonical: "/blog/how-i-made-mezo-documentation-agent-ready/",
-  },
-  openGraph: {
-    title,
-    description,
-    type: "article",
-    url: "https://0xdezman.cv/blog/how-i-made-mezo-documentation-agent-ready/",
-    siteName: "Abdulganiy Adeleke",
-    images: [
-      {
-        url: "/og/mezo-documentation-agent-ready.png",
-        width: 1200,
-        height: 675,
-        alt: title,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: [
-      {
-        url: "/og/mezo-documentation-agent-ready.png",
-        alt: title,
-      },
-    ],
-  },
-};
+export const metadata = buildBlogMetadata(post);
 
 const codeStyle =
   "rounded-sm border border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_7%,transparent)] px-1.5 py-0.5 font-mono text-[0.85em] font-semibold not-italic text-[var(--text)]";
@@ -171,7 +136,7 @@ export default function MezoDocumentationAgentReadyPost() {
           id="overview"
         >
           <Heading className="text-left" level={1}>
-            {title}
+            {post.title}
           </Heading>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <p className="font-mono text-xs text-[var(--muted)]">

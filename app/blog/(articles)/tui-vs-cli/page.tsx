@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { CodeBlock } from "@/components/CodeBlock";
 import { Heading } from "@/components/Heading";
@@ -6,30 +5,9 @@ import { MobileTableOfContents } from "@/components/MobileTableOfContents";
 import { PageActions } from "@/components/PageActions";
 import { ShareButtons } from "@/components/ShareButtons";
 import { TableOfContents } from "@/components/TableOfContents";
-import { blogPosts } from "@/content/blog";
+import { blogPosts, buildBlogMetadata, getBlogPost } from "@/content/blog";
 
-export const metadata: Metadata = {
-  title: "TUI vs CLI: Is There Any Difference?",
-  description:
-    "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
-  alternates: {
-    canonical: "/blog/tui-vs-cli/",
-  },
-  openGraph: {
-    title: "TUI vs CLI: Is There Any Difference?",
-    description:
-      "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
-    type: "article",
-    images: [{ url: "/og/tui-vs-cli.png", width: 1200, height: 675 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "TUI vs CLI: Is There Any Difference?",
-    description:
-      "A simple explainer on how TUIs and CLIs differ in expressing intent, terminal output, and automation — with Git and Lazygit.",
-    images: ["/og/tui-vs-cli.png"],
-  },
-};
+export const metadata = buildBlogMetadata(getBlogPost("/blog/tui-vs-cli/"));
 
 const codeStyle =
   "rounded-sm border border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--text)_7%,transparent)] px-1.5 py-0.5 font-mono text-[0.85em] font-semibold not-italic text-[var(--text)]";

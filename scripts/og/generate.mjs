@@ -1,6 +1,8 @@
-// Generates static OG preview cards (1200x630 PNG) with satori + sharp.
+// Generates static OG preview cards (1200x675 PNG) with satori + sharp.
 // Usage: npm run og
 // Cards land in public/og/ and are referenced from page metadata.
+// Article cards come from content/blog.json, so a new blog post gets a card
+// on the next build without a change in this file.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -129,7 +131,7 @@ function ProfileCard() {
   );
 }
 
-function ArticleCard({ kicker, title, meta }) {
+function ArticleCard({ kicker, title, meta, titleSize = 56 }) {
   return h(
     Shell,
     null,
@@ -153,7 +155,7 @@ function ArticleCard({ kicker, title, meta }) {
       { style: { display: "flex", flexDirection: "column", marginTop: 104 } },
       h(
         "div",
-        { style: { fontSize: 56, fontWeight: 700, color: TEXT, lineHeight: 1.15 } },
+        { style: { fontSize: titleSize, fontWeight: 700, color: TEXT, lineHeight: 1.15 } },
         title,
       ),
       h(
@@ -173,21 +175,43 @@ function ArticleCard({ kicker, title, meta }) {
   );
 }
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatDate(isoDate) {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return `${MONTHS[month - 1]} ${day}, ${year}`;
+}
+
+function slugFromHref(href) {
+  return href.replace(/^\/blog\//, "").replace(/\/$/, "");
+}
+
+function titleSizeFor(title) {
+  if (title.length > 70) {
+    return 44;
+  }
+  if (title.length > 48) {
+    return 50;
+  }
+  return 56;
+}
+
+const posts = JSON.parse(await readFile(path.join(root, "content", "blog.json"), "utf8"));
+const internalPosts = posts.filter((post) => post.href.startsWith("/blog/"));
+
 await mkdir(OUT, { recursive: true });
 await render(h(ProfileCard, null), "profile.png");
-await render(
-  h(ArticleCard, {
-    kicker: "BLOG",
-    title: "TUI vs CLI: Is There Any Difference?",
-    meta: "Abdulganiy Adeleke · Oct 13, 2026",
-  }),
-  "tui-vs-cli.png",
-);
-await render(
-  h(ArticleCard, {
-    kicker: "BLOG",
-    title: "Case Study: How I Made Mezo's Documentation Agent-Ready",
-    meta: "Abdulganiy Adeleke · Nov 16, 2026",
-  }),
-  "mezo-documentation-agent-ready.png",
-);
+
+for (const post of internalPosts) {
+  await render(
+    h(ArticleCard, {
+      kicker: "BLOG",
+      title: post.title,
+      meta: `Abdulganiy Adeleke · ${formatDate(post.date)}`,
+      titleSize: titleSizeFor(post.title),
+    }),
+    `${slugFromHref(post.href)}.png`,
+  );
+}
+
+console.log(`wrote ${internalPosts.length} article cards from content/blog.json`);
